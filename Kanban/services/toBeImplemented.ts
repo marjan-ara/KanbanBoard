@@ -154,9 +154,38 @@ export const deleteSprintTask = (sprintTaskId: string) => {
   }
 }
 
-export const getSprintId = (date: Date): string => {
-  const sprintId = '0000'
+export const getSprintId = (projectId: string, date: Date): string => {
+  const formattedDate = date.toISOString()
+
+  const result = await Xrm.WebApi.retrieveRecord(
+    'arades_sprint',
+
+    `?$filter=_arades_projectid_value eq '${projectId}' arades_startdate ge '${formattedDate}' and arades_enddate le '${formattedDate}'`
+  )
+
   /// find sprint of the project in which input date is between startDate and EndDate and return sprintId
+
   /// if it does not exists, create one and return sprintId
-  return sprintId
+
+  return result.entities.length === 1
+    ? result.entities[0].arades_sprintid
+    : null
+}
+
+export const filterProjectTasks = (
+  projectIds: string[],
+  ownerIds: string[],
+  featureIds: string[],
+  priorities: number[]
+) => {
+  // return active project tasks with these filters
+}
+
+export const filterSprintTasks = (
+  projectIds: string[],
+  ownerIds: string[],
+  featureIds: string[],
+  priorities: number[]
+) => {
+  // return active sprint tasks with these filters
 }

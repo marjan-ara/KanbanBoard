@@ -67,13 +67,17 @@
   position: absolute;
   height: 100%;
   width: 35%;
-  top: 0;
+
   right: 0;
 }
-.main-75 {
+/* .main-75 {
   max-height: 100% !important;
 }
 
-.scrollableContent-76 {
+.scrollableContent-67 {
   height: 100%;
+} */
+
+.ms-Modal-scrollableContent {
+  height: 100% !important;
 }

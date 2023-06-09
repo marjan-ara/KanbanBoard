@@ -36,6 +36,11 @@ export interface IProject {
   name: string
 }
 
+export interface IFeature {
+  id: string
+  name: string
+}
+
 export interface ISprint {
   id: string
   name: string

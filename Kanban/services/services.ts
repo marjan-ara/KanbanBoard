@@ -1,10 +1,17 @@
 // import config from './config.json'
 // import { ConfidentialClientApplication } from '@azure/msal-node'
 import { v4 as uuidv4 } from 'uuid'
-import { IColumnItem, IOwner, IProject, IProjectTask } from '../interfaces'
+import {
+  IColumnItem,
+  IFeature,
+  IOwner,
+  IProject,
+  IProjectTask
+} from '../interfaces'
 import sprintTasks from './sprint_tasks.json'
 import owners from './contacts.json'
 import projects from './projects.json'
+import features from './features.json'
 
 // const authorityUrl = 'https://login.microsoftonline.com/common'
 
@@ -105,6 +112,14 @@ export const getOwners = (): IOwner[] => {
   const output = owners.value.map((item) => ({
     id: item.contactid,
     name: item.fullname
+  }))
+  return output
+}
+
+export const getFeatures = (): IFeature[] => {
+  const output = features.value.map((item) => ({
+    id: item['arades_featureid'],
+    name: item['arades_name']
   }))
   return output
 }

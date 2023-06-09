@@ -10,6 +10,7 @@ import {
   IContextualMenuProps,
   IIconProps,
   IRenderFunction,
+  PrimaryButton,
   registerIcons,
   TextField,
   ThemeProvider
@@ -32,8 +33,13 @@ import {
 import { Provider } from 'react-redux'
 import { IColumnItem, IProject } from '../interfaces'
 import store from '../redux/store'
-import { getProjectsService } from '../services/services'
-import { createSprintTask, deleteSprintTask } from '../services/xrmServices'
+import {
+  createSprintTask,
+  deleteSprintTask,
+  getFeatures,
+  getOwners,
+  getProjects
+} from '../services/services'
 import './KanbanView.css'
 import TaskCard from './TaskCard'
 
@@ -43,24 +49,19 @@ registerIcons({
   }
 })
 const filterIcon: IIconProps = { iconName: 'filterIcon' }
-const filterMenuProps: IContextualMenuProps = {
-  items: [
-    {
-      key: 'project',
-      text: 'Project'
-    },
-    {
-      key: 'owner',
-      text: 'Owner'
-    }
-  ],
-  directionalHintFixed: true
-}
-
-function _getMenu(props: IContextualMenuProps): JSX.Element {
-  // Customize contextual menu with menuAs
-  return <ContextualMenu {...props} />
-}
+// const filterMenuProps: IContextualMenuProps = {
+//   items: [
+//     {
+//       key: 'project',
+//       text: 'Project',
+//     },
+//     {
+//       key: 'owner',
+//       text: 'Owner'
+//     }
+//   ],
+//   directionalHintFixed: true
+// }
 
 export interface IKanbanViewProps {
   // appContext: ComponentFramework.Context<IInputs>;
@@ -102,7 +103,7 @@ const move = (
   // destClone.splice(droppableDestination.index, 0, removed)
 
   if (sIndex === 0 && dIndex > 0) {
-    const stId = createSprintTask(removed.projectTask.id)
+    const stId = createSprintTask()
     removed.id = stId
     removed.isProjectTask = false
     removed.sprintTask = {
@@ -157,12 +158,8 @@ const getListStyle = (isDraggingOver: boolean) => ({
 
 const KanbanView: React.FC<IKanbanViewProps> = (props) => {
   const [list, setList] = useState(props.taskList)
-  const [searchProject, setSearchProject] = useState('')
-  const [featureSearch, setFeatureSearch] = useState('')
-  const [ownerSearch, setOwnerSearch] = useState('')
-  const [finishDateSearch, setFinishDateSearch] = useState('')
-  const [prioritySearch, setPrioritySearch] = useState('')
-  const projects = getProjectsService()
+  const [searchProjectTask, setSearchProjectTask] = useState(false)
+  const projects = getProjects()
   const projectOptions = projects.map((p) => ({
     key: p.id,
     text: p.name
@@ -186,24 +183,151 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     }
   }
 
-  const renderMenuList = (
-    menuListProps: IContextualMenuListProps,
-    defaultRender: IRenderFunction<IContextualMenuListProps>
-  ) => {
+  const owners = getOwners()
+  const ownerOptions = owners.map((o) => ({
+    key: o.id,
+    text: o.name
+  }))
+
+  const [selectedOwnerIds, setSelectedOwnerIds] = React.useState<string[]>([])
+  const onChangeOwnerFilter = (
+    event: React.FormEvent<IComboBox>,
+    option?: IComboBoxOption,
+    index?: number,
+    value?: string
+  ): void => {
+    const selected = option?.selected
+    if (option) {
+      setSelectedOwnerIds((prevSelectedKeys) =>
+        selected
+          ? [...prevSelectedKeys, option!.key as string]
+          : prevSelectedKeys.filter((k) => k !== option!.key)
+      )
+    }
+  }
+
+  const features = getFeatures()
+  const featureOptions = features.map((f) => ({
+    key: f.id,
+    text: f.name
+  }))
+
+  const [selectedFeatureIds, setSelectedFeatureIds] = React.useState<string[]>(
+    []
+  )
+  const onChangeFeatureFilter = (
+    event: React.FormEvent<IComboBox>,
+    option?: IComboBoxOption,
+    index?: number,
+    value?: string
+  ): void => {
+    const selected = option?.selected
+    if (option) {
+      setSelectedFeatureIds((prevSelectedKeys) =>
+        selected
+          ? [...prevSelectedKeys, option!.key as string]
+          : prevSelectedKeys.filter((k) => k !== option!.key)
+      )
+    }
+  }
+
+  const filterProjectTasks = () => {
+    const board = [...list]
+    console.log('initial board[0]', board[0])
+    if (searchProjectTask) {
+      // searchProjectTask()
+    } else {
+      // searchSprintTask()
+    }
+
+    // if (selectedProjectIds.length > 0) {
+    //   board[0] = board[0].filter((x) => selectedProjectIds.includes(x.id))
+    //   console.log('board[0]', board[0])
+    // } else {
+    //   const allProjectIds = projects.map((x) => x.id)
+    //   board[0] = board[0].filter((x) => allProjectIds.includes(x.id))
+    //   console.log('board[0]', board[0])
+    // }
+    // if (selectedOwnerIds.length > 0) {
+    //   const selectedOwnersNames = owners
+    //     .filter((x) => selectedOwnerIds.includes(x.id))
+    //     .map((item) => item.name)
+    //   board[0] = board[0].filter((x) =>
+    //     selectedOwnersNames.includes(x.projectTask.owner)
+    //   )
+    // }
+    // setList(board)
+  }
+
+  const renderMenuList = () => {
     return (
       <div>
-        <div style={{ borderBottom: '1px solid #ccc' }}>
+        <div className="menu-div">
           <ComboBox
+            label="Filter Projects"
             multiSelect
             selectedKey={selectedProjectIds}
             options={projectOptions}
             onChange={onChangeProjectFilter}
           />
+          <ComboBox
+            label="Filter Owners"
+            multiSelect
+            selectedKey={selectedOwnerIds}
+            options={ownerOptions}
+            onChange={onChangeOwnerFilter}
+          />
+          <ComboBox
+            label="Filter Features"
+            multiSelect
+            selectedKey={selectedFeatureIds}
+            options={featureOptions}
+            onChange={onChangeFeatureFilter}
+          />
+          <PrimaryButton
+            className="search-button"
+            text="Search"
+            onClick={filterProjectTasks}
+          />
         </div>
-        {defaultRender(menuListProps)}
+        {/* {defaultRender(menuListProps)} */}
       </div>
     )
   }
+
+  const filterMenuProps = {
+    onRenderMenuList: renderMenuList,
+    shouldFocusOnMount: true,
+    items: [
+      {
+        key: 'project',
+        text: 'Project'
+      },
+      {
+        key: 'owner',
+        text: 'Owner'
+      }
+    ]
+  }
+
+  // const renderMenuList = (
+  //   menuListProps: IContextualMenuListProps,
+  //   defaultRender: IRenderFunction<IContextualMenuListProps>
+  // ) => {
+  //   return (
+  //     <div>
+  //       <div style={{ borderBottom: '1px solid #ccc' }}>
+  //         <ComboBox
+  //           multiSelect
+  //           selectedKey={selectedProjectIds}
+  //           options={projectOptions}
+  //           onChange={onChangeProjectFilter}
+  //         />
+  //       </div>
+  //       {defaultRender(menuListProps)}
+  //     </div>
+  //   )
+  // }
 
   useEffect(() => {
     console.log('list', list)
@@ -249,25 +373,6 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     }
   }
 
-  const onChangeSearchProjectValue = React.useCallback(
-    (
-      event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
-      newValue?: string
-    ) => {
-      setSearchProject(newValue || '')
-    },
-    []
-  )
-  const onChangeSearchFeatureValue = React.useCallback(
-    (
-      event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
-      newValue?: string
-    ) => {
-      setSearchProject(newValue || '')
-    },
-    []
-  )
-
   return (
     <ThemeProvider>
       <Provider store={store}>
@@ -281,8 +386,9 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
                     text="Filter"
                     iconProps={filterIcon}
                     menuProps={filterMenuProps}
-                    menuAs={_getMenu}
-                    allowDisabledFocus
+                    onClick={() => setSearchProjectTask(true)}
+                    // menuAs={_getMenu}
+                    // allowDisabledFocus
                   />
                 </div>
                 <div className="queue-div">
@@ -352,10 +458,27 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
               </div>
               <div className="week-day-div">
                 <div className="row-ordered-div">
-                  <TextField
+                  {/* <TextField
                     placeholder="filtering area"
                     className="search-field"
-                  />
+                  /> */}
+                  <div className="row-ordered-div">
+                    <DefaultButton
+                      className="filter-button"
+                      text="Filter"
+                      iconProps={filterIcon}
+                      menuProps={filterMenuProps}
+                      onClick={() => setSearchProjectTask(false)}
+                      // menuAs={_getMenu}
+                      // allowDisabledFocus
+                    />
+                  </div>
+                  <div className="row-ordered-div" />
+                  <div className="row-ordered-div" />
+                  <div className="row-ordered-div" />
+                  <div className="row-ordered-div" />
+                  <div className="row-ordered-div" />
+                  <div className="row-ordered-div" />
                 </div>
                 <div className="queue-div">
                   {list.slice(1).map((el, ind) => (

@@ -105,7 +105,19 @@
 
 .filter-button {
   margin: 0.3em;
-  width: 100%;
+  flex: 1;
   color: blue;
   border-radius: 3px;
+}
+.search-button {
+  margin-top: 1em;
+  border-radius: 3px;
+}
+
+.menu-div {
+  border-bottom: 1px solid #ccc;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
