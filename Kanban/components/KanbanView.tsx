@@ -32,11 +32,8 @@ import {
 import { Provider } from 'react-redux'
 import { IColumnItem, IProject } from '../interfaces'
 import store from '../redux/store'
-import {
-  createSprintTask,
-  deleteSprintTask,
-  getProjects
-} from '../services/services'
+import { getProjectsService } from '../services/services'
+import { createSprintTask, deleteSprintTask } from '../services/xrmServices'
 import './KanbanView.css'
 import TaskCard from './TaskCard'
 
@@ -105,7 +102,7 @@ const move = (
   // destClone.splice(droppableDestination.index, 0, removed)
 
   if (sIndex === 0 && dIndex > 0) {
-    const stId = createSprintTask()
+    const stId = createSprintTask(removed.projectTask.id)
     removed.id = stId
     removed.isProjectTask = false
     removed.sprintTask = {
@@ -165,7 +162,7 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
   const [ownerSearch, setOwnerSearch] = useState('')
   const [finishDateSearch, setFinishDateSearch] = useState('')
   const [prioritySearch, setPrioritySearch] = useState('')
-  const projects = getProjects()
+  const projects = getProjectsService()
   const projectOptions = projects.map((p) => ({
     key: p.id,
     text: p.name
