@@ -1,0 +1,79 @@
+.row-ordered-div {
+  display: flex;
+  flex-direction: row;
+}
+.task-card-div {
+  border: solid rgb(231, 231, 231) thin;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+.task-card-icon {
+  margin-left: 0.5em;
+}
+
+.task-card-header {
+  border-bottom: solid thin rgb(231, 231, 231);
+  height: 2em;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  color: rgb(0, 123, 183);
+  background-color: rgb(231, 231, 231);
+}
+
+.task-card-footer {
+  display: flex;
+  flex-direction: row;
+  border-top: solid thin rgb(231, 231, 231);
+}
+
+.task-card-footer-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  font-size: 0.8em;
+  padding: 0.2em;
+}
+.task-card-footer-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  color: gray;
+  font-size: 0.8em;
+  padding: 0.2em;
+}
+.task-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  font-size: 0.8em;
+  padding: 0.2em;
+}
+.weekdays-div {
+  flex: auto;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+}
+
+.edit-modal-container {
+  position: absolute;
+  height: 100%;
+  width: 35%;
+  top: 0;
+  right: 0;
+}
+.main-75 {
+  max-height: 100% !important;
+}
+
+.scrollableContent-76 {
+  height: 100%;
+}

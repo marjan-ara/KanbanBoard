@@ -1,0 +1,111 @@
+.main-board {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+.queue-div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+.row-ordered-div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.col-ordered-div {
+  display: flex;
+  flex-direction: column;
+}
+.search-field {
+  flex: 1;
+  margin: 0.5em;
+}
+.pt-column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border: solid thin;
+  border-radius: 5px;
+  margin: 0.5em;
+  background-color: lemonchiffon;
+  overflow: scroll;
+}
+.column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border: solid thin;
+  border-radius: 5px;
+  margin: 0.5em;
+}
+.vertical-line {
+  height: 100%;
+  width: 0.5px;
+  border: solid thin;
+}
+
+.list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0.3em;
+  /* min-width: 300px; */
+}
+
+.list-header {
+  height: 3em;
+  min-height: 3em;
+  border: solid thin rgb(199, 199, 199);
+  border-radius: 3px 3px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.project-task-list {
+  border-top: solid thick rgb(0, 123, 183);
+  color: rgb(0, 123, 183);
+}
+.sprint-task-list {
+  border-top: solid thick green;
+  color: green;
+}
+
+.list-body {
+  display: flex;
+  flex-direction: column;
+  border: solid thin rgb(199, 199, 199);
+  border-radius: 0 0 3px 3px;
+  padding: 0.5em;
+  min-height: 80%;
+  height: 80%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.project-task-div {
+  display: flex;
+  flex-direction: column;
+  border-left: solid thin gray;
+  flex: 1;
+}
+
+.week-day-div {
+  display: flex;
+  flex-direction: column;
+  border-left: solid thin gray;
+  flex: 7;
+}
+
+.filter-button {
+  margin: 0.3em;
+  width: 100%;
+  color: blue;
+  border-radius: 3px;
+}

@@ -1,0 +1,66 @@
+.edit-div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 3em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-bottom: solid thin gray;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 3em;
+}
+.form-field {
+  display: flex;
+  flex: 1;
+}
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  height: 4em;
+  border-top: solid thin gray;
+  position: absolute;
+  bottom: 0;
+}
+
+.close-icon {
+  font-size: small;
+  margin-right: 0;
+  margin-left: auto;
+}
+.button {
+  margin-right: 0.5em;
+}
+
+.default-button {
+  border-color: blue;
+  color: blue;
+}
+
+.text-input {
+  margin-right: 3em;
+  width: 100%;
+}
+
+.text-input-label {
+  margin-left: 3em;
+  margin-right: auto;
+}

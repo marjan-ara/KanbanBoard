@@ -1,0 +1,27 @@
+{
+  "@odata.context": "https://aradesdev.api.crm4.dynamics.com/api/data/v9.2/$metadata#arades_applications",
+  "value": [
+    {
+      "@odata.etag": "W/\"169599855\"",
+      "versionnumber": 169599855,
+      "_owningbusinessunit_value": "0d29e34e-b00d-ea11-a813-000d3a2c57ba",
+      "statecode": 0,
+      "arades_name": "Ingram Invoicing",
+      "statuscode": 1,
+      "_createdby_value": "2afe3cff-6910-ea11-a811-000d3a294a83",
+      "_ownerid_value": "2afe3cff-6910-ea11-a811-000d3a294a83",
+      "modifiedon": "2021-08-25T15:25:16Z",
+      "_owninguser_value": "2afe3cff-6910-ea11-a811-000d3a294a83",
+      "_modifiedby_value": "2afe3cff-6910-ea11-a811-000d3a294a83",
+      "arades_applicationid": "56100aa5-b805-ec11-94ef-00224884d9d7",
+      "createdon": "2021-08-25T15:25:16Z",
+      "overriddencreatedon": null,
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "utcconversiontimezonecode": null,
+      "_createdonbehalfby_value": null,
+      "_owningteam_value": null,
+      "timezoneruleversionnumber": null
+    }
+  ]
+}
