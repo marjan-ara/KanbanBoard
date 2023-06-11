@@ -1,4 +1,4 @@
-.row-ordered-div {
+.task-card-row-ordered-div {
   display: flex;
   flex-direction: row;
 }
@@ -56,19 +56,14 @@
   font-size: 0.8em;
   padding: 0.2em;
 }
-.weekdays-div {
-  flex: auto;
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-}
 
 .edit-modal-container {
-  position: absolute;
+  /* position: absolute;
   height: 100%;
   width: 35%;
 
-  right: 0;
+  right: 0; */
+  border-radius: 5px;
 }
 /* .main-75 {
   max-height: 100% !important;

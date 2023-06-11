@@ -53,7 +53,6 @@ const EditTask: React.FC<IEditTaskProps> = ({
   // const countries = useSelector((state) => state.geo.country.list) || []
   const owners = useAppSelector((state) => state.owner.list)
   // const board = useAppSelector((state) => state.board.list)
-  console.log('owners', owners)
   const dispatch = useAppDispatch()
   const [options, setOptions] = useState<IComboBoxOption[]>([])
   const [selectedKey, setSelectedKey] = useState('')
@@ -87,6 +86,7 @@ const EditTask: React.FC<IEditTaskProps> = ({
   const saveChanges = () => {
     const updatedBoard = [...list]
     const cardIndex = updatedBoard[dayIndex].findIndex((x) => x.id === id)
+    console.log('updatedBoard[dayIndex + 1]', updatedBoard[dayIndex])
     const selectedOwner = owners.find((x) => x.id === selectedKey)
     if (editProjectTask) {
       if (cardIndex > -1) {
@@ -115,7 +115,7 @@ const EditTask: React.FC<IEditTaskProps> = ({
     <div className="edit-div">
       <div className="header">
         <Text variant="mediumPlus" nowrap block>
-          {editProjectTask ? 'Edit Project Task' : 'Edit Sprint Task'}
+          <b>{editProjectTask ? 'Edit Project Task' : 'Edit Sprint Task'}</b>
         </Text>
         <IconButton
           iconProps={closeIcon}

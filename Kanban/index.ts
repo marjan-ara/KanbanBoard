@@ -3,10 +3,13 @@
 /* eslint-disable no-unused-vars */
 import { IInputs, IOutputs } from './generated/ManifestTypes'
 import * as React from 'react'
-import KanbanView, { IKanbanViewProps } from './components/KanbanView'
+
 import DynamicsWebApi from 'dynamics-web-api'
 import { IColumnItem } from './interfaces'
-import { getColumnCards, getWeekDays } from './services/services'
+import { getColumnCards, getWeekDays } from './services/xrmServices'
+import KanbanView, {
+  IKanbanViewProps
+} from './components/kanbanView/KanbanView'
 
 export class Kanban
   implements ComponentFramework.ReactControl<IInputs, IOutputs>
@@ -22,7 +25,8 @@ export class Kanban
     taskList: [],
     weekdays: [],
     //callback function
-    onChange: this.notifyChange.bind(this)
+    onChange: this.notifyChange.bind(this),
+    context: null
   }
 
   /**
@@ -88,13 +92,18 @@ export class Kanban
     })
     weekDays.forEach((element, index) => {
       const projecttasks = taskListVar[0].map((item) => item.projectTask)
-      const colCards = getColumnCards(element, projecttasks)
-      taskListVar[1 + index] = colCards
+      // const colCards = getColumnCards(element, projecttasks)
+      // taskListVar[1 + index] = colCards
+
+      getColumnCards(context, element, projecttasks).then(
+        (res) => (taskListVar[1 + index] = res.colCards)
+      )
     })
     // this.dispatch(updateBoard(taskListVar))
     this._taskList = [...taskListVar]
     this._props.taskList = [...taskListVar]
     this._props.weekdays = weekDays
+    this._props.context = context
 
     console.log('update view props', this._props)
 

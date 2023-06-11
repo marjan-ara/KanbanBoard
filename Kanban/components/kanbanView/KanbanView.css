@@ -82,12 +82,16 @@
 }
 
 .project-task-list {
-  border-top: solid thick rgb(0, 123, 183);
-  color: rgb(0, 123, 183);
+  border-top: solid thick black;
+  /* rgb(0, 123, 183); */
+  /* color: rgb(0, 123, 183); */
+  color: black;
 }
 .sprint-task-list {
-  border-top: solid thick green;
-  color: green;
+  /* border-top: solid thick green;
+  color: green; */
+  border-top: solid thick black;
+  color: black;
 }
 
 .list-body {
@@ -118,7 +122,7 @@
 .filter-button {
   margin: 0.3em;
   flex: 1;
-  color: blue;
+  color: black;
   border-radius: 3px;
 }
 .search-button {

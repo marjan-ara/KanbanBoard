@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IColumnItem, IProjectTask, ISprintTask } from '../interfaces'
+import { IColumnItem, IProjectTask, ISprintTask } from '../../interfaces'
 import './TaskCard.css'
 import {
   ChromeBackMirroredIcon,
@@ -12,15 +12,22 @@ import {
   ITooltipHostStyles,
   Modal,
   registerIcons,
+  Text,
   TooltipHost
 } from '@fluentui/react'
 import { useBoolean, useId } from '@fluentui/react-hooks'
-import EditTask from './editTask/EditTask'
+import EditTask from '../editTask/EditTask'
+// import {
+//   createSprintTask,
+//   deleteProjectTask,
+//   deleteSprintTask
+// } from '../../services/services'
 import {
   createSprintTask,
   deleteProjectTask,
   deleteSprintTask
-} from '../services/services'
+} from '../../services/xrmServices'
+import { IInputs } from '../../generated/ManifestTypes'
 
 registerIcons({
   icons: {
@@ -45,6 +52,8 @@ interface IProps {
   list: IColumnItem[][]
   setList: (value: IColumnItem[][]) => void
   isClosed: boolean
+  weekDays: Date[]
+  context: ComponentFramework.Context<IInputs> | null
 }
 
 const TaskCard: React.FC<IProps> = ({
@@ -55,7 +64,9 @@ const TaskCard: React.FC<IProps> = ({
   dayIndex,
   isClosed,
   list,
-  setList
+  setList,
+  weekDays,
+  context
 }) => {
   const tooltipId = useId('tooltip')
   const titleId = useId('title')
@@ -67,18 +78,22 @@ const TaskCard: React.FC<IProps> = ({
     const index = board[dayIndex].findIndex((x) => x.id === id)
     board[dayIndex].splice(index, 1)
     setList(board)
-    if (isProjectTask) deleteProjectTask(id)
-    else deleteSprintTask(id)
+    if (isProjectTask) deleteProjectTask(context!, id)
+    else deleteSprintTask(context!, id)
   }
 
-  const cloneToNextDay = () => {
-    console.log('clone')
+  const cloneToNextDay = async () => {
     const board = [...list]
     const sprintTask = board[dayIndex].find((x) => x.id === id)
-    console.log('sprintTask', sprintTask)
     board[dayIndex + 1].push(sprintTask!)
     setList(board)
-    createSprintTask()
+    await createSprintTask(
+      context!,
+      sprintTask!.projectTask.id,
+      sprintTask!.id,
+      weekDays[dayIndex + 1],
+      weekDays[dayIndex + 1]
+    )
   }
   return (
     <div className="task-card-div">
@@ -127,23 +142,29 @@ const TaskCard: React.FC<IProps> = ({
         <DeleteIcon className="task-card-icon" /> */}
       </div>
       <div className="task-card-body">
-        <div className="row-ordered-div">
-          <b>{projectTask.name}</b>
+        <div className="task-card-row-ordered-div">
+          <b>{isProjectTask ? projectTask.name : sprintTask?.name}</b>
         </div>
-        <div className="row-ordered-div">
-          <b>Project:</b>
-          {`  ${projectTask.project}`}
+        <div className="task-card-row-ordered-div">
+          <Text variant="small" nowrap={false} block>
+            <b>Project:</b>
+            {isProjectTask ? projectTask.project : sprintTask?.project}
+          </Text>
         </div>
-        <div className="row-ordered-div">
-          <b>Feature: </b>
-          {projectTask.feature}
+        <div className="task-card-row-ordered-div">
+          <Text variant="small" nowrap={false} block>
+            <b>Feature: </b>
+            {isProjectTask ? projectTask.feature : sprintTask?.feature}
+          </Text>
         </div>
       </div>
       <div className="task-card-footer">
         <div className="task-card-footer-left">
-          {projectTask.owner}
+          {isProjectTask ? projectTask.owner : sprintTask?.owner}
           <br />
-          {projectTask.estimatedDuration}
+          {isProjectTask
+            ? projectTask.estimatedDuration
+            : sprintTask?.estimatedDuration}
           <br />
           {projectTask.priority || 'not defined'}
           <br />
