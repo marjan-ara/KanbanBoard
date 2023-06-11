@@ -59,12 +59,11 @@ import features from './features.json'
 //   }
 // }
 
-export const getCurrentWeekDays = (): Date[] => {
-  const curr = new Date() // get current date
-  const first = curr.getDate() - curr.getDay() // First day is the day of the month - the day of the week
+export const getWeekDays = (inputDate: Date): Date[] => {
+  const first = inputDate.getDate() - inputDate.getDay() + 1 // First day is the day of the month - the day of the week
   const weekdays = []
   for (let i = 0; i < 7; i++) {
-    const day = new Date(curr.setDate(first + i))
+    const day = new Date(inputDate.setDate(first + i))
     weekdays.push(day)
   }
   return weekdays

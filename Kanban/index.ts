@@ -6,7 +6,7 @@ import * as React from 'react'
 import KanbanView, { IKanbanViewProps } from './components/KanbanView'
 import DynamicsWebApi from 'dynamics-web-api'
 import { IColumnItem } from './interfaces'
-import { getColumnCards, getCurrentWeekDays } from './services/services'
+import { getColumnCards, getWeekDays } from './services/services'
 
 export class Kanban
   implements ComponentFramework.ReactControl<IInputs, IOutputs>
@@ -56,7 +56,7 @@ export class Kanban
     context: ComponentFramework.Context<IInputs>
   ): React.ReactElement {
     const dataSet = this._context.parameters.taskListDataSet
-    const weekDays = getCurrentWeekDays()
+    const weekDays: Date[] = getWeekDays(new Date())
     const taskListVar: IColumnItem[][] = [[], [], [], [], [], [], [], []]
 
     dataSet.sortedRecordIds.forEach((recordId) => {

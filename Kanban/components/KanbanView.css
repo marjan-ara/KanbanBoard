@@ -10,6 +10,18 @@
   flex-direction: row;
   width: 100%;
   height: 100%;
+  /* position: relative; */
+}
+.change-week-button-div {
+  height: 100%;
+  width: 30px;
+  position: relative;
+}
+.next-week-button {
+  position: absolute;
+  right: 0;
+  color: black;
+  top: 50%;
 }
 .row-ordered-div {
   display: flex;

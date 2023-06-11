@@ -6,6 +6,7 @@ import {
   DefaultButton,
   IComboBox,
   IComboBoxOption,
+  IconButton,
   IContextualMenuListProps,
   IContextualMenuProps,
   IIconProps,
@@ -15,8 +16,12 @@ import {
   TextField,
   ThemeProvider
 } from '@fluentui/react'
-import { FilterIcon } from '@fluentui/react-icons-mdl2'
-import moment from 'moment'
+import {
+  CaretLeftSolid8Icon,
+  CaretRightSolid8Icon,
+  FilterIcon
+} from '@fluentui/react-icons-mdl2'
+import moment, { weekdays } from 'moment'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import {
@@ -38,17 +43,22 @@ import {
   deleteSprintTask,
   getFeatures,
   getOwners,
-  getProjects
+  getProjects,
+  getWeekDays
 } from '../services/services'
 import './KanbanView.css'
 import TaskCard from './TaskCard'
 
 registerIcons({
   icons: {
-    filterIcon: <FilterIcon />
+    filterIcon: <FilterIcon />,
+    nextWeekIcon: <CaretRightSolid8Icon />,
+    prevWeekIcon: <CaretLeftSolid8Icon />
   }
 })
 const filterIcon: IIconProps = { iconName: 'filterIcon' }
+const nextWeekIcon: IIconProps = { iconName: 'nextWeekIcon' }
+const prevWeekIcon: IIconProps = { iconName: 'prevWeekIcon' }
 // const filterMenuProps: IContextualMenuProps = {
 //   items: [
 //     {
@@ -158,6 +168,7 @@ const getListStyle = (isDraggingOver: boolean) => ({
 
 const KanbanView: React.FC<IKanbanViewProps> = (props) => {
   const [list, setList] = useState(props.taskList)
+  const [weekDays, setWeekDays] = useState(props.weekdays)
   const [searchProjectTask, setSearchProjectTask] = useState(false)
   const projects = getProjects()
   const projectOptions = projects.map((p) => ({
@@ -330,17 +341,22 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
   // }
 
   useEffect(() => {
-    console.log('list', list)
     if (list !== props.taskList) {
       props.onChange(list)
     }
-  }, [list])
+    if (weekDays !== props.weekdays) {
+      props.onChange(list)
+    }
+  }, [list, weekDays])
 
   useEffect(() => {
     if (list !== props.taskList) {
       setList(props.taskList)
     }
-  }, [props.taskList])
+    if (weekDays !== props.weekdays) {
+      setWeekDays(props.weekdays)
+    }
+  }, [props.taskList, props.weekdays])
 
   function onDragEnd(result: DropResult): void {
     const { source, destination } = result
@@ -373,6 +389,23 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     }
   }
 
+  const getNextWeek = () => {
+    const date = weekDays[6]
+    date.setDate(date.getDate() + 1)
+
+    const nextWeek = getWeekDays(date)
+    setWeekDays(nextWeek)
+  }
+
+  const getPrevWeek = () => {
+    console.log('getPrevWeek')
+    const date = weekDays[0]
+    date.setDate(date.getDate() - 2)
+    console.log('date: ', date)
+    const prevWeek = getWeekDays(date)
+    console.log('prevWeek', prevWeek)
+    setWeekDays(prevWeek)
+  }
   return (
     <ThemeProvider>
       <Provider store={store}>
@@ -481,6 +514,15 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
                   <div className="row-ordered-div" />
                 </div>
                 <div className="queue-div">
+                  <div className="change-week-button-div">
+                    <IconButton
+                      className="next-week-button"
+                      iconProps={prevWeekIcon}
+                      onClick={getPrevWeek}
+                      title="Next Week"
+                      ariaLabel="next week"
+                    />
+                  </div>
                   {list.slice(1).map((el, ind) => (
                     <Droppable key={ind + 1} droppableId={`${ind + 1}`}>
                       {(
@@ -494,9 +536,9 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
                           {...provided.droppableProps}>
                           <div className="list-header sprint-task-list">
                             <span>
-                              {moment(props.weekdays[ind]).format('dddd')}
+                              {moment(weekDays[ind]).format('dddd')}
                               <br />
-                              {moment(props.weekdays[ind]).format('MMM Do')}
+                              {moment(weekDays[ind]).format('MMM Do')}
                             </span>
                           </div>
                           <div className="list-body">
@@ -546,6 +588,15 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
                       )}
                     </Droppable>
                   ))}
+                  <div className="change-week-button-div">
+                    <IconButton
+                      className="next-week-button"
+                      iconProps={nextWeekIcon}
+                      onClick={getNextWeek}
+                      title="Next Week"
+                      ariaLabel="next week"
+                    />
+                  </div>
                 </div>
               </div>
             </DragDropContext>
