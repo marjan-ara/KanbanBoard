@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/dot-notation */
 // import config from './config.json'
 // import { ConfidentialClientApplication } from '@azure/msal-node'
 import { v4 as uuidv4 } from 'uuid'

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   ComboBox,
@@ -17,7 +18,7 @@ import { ChromeCloseIcon } from '@fluentui/react-icons-mdl2'
 import './EditTask.css'
 import { getAllOwners } from '../../redux/features/ownerSlice'
 import { useAppDispatch, useAppSelector } from '../../hooks'
-import { IColumnItem, IOwner } from '../../interfaces'
+import { IColumnItem } from '../../interfaces'
 import { updateProjectTask, updateSprintTask } from '../../services/services'
 
 interface IEditTaskProps {
@@ -109,6 +110,7 @@ const EditTask: React.FC<IEditTaskProps> = ({
       setList(updatedBoard)
       updateSprintTask()
     }
+
     hideModal()
   }
   return (

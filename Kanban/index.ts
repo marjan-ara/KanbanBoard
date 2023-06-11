@@ -1,10 +1,9 @@
+/* eslint-disable @typescript-eslint/no-useless-constructor */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-unused-vars */
-import { IInputs, IOutputs } from './generated/ManifestTypes'
 import * as React from 'react'
-
-import DynamicsWebApi from 'dynamics-web-api'
+import { IInputs, IOutputs } from './generated/ManifestTypes'
 import { IColumnItem } from './interfaces'
 import { getColumnCards, getWeekDays } from './services/xrmServices'
 import KanbanView, {
@@ -15,9 +14,13 @@ export class Kanban
   implements ComponentFramework.ReactControl<IInputs, IOutputs>
 {
   private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>
+
   private _context: ComponentFramework.Context<IInputs>
+
   private _taskList: IColumnItem[][]
+
   private _weekDays: Date[]
+
   private notifyOutputChanged: () => void
 
   private _props: IKanbanViewProps = {

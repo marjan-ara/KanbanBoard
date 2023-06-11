@@ -1,6 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable @typescript-eslint/no-redeclare */
 import * as React from 'react'
-import { IColumnItem, IProjectTask, ISprintTask } from '../../interfaces'
-import './TaskCard.css'
 import {
   ChromeBackMirroredIcon,
   EditMirroredIcon,
@@ -16,7 +16,9 @@ import {
   TooltipHost
 } from '@fluentui/react'
 import { useBoolean, useId } from '@fluentui/react-hooks'
+import { IColumnItem, IProjectTask, ISprintTask } from '../../interfaces'
 import EditTask from '../editTask/EditTask'
+import './TaskCard.css'
 // import {
 //   createSprintTask,
 //   deleteProjectTask,
@@ -84,13 +86,13 @@ const TaskCard: React.FC<IProps> = ({
 
   const cloneToNextDay = async () => {
     const board = [...list]
-    const sprintTask = board[dayIndex].find((x) => x.id === id)
-    board[dayIndex + 1].push(sprintTask!)
+    const sprintTaskCard = board[dayIndex].find((x) => x.id === id)
+    board[dayIndex + 1].push(sprintTaskCard!)
     setList(board)
     await createSprintTask(
       context!,
-      sprintTask!.projectTask.id,
-      sprintTask!.id,
+      sprintTaskCard!.projectTask.id,
+      sprintTaskCard!.id,
       weekDays[dayIndex + 1],
       weekDays[dayIndex + 1]
     )

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IInputs } from '../generated/ManifestTypes'
 import {
   IColumnItem,
@@ -27,10 +29,10 @@ export const getActiveSprints = async (
     '?$filter=statecode eq 0'
   )
   const output = result.entities.map((x) => ({
-    id: x['arades_sprintid'],
-    name: x['arades_name'],
-    startDate: new Date(x['arades_startdate']),
-    endDate: new Date(x['arades_enddate'])
+    id: x.arades_sprintid,
+    name: x.arades_name,
+    startDate: new Date(x.arades_startdate),
+    endDate: new Date(x.arades_enddate)
   }))
   return output
 }
@@ -86,8 +88,8 @@ export const getOwners = async (
     '?$filter=isdisabled eq false and islicensed eq true'
   )
   const output = result.entities.map((x) => ({
-    id: x['systemuserid'],
-    name: x['fullname']
+    id: x.systemuserid,
+    name: x.fullname
   }))
   return output
 }
@@ -101,8 +103,8 @@ export const getProjects = async (
     '?$select=*'
   )
   const output = result.entities.map((x) => ({
-    id: x['arades_projectid'],
-    name: x['arades_name']
+    id: x.arades_projectid,
+    name: x.arades_name
   }))
   return output
 }
