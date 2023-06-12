@@ -36,14 +36,24 @@ import { Provider } from 'react-redux'
 import { IInputs } from '../../generated/ManifestTypes'
 import { IColumnItem } from '../../interfaces'
 import store from '../../redux/store'
+// import {
+//   createSprintTask,
+//   deleteSprintTask,
+//   getColumnCards,
+//   getFeatures,
+//   getOwners,
+//   getProjects,
+//   getWeekDays
+// } from '../../services/services'
 import {
   createSprintTask,
   deleteSprintTask,
+  getColumnCards,
   getFeatures,
   getOwners,
   getProjects,
   getWeekDays
-} from '../../services/services'
+} from '../../services/xrmServices'
 import TaskCard from '../taskCard/TaskCard'
 import './KanbanView.css'
 
@@ -99,14 +109,14 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
   const [list, setList] = useState(props.taskList)
   const [weekDays, setWeekDays] = useState(props.weekdays)
 
-  const move = (
+  const move = async (
     source: IColumnItem[],
     destination: IColumnItem[],
     droppableSource: DraggableLocation,
     droppableDestination: DraggableLocation,
     sIndex: number,
     dIndex: number
-  ): IMoveResult | any => {
+  ): Promise<IMoveResult> => {
     const sourceClone = Array.from(source)
     const destClone = Array.from(destination)
 
@@ -114,13 +124,14 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     // destClone.splice(droppableDestination.index, 0, removed)
 
     if (sIndex === 0 && dIndex > 0) {
-      const stId = createSprintTask(
+      const res = await createSprintTask(
         props.context!,
         removed.projectTask.id,
         removed.projectTask.id,
         weekDays[0],
         weekDays[6]
       )
+      const stId = res
       removed.id = stId
       removed.isProjectTask = false
       removed.sprintTask = {
@@ -137,9 +148,8 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
       removed.sprintTask = null
       deleteSprintTask(props.context!, removed.id)
     } else {
-      console.log('sIndex > 0 && dIndex >0')
       deleteSprintTask(props.context!, removed.id)
-      const stId = createSprintTask(
+      const stId = await createSprintTask(
         props.context!,
         removed.projectTask.id,
         removed.projectTask.id,
@@ -159,18 +169,19 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     }
     sourceClone.splice(droppableSource.index, 1)
     destClone.splice(droppableDestination.index, 0, removed)
-    const result: IMoveResult | any = {}
-    result[droppableSource.droppableId] = sourceClone
-    result[droppableDestination.droppableId] = destClone
+    // const result: IMoveResult | any = {}
+    // result[droppableSource.droppableId] = sourceClone
+    // result[droppableDestination.droppableId] = destClone
+
+    const result: IMoveResult = {
+      droppable: sourceClone,
+      droppable2: destClone
+    }
 
     return result
   }
 
-  const projects = getProjects(props.context!)
-  const projectOptions = projects.map((p) => ({
-    key: p.id,
-    text: p.name
-  }))
+
   const [selectedProjectIds, setSelectedProjectIds] = useState<string[]>([])
   const [sprintFilterSelectedProjectIds, setSprintFilterSelectedProjectIds] =
     useState<string[]>([])
@@ -294,7 +305,7 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
 
   const filterProjectTasks = () => {
     const board = [...list]
-    console.log('initial board[0]', board[0])
+    // console.log('initial board[0]', board[0])
     // searchProjectTask()
     // if (selectedProjectIds.length > 0) {
     //   board[0] = board[0].filter((x) => selectedProjectIds.includes(x.id))
@@ -446,55 +457,80 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     ]
   }
 
-  // const renderMenuList = (
-  //   menuListProps: IContextualMenuListProps,
-  //   defaultRender: IRenderFunction<IContextualMenuListProps>
-  // ) => {
-  //   return (
-  //     <div>
-  //       <div style={{ borderBottom: '1px solid #ccc' }}>
-  //         <ComboBox
-  //           multiSelect
-  //           selectedKey={selectedProjectIds}
-  //           options={projectOptions}
-  //           onChange={onChangeProjectFilter}
-  //         />
-  //       </div>
-  //       {defaultRender(menuListProps)}
-  //     </div>
-  //   )
-  // }
+  const getSprintTasksOfTheBoard = async () => {
+    try {
+      const promises: Promise<any>[] = []
+      const taskListVar = [...list]
+      weekDays.forEach((element, index) => {
+        const projecttasks = taskListVar[0].map((item) => item.projectTask)
+        promises.push(
+          getColumnCards(props.context!, element, projecttasks).then((res) => {
+            console.log('getColumnCards res', res)
+
+            taskListVar[1 + index] = res
+            console.log('taskListVar', taskListVar)
+          })
+        )
+      })
+
+      Promise.allSettled(promises).then(() => {
+        setList(taskListVar)
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getFilterOptions=async()=>{
+    try{
+      const projects = await getProjects(props.context!)
+      const projectOptions = projects.map((p) => ({
+        key: p.id,
+        text: p.name
+      }))
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+  const [isFirstLoad, setIsFirstLoad] = useState(true)
+  useEffect(() => {
+    if (isFirstLoad) {
+      setIsFirstLoad(false)
+      getSprintTasksOfTheBoard()
+    
+    }
+  }, [isFirstLoad])
 
   useEffect(() => {
-    console.log('change list, weekDays', list, weekDays)
+    // console.log('change list, weekDays', list, weekDays)
     if (list !== props.taskList) {
-      console.log('change list 1:', list)
+      // console.log('change list 1:', list)
       props.onChange(list, weekDays)
     }
   }, [list])
 
   useEffect(() => {
-    console.log('change list, weekDays', list, weekDays)
+    // console.log('change list, weekDays', list, weekDays)
 
     if (weekDays !== props.weekdays) {
-      console.log('change list 2:', list)
-      setList([list[0], [], [], [], [], [], []])
-      props.onChange(list, weekDays)
+      // console.log('change list 2:', list)
+      getSprintTasksOfTheBoard()
     }
   }, [weekDays])
 
   useEffect(() => {
     if (list !== props.taskList) {
-      console.log('1')
+      // console.log('1')
       setList(props.taskList)
     }
     if (weekDays !== props.weekdays) {
-      console.log('2')
+      // console.log('2')
       setWeekDays(props.weekdays)
     }
   }, [props.taskList, props.weekdays])
 
-  function onDragEnd(result: DropResult): void {
+  const onDragEnd=async (result: DropResult): Promise<void> {
     const { source, destination } = result
 
     // dropped outside the list
@@ -510,17 +546,10 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
       newState[sInd] = items
       setList(newState)
     } else {
-      const result = move(
-        list[sInd],
-        list[dInd],
-        source,
-        destination,
-        sInd,
-        dInd
-      )
+      const res = await move(list[sInd], list[dInd], source, destination, sInd, dInd)
       const newState = [...list]
-      newState[sInd] = result[sInd]
-      newState[dInd] = result[dInd]
+      newState[sInd] = res.droppable
+      newState[dInd] = res.droppable2
       setList(newState)
     }
   }
