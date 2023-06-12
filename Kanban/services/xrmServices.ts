@@ -3,6 +3,7 @@
 import { IInputs } from '../generated/ManifestTypes'
 import {
   IColumnItem,
+  IFeature,
   IOwner,
   IProject,
   IProjectTask,
@@ -80,7 +81,7 @@ export const getColumnCards = async (
 
 export const getOwners = async (
   context: ComponentFramework.Context<IInputs>
-): Promise<any> => {
+): Promise<IOwner[]> => {
   // get all team members , I don't know if it is the contact entity or something else,
   // I need person's name and id of those who can do a sprint task
   const result = await context.webAPI.retrieveMultipleRecords(
@@ -96,21 +97,22 @@ export const getOwners = async (
 
 export const getProjects = async (
   context: ComponentFramework.Context<IInputs>
-): Promise<any> => {
+): Promise<IProject[]> => {
   // https://aradespsm.api.crm4.dynamics.com/api/data/v9.2/arades_projects
   const result = await context.webAPI.retrieveMultipleRecords(
     'arades_project',
     '?$select=*'
   )
-  const output = result.entities.map((x) => ({
-    id: x.arades_projectid,
-    name: x.arades_name
-  }))
+  const output =
+    result.entities.map((x) => ({
+      id: x.arades_projectid,
+      name: x.arades_name
+    })) || []
   return output
 }
 export const getFeatures = async (
   context: ComponentFramework.Context<IInputs>
-): Promise<any> => {
+): Promise<IFeature[]> => {
   const result = await context.webAPI.retrieveMultipleRecords(
     'arades_features',
     '?$select=*'
