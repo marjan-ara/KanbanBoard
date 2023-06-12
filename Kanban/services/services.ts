@@ -3,6 +3,7 @@
 // import config from './config.json'
 // import { ConfidentialClientApplication } from '@azure/msal-node'
 import { v4 as uuidv4 } from 'uuid'
+import moment from 'moment'
 import {
   IColumnItem,
   IFeature,
@@ -78,35 +79,55 @@ export const getColumnCards = async (
   projectTasks: IProjectTask[]
 ): Promise<any> => {
   const output: IColumnItem[] = []
-  const strDate = String(date).substring(0, 10)
+  const strDate = moment(date).format('YYYY-MM-DD')
+
   const sprinttasks = sprintTasks.value.filter(
     (item) =>
       item['arades_plannedstartdate'] !== null &&
       item['arades_plannedstartdate'].includes(strDate)
   )
+  console.log(
+    'sprintTasks.value[2].arades_plannedstartdate',
+    sprintTasks.value[2]['arades_plannedstartdate'],
+    'strDate:',
+    strDate,
+    sprintTasks.value[2]['arades_plannedstartdate']?.includes(strDate)
+  )
+  console.log('sprinttasksAfterFilter', sprinttasks)
   sprinttasks.forEach((el) => {
-    const pt = projectTasks.find(
-      (item) => item.id === el['_arades_taskid_value']
-    )
-    if (pt !== undefined) {
-      const st = {
-        id: el['arades_sprinttaskid'],
-        name: pt?.name,
-        project: pt?.project,
-        feature: pt?.feature,
-        estimatedDuration: pt?.estimatedDuration,
-        priority: pt?.priority,
-        owner: pt?.owner
-      }
+    let pt = projectTasks.find((item) => item.id === el['_arades_taskid_value'])
+    console.log('pt', pt)
 
-      output.push({
-        id: st.id,
-        isProjectTask: false,
-        projectTask: pt,
-        sprintTask: st,
-        isClosed: false
-      })
+    if (!pt) {
+      console.log('not pt')
+      pt = {
+        id: uuidv4(),
+        name: 'Undefined',
+        project: 'Undefined',
+        feature: 'Undefined',
+        estimatedDuration: 'Undefined',
+        priority: 'Undefined',
+        owner: 'Undefined'
+      }
     }
+    const st = {
+      id: el['arades_sprinttaskid'],
+      name: pt.name,
+      project: pt.project,
+      feature: pt.feature,
+      estimatedDuration: pt.estimatedDuration,
+      priority: pt.priority,
+      owner: pt.owner
+    }
+
+    output.push({
+      id: st.id,
+      isProjectTask: false,
+      projectTask: pt || null,
+      sprintTask: st,
+      isClosed: false
+    })
+    console.log('output', output)
   })
   return output
 }

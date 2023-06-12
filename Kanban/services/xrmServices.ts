@@ -136,7 +136,8 @@ export const createSprintTask = async (
     'arades_TaskId@odata.bind': `/arades_projecttasks(${projectTaskId})`
   }
   const result = await context.webAPI.createRecord('arades_sprinttask', data)
-  return result.id
+  const output = result.id
+  return output
 }
 
 export const updateProjectTask = async (

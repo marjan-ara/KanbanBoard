@@ -94,25 +94,32 @@ export class Kanban
         isClosed: false
       })
     })
-    weekDays.forEach((element, index) => {
-      const projecttasks = taskListVar[0].map((item) => item.projectTask)
-      // const colCards = getColumnCards(element, projecttasks)
-      // taskListVar[1 + index] = colCards
 
-      getColumnCards(context, element, projecttasks).then(
-        (res) => (taskListVar[1 + index] = res.colCards)
-      )
-    })
-    // this.dispatch(updateBoard(taskListVar))
+    // weekDays.forEach((element, index) => {
+    //   const projecttasks = taskListVar[0].map((item) => item.projectTask)
+    //   // const colCards = getColumnCards(element, projecttasks)
+    //   // taskListVar[1 + index] = colCards
+
+    //   getColumnCards(context, element, projecttasks).then((res) => {
+    //     console.log('getColumnCards res', res)
+
+    //     taskListVar[1 + index] = res
+    //     console.log('taskListVar', taskListVar)
+    //   })
+    // })
+
     this._taskList = [...taskListVar]
+    console.log('this._taskList', this._taskList)
     this._weekDays = weekDays
     this._props.taskList = [...taskListVar]
     this._props.weekdays = weekDays
     this._props.context = context
 
-    console.log('update view props', this._props)
-
     return React.createElement(KanbanView, this._props)
+
+    // this.dispatch(updateBoard(taskListVar))
+
+    // console.log('update view props', this._props)
   }
 
   private notifyChange(newList: IColumnItem[][], newWeekDays: Date[]) {
@@ -122,9 +129,10 @@ export class Kanban
       // const colCards = getColumnCards(element, projecttasks)
       // taskListVar[1 + index] = colCards
 
-      getColumnCards(this._context, element, projecttasks).then(
-        (res) => (newTaskList[1 + index] = res.colCards)
-      )
+      getColumnCards(this._context, element, projecttasks).then((res) => {
+        // console.log('getColumnCards res', res)
+        newTaskList[1 + index] = res
+      })
     })
 
     this._taskList = newTaskList
