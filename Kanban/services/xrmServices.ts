@@ -9,6 +9,46 @@ import {
   ISprint,
   ISprintTask
 } from '../interfaces'
+import DynamicsWebApi from 'dynamics-web-api';
+import * as MSAL from '@azure/msal-node';
+
+//OAuth Token Endpoint (from your Azure App Registration)
+const authorityUrl = "https://login.microsoftonline.com/ed0e8c26-74ad-4757-b665-2ba44592d33b";
+
+const msalConfig = {
+    auth: {
+        authority: authorityUrl,
+        clientId: "8c2d97aa-c48c-4dfe-a26e-82d8fd0eeaeb",
+        clientSecret:"uCB8Q~uKOzLPwa7dvmAqn5h92--7EdrjQ7I_Ga59",
+        knownAuthorities: ["login.microsoftonline.com"]
+    }
+}
+
+const cca = new MSAL.ConfidentialClientApplication(msalConfig);
+const serverUrl = "https://aradespsmdev.api.crm.dynamics.com";
+
+//function that acquires a token and passes it to DynamicsWebApi
+const acquireToken = (dynamicsWebApiCallback: any) => {
+    cca.acquireTokenByClientCredential({
+        scopes: [`${serverUrl}/.default`],
+    }).then(response => {
+        //call DynamicsWebApi callback only when a token has been retrieved successfully
+        if (response != null) {
+          dynamicsWebApiCallback(response.accessToken);
+        }
+    }).catch((error) => {
+        console.log(JSON.stringify(error));
+    });
+}
+
+//create DynamicsWebApi
+const dynamicsWebApi = new DynamicsWebApi({
+    serverUrl: serverUrl,
+    dataApi: {
+        version: '9.2'
+    },
+    onTokenRefresh: acquireToken
+});
 
 export const getWeekDays = (inputDate: Date): Date[] => {
   const first = inputDate.getDate() - inputDate.getDay() + 1 // First day is the day of the month - the day of the week
@@ -24,11 +64,11 @@ export const getActiveSprints = async (
   context: ComponentFramework.Context<IInputs>
 ): Promise<any> => {
   // https://aradespsm.api.crm4.dynamics.com/api/data/v9.2/arades_sprints
-  const result = await context.webAPI.retrieveMultipleRecords(
-    'arades_sprint',
-    '?$filter=statecode eq 0'
-  )
-  const output = result.entities.map((x) => ({
+  const result = await dynamicsWebApi.retrieveMultipleRequest({
+    collection: "arades_springs",
+    filter: "statecode eq 0"
+  })
+  const output = result.value.map((x) => ({
     id: x.arades_sprintid,
     name: x.arades_name,
     startDate: new Date(x.arades_startdate),
@@ -45,11 +85,11 @@ export const getColumnCards = async (
   const output: IColumnItem[] = []
   const strDate = String(date).substring(0, 10)
   const formattedDate = date.toISOString().split('T')[0]
-  const result = await context.webAPI.retrieveMultipleRecords(
-    'arades_sprinttask',
-    "?$filter=statecode eq 0 and Microsoft.Dynamics.CRM.On(PropertyName=@p1,PropertyValue=@p2)&@p1='arades_plannedstartdate'&@p2='${formattedDate}'"
-  )
-  const sprinttasks = result.entities
+  const result = await dynamicsWebApi.retrieveMultipleRequest({
+    collection: "arades_sprinttasks",
+    filter: "statecode eq 0 and Microsoft.Dynamics.CRM.On(PropertyName=@p1,PropertyValue=@p2)&@p1='arades_plannedstartdate'&@p2='${formattedDate}'"
+  })
+  const sprinttasks = result.value
 
   sprinttasks.forEach((el) => {
     const pt = projectTasks.find(
@@ -83,11 +123,11 @@ export const getOwners = async (
 ): Promise<any> => {
   // get all team members , I don't know if it is the contact entity or something else,
   // I need person's name and id of those who can do a sprint task
-  const result = await context.webAPI.retrieveMultipleRecords(
-    'systemuser',
-    '?$filter=isdisabled eq false and islicensed eq true'
-  )
-  const output = result.entities.map((x) => ({
+  const result = await dynamicsWebApi.retrieveMultipleRequest({
+    collection: "systemusers",
+    filter: "isdisabled eq false and islicensed eq true"
+  })
+  const output = result.value.map((x) => ({
     id: x.systemuserid,
     name: x.fullname
   }))
@@ -98,11 +138,10 @@ export const getProjects = async (
   context: ComponentFramework.Context<IInputs>
 ): Promise<any> => {
   // https://aradespsm.api.crm4.dynamics.com/api/data/v9.2/arades_projects
-  const result = await context.webAPI.retrieveMultipleRecords(
-    'arades_project',
-    '?$select=*'
-  )
-  const output = result.entities.map((x) => ({
+  const result = await dynamicsWebApi.retrieveMultipleRequest({
+    collection: "arades_projects",
+  })
+  const output = result.value.map((x) => ({
     id: x.arades_projectid,
     name: x.arades_name
   }))
@@ -111,11 +150,10 @@ export const getProjects = async (
 export const getFeatures = async (
   context: ComponentFramework.Context<IInputs>
 ): Promise<any> => {
-  const result = await context.webAPI.retrieveMultipleRecords(
-    'arades_features',
-    '?$select=*'
-  )
-  const output = result.entities.map((x) => ({
+  const result = await dynamicsWebApi.retrieveMultipleRequest({
+    collection: "arades_features"
+  })
+  const output = result.value.map((x) => ({
     id: x['arades_featureid'],
     name: x['arades_name']
   }))
@@ -135,8 +173,11 @@ export const createSprintTask = async (
     'arades_SprintId@odata.bind': `/arades_sprints(${sprintId})`,
     'arades_TaskId@odata.bind': `/arades_projecttasks(${projectTaskId})`
   }
-  const result = await context.webAPI.createRecord('arades_sprinttask', data)
-  return result.id
+  const result = await dynamicsWebApi.createRequest({
+    collection: "arades_sprinttasks",
+    entity: data
+  })
+  return result // TODO just id
 }
 
 export const updateProjectTask = async (
@@ -166,12 +207,16 @@ export const updateProjectTask = async (
     data.statecode = 1
     data.statuscode = 771840004
   }
-  await context.webAPI.updateRecord('arades_projecttask', projectTaskId, data)
-  const task = context.webAPI.retrieveRecord(
-    'arades_projecttask',
-    projectTaskId,
-    '?$select=*'
-  )
+  
+  await dynamicsWebApi.updateRequest({
+    collection: 'arades_projecttasks',
+    key: projectTaskId,
+    entity: data
+  });
+  const task = dynamicsWebApi.retrieveRequest({
+    collection: 'arades_projecttasks',
+    key: projectTaskId
+  })
   return task
 }
 
@@ -201,21 +246,25 @@ export const updateSprintTask = async (
     data.statecode = 1
     data.statuscode = 2
   }
-  await context.webAPI.updateRecord('arades_sprinttask', sprintTaskId, data)
-  const task = await context.webAPI.retrieveRecord(
-    'arades_sprinttask',
-    sprintTaskId,
-    '?$select=*'
-  )
+  await dynamicsWebApi.updateRequest({
+    collection: 'arades_sprinttasks',
+    key: sprintTaskId,
+    entity: data
+  });
+
+  const task = await dynamicsWebApi.retrieveRequest({
+    collection: 'arades_sprinttasks',
+    key: sprintTaskId
+  })
   if (closeTask) {
-    await context.webAPI.updateRecord(
-      'arades_projecttask',
-      task._arades_taskid_value,
-      {
+    await dynamicsWebApi.updateRequest({
+      collection: 'arades_projecttasks',
+      key: task._arades_taskid_value,
+      entity: {
         statecode: 1,
         statuscode: 771840004
       }
-    )
+  })
   }
   return task
 }
@@ -227,7 +276,10 @@ export const deleteProjectTask = async (
   // delete project task
   // retutn if action was successful or not
   try {
-    await context.webAPI.deleteRecord('arades_projecttask', projectTaskId)
+    await dynamicsWebApi.deleteRequest({
+      collection: "arades_projecttasks",
+      key: projectTaskId
+    })
     return true
   } catch (error) {
     return false
@@ -241,7 +293,10 @@ export const deleteSprintTask = async (
   // delete sprint task
   // retutn if action was successful or not
   try {
-    await context.webAPI.deleteRecord('arades_sprinttask', sprintTaskId)
+    await dynamicsWebApi.deleteRequest({
+      collection: "arades_sprinttasks",
+      key: sprintTaskId
+    })
     return true
   } catch (error) {
     return false
@@ -255,18 +310,17 @@ export const getSprintId = async (
 ): Promise<any> => {
   const formattedDate = date.toISOString()
 
-  const result = await context.webAPI.retrieveRecord(
-    'arades_sprint',
-
-    `?$filter=_arades_projectid_value eq '${projectId}' arades_startdate ge '${formattedDate}' and arades_enddate le '${formattedDate}'`
-  )
+  const result = await dynamicsWebApi.retrieveMultipleRequest({
+    collection: "arades_sprints",
+    filter: `_arades_projectid_value eq '${projectId}' arades_startdate ge '${formattedDate}' and arades_enddate le '${formattedDate}'`
+})
 
   /// find sprint of the project in which input date is between startDate and EndDate and return sprintId
 
   /// if it does not exists, create one and return sprintId
 
-  return result.entities.length === 1
-    ? result.entities[0].arades_sprintid
+  return result.value.length === 1
+    ? result.value[0].arades_sprintid
     : null
 }
 
