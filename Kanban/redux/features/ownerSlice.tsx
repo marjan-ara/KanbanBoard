@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getOwners } from '../../services/services'
 import { IOwner } from '../../interfaces'
+import { IInputs } from '../../generated/ManifestTypes'
 
 export const getAllOwnersAsync = createAsyncThunk(
   'owners/getAll',
-  (): IOwner[] => {
-    let res = getOwners()
+  (context: ComponentFramework.Context<IInputs>): IOwner[] => {
+    let res = getOwners(context)
     if (!res) res = []
     return res
   }
@@ -42,8 +43,8 @@ const ownerSlice = createSlice({
       })
   },
   reducers: {
-    getAllOwners: (state) => {
-      const res = getOwners()
+    getAllOwners: (state, action) => {
+      const res = getOwners(action.payload)
       state.list = res
     }
   }

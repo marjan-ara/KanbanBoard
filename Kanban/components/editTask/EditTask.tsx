@@ -20,6 +20,7 @@ import { getAllOwners } from '../../redux/features/ownerSlice'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { IColumnItem } from '../../interfaces'
 import { updateProjectTask, updateSprintTask } from '../../services/services'
+import { IInputs } from '../../generated/ManifestTypes'
 
 interface IEditTaskProps {
   id: string
@@ -30,6 +31,7 @@ interface IEditTaskProps {
   dayIndex: number
   list: IColumnItem[][]
   setList: (value: IColumnItem[][]) => void
+  context: ComponentFramework.Context<IInputs>
 }
 
 registerIcons({
@@ -49,7 +51,8 @@ const EditTask: React.FC<IEditTaskProps> = ({
   duration,
   dayIndex,
   list,
-  setList
+  setList,
+  context
 }) => {
   // const countries = useSelector((state) => state.geo.country.list) || []
   const owners = useAppSelector((state) => state.owner.list)
@@ -65,7 +68,7 @@ const EditTask: React.FC<IEditTaskProps> = ({
   ]
 
   useEffect(() => {
-    if (owners.length === 0) dispatch(getAllOwners())
+    if (owners.length === 0) dispatch(getAllOwners(context))
   }, [])
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import DynamicsWebApi from 'dynamics-web-api'
-import * as MSAL from '@azure/msal-node'
+import * as MSAL from '@azure/msal-react'
 import { IInputs } from '../generated/ManifestTypes'
 import {
   IColumnItem,
@@ -26,24 +26,27 @@ const msalConfig = {
   }
 }
 
-const cca = new MSAL.ConfidentialClientApplication(msalConfig)
+// const cca = new MSAL.publicClientApplication(msalConfig)
 const serverUrl = 'https://aradespsmdev.api.crm.dynamics.com'
 
 //function that acquires a token and passes it to DynamicsWebApi
 const acquireToken = (dynamicsWebApiCallback: any) => {
-  cca
-    .acquireTokenByClientCredential({
-      scopes: [`${serverUrl}/.default`]
-    })
-    .then((response) => {
-      //call DynamicsWebApi callback only when a token has been retrieved successfully
-      if (response != null) {
-        dynamicsWebApiCallback(response.accessToken)
-      }
-    })
-    .catch((error) => {
-      console.log(JSON.stringify(error))
-    })
+  const token =
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FyYWRlc3BzbWRldi5jcm00LmR5bmFtaWNzLmNvbSIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzdhYzlhYjNmLTBiZjItNDVlNy1hMTVlLTFjZjU3ZWQzOWU3MS8iLCJpYXQiOjE2ODY1Nzc1MDUsIm5iZiI6MTY4NjU3NzUwNSwiZXhwIjoxNjg2NTgxNDA1LCJhaW8iOiJFMlpnWUZqQS8yeHExbi9HbkREdER5ZVZMdDEyQXdBPSIsImFwcGlkIjoiOGMyZDk3YWEtYzQ4Yy00ZGZlLWEyNmUtODJkOGZkMGVlYWViIiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvN2FjOWFiM2YtMGJmMi00NWU3LWExNWUtMWNmNTdlZDM5ZTcxLyIsInJoIjoiMC5BWUlBUDZ2SmV2SUw1MFdoWGh6MWZ0T2VjUWNBQUFBQUFBQUF3QUFBQUFBQUFBQ0NBQUEuIiwidGlkIjoiN2FjOWFiM2YtMGJmMi00NWU3LWExNWUtMWNmNTdlZDM5ZTcxIiwidXRpIjoicVBiTXJSclNWRTJnU21NNHh2ZEpBQSIsInZlciI6IjEuMCJ9.H5I-rO3JsNt3izBS6edQYi6crKF_FBBSwNpaPtcjwDoji5VVxKFdqExhPvgz_iKXV1iwQSlV63jSX0gxFhoZz8atGK_Nw7SYJ4giM0wYJurvc9hIV7BjaZoJ0OoOaWnSPeLwNZgHh1IfJSuWPAU6hv07q31rwzdWbYKH10Ry_ojxCLSOQ0A3N-IJXe_Lu9ievefp_ku9i3WHIPvjKwRRaUQNVlebNRQzxr1dyeBSnmYcxX26NkApQ75r8MBoFNbAXVebxah1LGq5jjmy36KG7ebwX0N-FiOnpxXC-MYxxjrlk2josHGHFmsuq7HXa7LFlLbh2mfE7WYY7ip0ZFJT_g'
+  dynamicsWebApiCallback(token)
+  // cca
+  //   .acquireTokenByClientCredential({
+  //     scopes: [`${serverUrl}/.default`]
+  //   })
+  //   .then((response) => {
+  //     //call DynamicsWebApi callback only when a token has been retrieved successfully
+  //     if (response != null) {
+  //       dynamicsWebApiCallback(response.accessToken)
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     console.log(JSON.stringify(error))
+  //   })
 }
 
 //create DynamicsWebApi

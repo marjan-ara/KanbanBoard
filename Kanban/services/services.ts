@@ -132,7 +132,9 @@ export const getColumnCards = async (
   return output
 }
 
-export const getOwners = (): IOwner[] => {
+export const getOwners = (
+  context: ComponentFramework.Context<IInputs>
+): IOwner[] => {
   const output = owners.value.map((item) => ({
     id: item.contactid,
     name: item.fullname
@@ -140,7 +142,9 @@ export const getOwners = (): IOwner[] => {
   return output
 }
 
-export const getFeatures = (): IFeature[] => {
+export const getFeatures = (
+  context: ComponentFramework.Context<IInputs>
+): IFeature[] => {
   const output = features.value.map((item) => ({
     id: item['arades_featureid'],
     name: item['arades_name']

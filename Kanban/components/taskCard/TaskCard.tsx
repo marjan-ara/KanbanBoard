@@ -19,16 +19,16 @@ import { useBoolean, useId } from '@fluentui/react-hooks'
 import { IColumnItem, IProjectTask, ISprintTask } from '../../interfaces'
 import EditTask from '../editTask/EditTask'
 import './TaskCard.css'
-import {
-  createSprintTask,
-  deleteProjectTask,
-  deleteSprintTask
-} from '../../services/services'
 // import {
 //   createSprintTask,
 //   deleteProjectTask,
 //   deleteSprintTask
-// } from '../../services/xrmServices'
+// } from '../../services/services'
+import {
+  createSprintTask,
+  deleteProjectTask,
+  deleteSprintTask
+} from '../../services/xrmServices'
 import { IInputs } from '../../generated/ManifestTypes'
 
 registerIcons({
@@ -196,6 +196,7 @@ const TaskCard: React.FC<IProps> = ({
           dayIndex={dayIndex}
           list={list}
           setList={setList}
+          context={context!}
         />
       </Modal>
     </div>
