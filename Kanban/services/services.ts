@@ -14,6 +14,7 @@ import sprintTasks from './sprint_tasks.json'
 import owners from './contacts.json'
 import projects from './projects.json'
 import features from './features.json'
+import { IInputs } from '../generated/ManifestTypes'
 
 // const authorityUrl = 'https://login.microsoftonline.com/common'
 
@@ -71,10 +72,11 @@ export const getWeekDays = (inputDate: Date): Date[] => {
   return weekdays
 }
 
-export const getColumnCards = (
+export const getColumnCards = async (
+  context: ComponentFramework.Context<IInputs>,
   date: Date,
   projectTasks: IProjectTask[]
-): IColumnItem[] => {
+): Promise<any> => {
   const output: IColumnItem[] = []
   const strDate = String(date).substring(0, 10)
   const sprinttasks = sprintTasks.value.filter(
@@ -132,20 +134,37 @@ export const updateSprintTask = () => {
   return null
 }
 
-export const deleteProjectTask = (id: string) => {
+export const deleteProjectTask = (
+  context: ComponentFramework.Context<IInputs>,
+  id: string
+) => {
   return null
 }
-export const deleteSprintTask = (id: string) => {
+export const deleteSprintTask = (
+  context: ComponentFramework.Context<IInputs>,
+  id: string
+) => {
   return null
 }
 
-export const createSprintTask = (): string => {
-  const sprintId = uuidv4()
+export const createSprintTask = (
+  context: ComponentFramework.Context<IInputs>,
+  projectTaskId: string,
+  sprintId: string,
+  startDate: Date,
+  endDate: Date
+): string => {
+  const output = uuidv4()
   // const sprintId = '0000000'
-  return sprintId
+  // return new Promise((resolve, reject) => {
+  //   resolve(output)
+  // })
+  return output
 }
 
-export const getProjects = (): IProject[] => {
+export const getProjects = (
+  context: ComponentFramework.Context<IInputs>
+): IProject[] => {
   const res = projects.value.map((item) => ({
     id: item['arades_projectid'],
     name: item['arades_name']

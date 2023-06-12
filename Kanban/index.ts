@@ -6,6 +6,7 @@ import * as React from 'react'
 import { IInputs, IOutputs } from './generated/ManifestTypes'
 import { IColumnItem } from './interfaces'
 import { getColumnCards, getWeekDays } from './services/xrmServices'
+// import { getColumnCards, getWeekDays } from './services/services'
 import KanbanView, {
   IKanbanViewProps
 } from './components/kanbanView/KanbanView'
@@ -104,6 +105,7 @@ export class Kanban
     })
     // this.dispatch(updateBoard(taskListVar))
     this._taskList = [...taskListVar]
+    this._weekDays = weekDays
     this._props.taskList = [...taskListVar]
     this._props.weekdays = weekDays
     this._props.context = context
@@ -113,8 +115,20 @@ export class Kanban
     return React.createElement(KanbanView, this._props)
   }
 
-  private notifyChange(newList: IColumnItem[][]) {
-    this._taskList = newList
+  private notifyChange(newList: IColumnItem[][], newWeekDays: Date[]) {
+    const newTaskList = [...newList]
+    newWeekDays.forEach((element, index) => {
+      const projecttasks = newTaskList[0].map((item) => item.projectTask)
+      // const colCards = getColumnCards(element, projecttasks)
+      // taskListVar[1 + index] = colCards
+
+      getColumnCards(this._context, element, projecttasks).then(
+        (res) => (newTaskList[1 + index] = res.colCards)
+      )
+    })
+
+    this._taskList = newTaskList
+    this._weekDays = newWeekDays
     this.notifyOutputChanged()
   }
   /**

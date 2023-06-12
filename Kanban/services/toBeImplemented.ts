@@ -16,16 +16,16 @@
 //   return result.entities
 // }
 
-// export const getSprintTasks = (date: Date) => {
-//   // get sprint tasks of a specific day
-//   // get all active sprint tasks including projectId,projectName, ownerId,ownerName, featureId, featureName
-//   const formattedDate = date.toISOString().split('T')[0]
-//   const result = Xrm.WebApi.retrieveRecords(
-//     'arades_sprinttask',
-//     "?$filter=statecode eq 0 and Microsoft.Dynamics.CRM.On(PropertyName=@p1,PropertyValue=@p2)&@p1='arades_plannedstartdate'&@p2='${formattedDate}'"
-//   )
-//   return result.entities
-// }
+export const getSprintTasks = (date: Date) => {
+  // get sprint tasks of a specific day
+  // get all active sprint tasks including projcetTaskId, sprintId, projectId,projectName, ownerId,ownerName, featureId, featureName, estimatedDuration
+  const formattedDate = date.toISOString().split('T')[0]
+  const result = Xrm.WebApi.retrieveRecords(
+    'arades_sprinttask',
+    "?$filter=statecode eq 0 and Microsoft.Dynamics.CRM.On(PropertyName=@p1,PropertyValue=@p2)&@p1='arades_plannedstartdate'&@p2='${formattedDate}'"
+  )
+  return result.entities
+}
 
 // export const getProjectTasks = () => {
 //   //get all active and not-finished project tasks

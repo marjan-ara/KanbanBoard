@@ -18,7 +18,7 @@ import {
   CaretRightSolid8Icon,
   FilterIcon
 } from '@fluentui/react-icons-mdl2'
-import moment from 'moment'
+import moment, { weekdays } from 'moment'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import {
@@ -61,7 +61,7 @@ export interface IKanbanViewProps {
   // appContext: ComponentFramework.Context<IInputs>;
   taskList: IColumnItem[][]
   weekdays: Date[]
-  onChange: (taskList: IColumnItem[][]) => void
+  onChange: (taskList: IColumnItem[][], newWeekDays: Date[]) => void
   context: ComponentFramework.Context<IInputs> | null
 }
 
@@ -82,61 +82,6 @@ const reorder = (
   return result
 }
 
-const move = (
-  source: IColumnItem[],
-  destination: IColumnItem[],
-  droppableSource: DraggableLocation,
-  droppableDestination: DraggableLocation,
-  sIndex: number,
-  dIndex: number
-): IMoveResult | any => {
-  const sourceClone = Array.from(source)
-  const destClone = Array.from(destination)
-
-  const removed = sourceClone[droppableSource.index]
-  // destClone.splice(droppableDestination.index, 0, removed)
-
-  if (sIndex === 0 && dIndex > 0) {
-    const stId = createSprintTask()
-    removed.id = stId
-    removed.isProjectTask = false
-    removed.sprintTask = {
-      id: stId,
-      name: removed.projectTask.name,
-      project: removed.projectTask.project,
-      feature: removed.projectTask.feature,
-      estimatedDuration: removed.projectTask.estimatedDuration,
-      priority: removed.projectTask.priority,
-      owner: removed.projectTask.owner
-    }
-  } else if (sIndex > 0 && dIndex === 0) {
-    removed.id = removed.projectTask.id
-    removed.sprintTask = null
-    deleteSprintTask(removed.id)
-  } else {
-    console.log('sIndex > 0 && dIndex >0')
-    deleteSprintTask(removed.id)
-    const stId = createSprintTask()
-    removed.id = stId
-    removed.sprintTask = {
-      id: stId,
-      name: removed.projectTask.name,
-      project: removed.projectTask.project,
-      feature: removed.projectTask.feature,
-      estimatedDuration: removed.projectTask.estimatedDuration,
-      priority: removed.projectTask.priority,
-      owner: removed.projectTask.owner
-    }
-  }
-  sourceClone.splice(droppableSource.index, 1)
-  destClone.splice(droppableDestination.index, 0, removed)
-  const result: IMoveResult | any = {}
-  result[droppableSource.droppableId] = sourceClone
-  result[droppableDestination.droppableId] = destClone
-
-  return result
-}
-
 const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: 'none',
@@ -153,7 +98,75 @@ const getListStyle = (isDraggingOver: boolean) => ({
 const KanbanView: React.FC<IKanbanViewProps> = (props) => {
   const [list, setList] = useState(props.taskList)
   const [weekDays, setWeekDays] = useState(props.weekdays)
-  const projects = getProjects()
+
+  const move = (
+    source: IColumnItem[],
+    destination: IColumnItem[],
+    droppableSource: DraggableLocation,
+    droppableDestination: DraggableLocation,
+    sIndex: number,
+    dIndex: number
+  ): IMoveResult | any => {
+    const sourceClone = Array.from(source)
+    const destClone = Array.from(destination)
+
+    const removed = sourceClone[droppableSource.index]
+    // destClone.splice(droppableDestination.index, 0, removed)
+
+    if (sIndex === 0 && dIndex > 0) {
+      const stId = createSprintTask(
+        props.context!,
+        removed.projectTask.id,
+        removed.projectTask.id,
+        weekDays[0],
+        weekDays[6]
+      )
+      removed.id = stId
+      removed.isProjectTask = false
+      removed.sprintTask = {
+        id: stId,
+        name: removed.projectTask.name,
+        project: removed.projectTask.project,
+        feature: removed.projectTask.feature,
+        estimatedDuration: removed.projectTask.estimatedDuration,
+        priority: removed.projectTask.priority,
+        owner: removed.projectTask.owner
+      }
+    } else if (sIndex > 0 && dIndex === 0) {
+      removed.id = removed.projectTask.id
+      removed.sprintTask = null
+      deleteSprintTask(props.context!, removed.id)
+    } else {
+      console.log('sIndex > 0 && dIndex >0')
+      deleteSprintTask(props.context!, removed.id)
+      const stId = createSprintTask(
+        props.context!,
+        removed.projectTask.id,
+        removed.projectTask.id,
+        weekDays[0],
+        weekDays[6]
+      )
+      removed.id = stId
+      removed.sprintTask = {
+        id: stId,
+        name: removed.projectTask.name,
+        project: removed.projectTask.project,
+        feature: removed.projectTask.feature,
+        estimatedDuration: removed.projectTask.estimatedDuration,
+        priority: removed.projectTask.priority,
+        owner: removed.projectTask.owner
+      }
+    }
+    sourceClone.splice(droppableSource.index, 1)
+    destClone.splice(droppableDestination.index, 0, removed)
+    const result: IMoveResult | any = {}
+    result[droppableSource.droppableId] = sourceClone
+    result[droppableDestination.droppableId] = destClone
+
+    return result
+  }
+
+  const projects = getProjects(props.context!)
   const projectOptions = projects.map((p) => ({
     key: p.id,
     text: p.name
@@ -453,19 +466,30 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
   // }
 
   useEffect(() => {
+    console.log('change list, weekDays', list, weekDays)
     if (list !== props.taskList) {
-      props.onChange(list)
+      console.log('change list 1:', list)
+      props.onChange(list, weekDays)
     }
+  }, [list])
+
+  useEffect(() => {
+    console.log('change list, weekDays', list, weekDays)
+
     if (weekDays !== props.weekdays) {
-      props.onChange(list)
+      console.log('change list 2:', list)
+      setList([list[0], [], [], [], [], [], []])
+      props.onChange(list, weekDays)
     }
-  }, [list, weekDays])
+  }, [weekDays])
 
   useEffect(() => {
     if (list !== props.taskList) {
+      console.log('1')
       setList(props.taskList)
     }
     if (weekDays !== props.weekdays) {
+      console.log('2')
       setWeekDays(props.weekdays)
     }
   }, [props.taskList, props.weekdays])
