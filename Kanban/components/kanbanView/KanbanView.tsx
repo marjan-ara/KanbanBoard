@@ -34,7 +34,7 @@ import {
 } from 'react-beautiful-dnd'
 import { Provider } from 'react-redux'
 import { IInputs } from '../../generated/ManifestTypes'
-import { IColumnItem } from '../../interfaces'
+import { IColumnItem, IProject } from '../../interfaces'
 import store from '../../redux/store'
 // import {
 //   createSprintTask,
@@ -181,7 +181,6 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     return result
   }
 
-
   const [selectedProjectIds, setSelectedProjectIds] = useState<string[]>([])
   const [sprintFilterSelectedProjectIds, setSprintFilterSelectedProjectIds] =
     useState<string[]>([])
@@ -218,12 +217,6 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     }
   }
 
-  const owners = getOwners()
-  const ownerOptions = owners.map((o) => ({
-    key: o.id,
-    text: o.name
-  }))
-
   const [selectedOwnerIds, setSelectedOwnerIds] = React.useState<string[]>([])
   const [sprintFilterSelectedOwnerIds, setSprintFilterSelectedOwnerIds] =
     useState<string[]>([])
@@ -259,11 +252,9 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     }
   }
 
-  const features = getFeatures()
-  const featureOptions = features.map((f) => ({
-    key: f.id,
-    text: f.name
-  }))
+  const [projectOptions, setProjectOptions] = useState<IComboBoxOption[]>([])
+  const [featureOptions, setFeatureOptions] = useState<IComboBoxOption[]>([])
+  const [ownerOptions, setOwnerOptions] = useState<IComboBoxOption[]>([])
 
   const [selectedFeatureIds, setSelectedFeatureIds] = React.useState<string[]>(
     []
@@ -481,15 +472,29 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     }
   }
 
-  const getFilterOptions=async()=>{
-    try{
+  const getFilterOptions = async () => {
+    try {
       const projects = await getProjects(props.context!)
-      const projectOptions = projects.map((p) => ({
+      const po = projects.map((p) => ({
         key: p.id,
         text: p.name
       }))
-    }
-    catch(error){
+      setProjectOptions(po)
+
+      const owners = await getOwners(props.context!)
+      const oo = owners.map((o) => ({
+        key: o.id,
+        text: o.name
+      }))
+      setOwnerOptions(oo)
+
+      const features = await getFeatures(props.context!)
+      const fo = features.map((f) => ({
+        key: f.id,
+        text: f.name
+      }))
+      setFeatureOptions(fo)
+    } catch (error) {
       console.log(error)
     }
   }
@@ -498,7 +503,7 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     if (isFirstLoad) {
       setIsFirstLoad(false)
       getSprintTasksOfTheBoard()
-    
+      getFilterOptions()
     }
   }, [isFirstLoad])
 
@@ -530,7 +535,7 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     }
   }, [props.taskList, props.weekdays])
 
-  const onDragEnd=async (result: DropResult): Promise<void> {
+  const onDragEnd = async (result: DropResult): Promise<void> => {
     const { source, destination } = result
 
     // dropped outside the list
@@ -546,7 +551,14 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
       newState[sInd] = items
       setList(newState)
     } else {
-      const res = await move(list[sInd], list[dInd], source, destination, sInd, dInd)
+      const res = await move(
+        list[sInd],
+        list[dInd],
+        source,
+        destination,
+        sInd,
+        dInd
+      )
       const newState = [...list]
       newState[sInd] = res.droppable
       newState[dInd] = res.droppable2
