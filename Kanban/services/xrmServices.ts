@@ -48,7 +48,7 @@ export const getColumnCards = async (
   const formattedDate = date.toISOString().split('T')[0]
   const result = await context.webAPI.retrieveMultipleRecords(
     'arades_sprinttask',
-    "?$filter=statecode eq 0 and Microsoft.Dynamics.CRM.On(PropertyName=@p1,PropertyValue=@p2)&@p1='arades_plannedstartdate'&@p2='${formattedDate}'"
+    `?$filter=statecode eq 0 and Microsoft.Dynamics.CRM.On(PropertyName=@p1,PropertyValue=@p2)&@p1='arades_plannedstartdate'&@p2='${formattedDate}'`
   )
   const sprinttasks = result.entities
 
@@ -259,7 +259,6 @@ export const getSprintId = async (
 
   const result = await context.webAPI.retrieveRecord(
     'arades_sprint',
-
     `?$filter=_arades_projectid_value eq '${projectId}' arades_startdate ge '${formattedDate}' and arades_enddate le '${formattedDate}'`
   )
 
