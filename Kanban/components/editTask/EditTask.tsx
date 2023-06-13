@@ -19,7 +19,8 @@ import './EditTask.css'
 import { getAllOwners } from '../../redux/features/ownerSlice'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { IColumnItem } from '../../interfaces'
-import { updateProjectTask, updateSprintTask } from '../../services/services'
+// import { updateProjectTask, updateSprintTask } from '../../services/services'
+import { updateProjectTask, updateSprintTask } from '../../services/xrmservices'
 import { IInputs } from '../../generated/ManifestTypes'
 
 interface IEditTaskProps {
@@ -101,7 +102,19 @@ const EditTask: React.FC<IEditTaskProps> = ({
           String(durationVal)
         updatedBoard[0][cardIndex].isClosed = isCloased
         setList(updatedBoard)
-        updateProjectTask()
+        const toBeUpdated = updatedBoard[0][cardIndex]
+        // context: ComponentFramework.Context<IInputs>,
+        // projectTaskId: string,
+        // ownerId: string,
+        // estimatedDuration: number,
+        // closeTask: boolean
+        updateProjectTask(
+          context,
+          toBeUpdated.id,
+          selectedOwner?.id,
+          durationVal,
+          isCloased
+        )
       }
     } else {
       updatedBoard[dayIndex][cardIndex].sprintTask!.owner = selectedOwner
@@ -111,7 +124,14 @@ const EditTask: React.FC<IEditTaskProps> = ({
         String(durationVal)
       updatedBoard[dayIndex][cardIndex].isClosed = isCloased
       setList(updatedBoard)
-      updateSprintTask()
+
+      updateSprintTask(
+        context,
+        updatedBoard[dayIndex][cardIndex].id,
+        selectedOwner?.id,
+        durationVal,
+        isCloased
+      )
     }
 
     hideModal()

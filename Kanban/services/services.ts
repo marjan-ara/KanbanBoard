@@ -152,10 +152,23 @@ export const getFeatures = (
   return output
 }
 
-export const updateProjectTask = () => {
+export const updateProjectTask = (
+  context: ComponentFramework.Context<IInputs>,
+  sprintTaskId: string,
+  ownerId: string | undefined,
+  estimatedDuration: number | null,
+  closeTask: boolean
+) => {
   return null
 }
-export const updateSprintTask = () => {
+
+export const updateSprintTask = (
+  context: ComponentFramework.Context<IInputs>,
+  sprintTaskId: string,
+  ownerId: string | undefined,
+  estimatedDuration: number | null,
+  closeTask: boolean
+) => {
   return null
 }
 
