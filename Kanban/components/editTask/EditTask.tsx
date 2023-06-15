@@ -2,25 +2,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   ComboBox,
-  DefaultButton,
+  CommandBarButton,
+  // DefaultButton,
   IComboBox,
   IComboBoxOption,
   IconButton,
   IIconProps,
   MaskedTextField,
-  PrimaryButton,
+  // PrimaryButton,
   registerIcons,
   Text
 } from '@fluentui/react'
 
 import React, { useEffect, useState } from 'react'
-import { ChromeCloseIcon } from '@fluentui/react-icons-mdl2'
+import {
+  CancelIcon,
+  ChromeCloseIcon,
+  SaveIcon
+} from '@fluentui/react-icons-mdl2'
 import './EditTask.css'
 import { getAllOwners } from '../../redux/features/ownerSlice'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { IColumnItem } from '../../interfaces'
-// import { updateProjectTask, updateSprintTask } from '../../services/services'
-import { updateProjectTask, updateSprintTask } from '../../services/xrmservices'
+import { updateProjectTask, updateSprintTask } from '../../services/services'
+//import { updateProjectTask, updateSprintTask } from '../../services/xrmservices'
+// import {
+//   updateProjectTask,
+//   updateSprintTask
+// } from '../../services/newXrmServices'
 import { IInputs } from '../../generated/ManifestTypes'
 
 interface IEditTaskProps {
@@ -37,10 +46,14 @@ interface IEditTaskProps {
 
 registerIcons({
   icons: {
-    closeIcon: <ChromeCloseIcon />
+    closeIcon: <ChromeCloseIcon />,
+    saveIcon: <SaveIcon />,
+    cancelIcon: <CancelIcon />
   }
 })
 const closeIcon: IIconProps = { iconName: 'closeIcon' }
+const saveIcon: IIconProps = { iconName: 'saveIcon' }
+const cancelIcon: IIconProps = { iconName: 'cancelIcon' }
 const maskFormat: { [key: string]: RegExp } = {
   '*': /[0-9]/
 }
@@ -162,6 +175,7 @@ const EditTask: React.FC<IEditTaskProps> = ({
               selectedKey={selectedKey}
               // defaultSelectedKey="C"
               // label="Basic single-select ComboBox"
+
               options={options}
               className="text-input"
               onChange={(
@@ -224,12 +238,26 @@ const EditTask: React.FC<IEditTaskProps> = ({
         </div>
       </div>
       <div className="footer">
-        <DefaultButton
+        {/* <DefaultButton
           text="Cancel"
           onClick={hideModal}
           className="button default-button"
+        /> */}
+        {/* <PrimaryButton text="Save" className="button" onClick={saveChanges} /> */}
+
+        <CommandBarButton
+          iconProps={cancelIcon}
+          text="Cancel"
+          onClick={hideModal}
+          className="button"
         />
-        <PrimaryButton text="Save" className="button" onClick={saveChanges} />
+
+        <CommandBarButton
+          iconProps={saveIcon}
+          text="Save"
+          onClick={saveChanges}
+          className="button"
+        />
       </div>
     </div>
   )

@@ -40,42 +40,49 @@ export const getActiveSprints = async (
 
 export const getColumnCards = async (
   context: ComponentFramework.Context<IInputs>,
-  date: Date,
-  projectTasks: IProjectTask[]
+  date: Date
 ): Promise<any> => {
   const output: IColumnItem[] = []
-  const strDate = String(date).substring(0, 10)
   const formattedDate = date.toISOString().split('T')[0]
+
   const result = await context.webAPI.retrieveMultipleRecords(
     'arades_sprinttask',
-    `?$filter=statecode eq 0 and Microsoft.Dynamics.CRM.On(PropertyName=@p1,PropertyValue=@p2)&@p1='arades_plannedstartdate'&@p2='${formattedDate}'`
+    `?$filter=statecode eq 0 and Microsoft.Dynamics.CRM.On(PropertyName=@p1,PropertyValue=@p2)&@p1='arades_plannedstartdate'&@p2='${formattedDate}'&$expand=arades_TaskId($select=arades_name,_arades_featureid_value),arades_ProjectId($select=arades_name),arades_SprintId($select=arades_name),owninguser($select=fullname)`
   )
   const sprinttasks = result.entities
-
+  console.log('result.entities', result.entities)
   sprinttasks.forEach((el) => {
-    const pt = projectTasks.find(
-      (item) => item.id === el['_arades_taskid_value']
-    )
-    if (pt !== undefined) {
-      const st = {
-        id: el['arades_sprinttaskid'],
-        name: el['arades_name'],
-        project: pt?.project,
-        feature: pt?.feature,
-        estimatedDuration: pt?.estimatedDuration,
-        priority: pt?.priority,
-        owner: pt?.owner
-      }
-
-      output.push({
-        id: st.id,
-        isProjectTask: false,
-        projectTask: pt,
-        sprintTask: st,
-        isClosed: false
-      })
+    const st: ISprintTask = {
+      id: el['arades_sprinttaskid'],
+      name: el['arades_name'],
+      project: el['arades_ProjectId'].arades_name,
+      feature: 'undefined',
+      estimatedDuration: el['arades_estimatedduration'],
+      priority: 'undefined',
+      owner: el['owninguser'].fullname,
+      sprintId: el['_arades_sprintid_value']
     }
+
+    const pt: IProjectTask = {
+      id: el['arades_ProjectId'].arades_projectid,
+      name: el['arades_name'],
+      project: el['arades_ProjectId'].arades_name,
+      feature: 'undefined',
+      estimatedDuration: 'undefined',
+      priority: 'undefined',
+      owner: 'undefined'
+    }
+
+    output.push({
+      id: st.id,
+      projectId: el['arades_ProjectId'].arades_projectid,
+      isProjectTask: false,
+      projectTask: pt,
+      sprintTask: st,
+      isClosed: false
+    })
   })
+  console.log('output', output)
   return output
 }
 
@@ -153,16 +160,9 @@ export const updateProjectTask = async (
   // if closeTask is true, deactivate project task
   // return project task
 
-  const data: {
-    arades_estimatedduration: number | null
-    'OwnerId@odata.bind': string | undefined
-    statecode: number | null
-    statuscode: number | null
-  } = {
+  const data: any = {
     arades_estimatedduration: estimatedDuration,
-    'OwnerId@odata.bind': `/systemusers('${ownerId}')`,
-    statecode: null,
-    statuscode: null
+    'ownerid@odata.bind': `/systemusers('${ownerId}')`
   }
   if (closeTask) {
     data.statecode = 1
@@ -188,16 +188,9 @@ export const updateSprintTask = async (
   // update owner/ estimatedDuration
   // if closeTask is true, deactivate sprint task and its related project task
   // return sprint task
-  const data: {
-    arades_estimatedduration: number | null
-    'OwnerId@odata.bind': string | undefined
-    statecode: number | null
-    statuscode: number | null
-  } = {
+  const data: any = {
     arades_estimatedduration: estimatedDuration,
-    'OwnerId@odata.bind': `/systemusers('${ownerId}')`,
-    statecode: null,
-    statuscode: null
+    'ownerid@odata.bind': `/systemusers('${ownerId}')`
   }
   if (closeTask) {
     data.statecode = 1
@@ -254,7 +247,7 @@ export const getSprintId = async (
   context: ComponentFramework.Context<IInputs>,
   projectId: string,
   date: Date
-): Promise<any> => {
+): Promise<string> => {
   const formattedDate = date.toISOString()
 
   const result = await context.webAPI.retrieveRecord(
@@ -266,9 +259,7 @@ export const getSprintId = async (
 
   /// if it does not exists, create one and return sprintId
 
-  return result.entities.length === 1
-    ? result.entities[0].arades_sprintid
-    : null
+  return result.entities.length === 1 ? result.entities[0].arades_sprintid : ''
 }
 
 export const filterProjectTasks = async (

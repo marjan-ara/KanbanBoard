@@ -1,4 +1,6 @@
 .edit-div {
+  min-width: 500px;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -23,7 +25,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 3em;
+  margin-top: 1em;
 }
 .form-field {
   display: flex;
@@ -44,19 +46,19 @@
   font-size: small;
   margin-right: 0;
   margin-left: auto;
+  color: black;
 }
 .button {
+  height: 100%;
   margin-right: 0.5em;
-}
-
-.default-button {
-  border-color: blue;
-  color: blue;
+  border-radius: 3px;
+  font-size: 1.1em;
 }
 
 .text-input {
   margin-right: 3em;
   width: 100%;
+  border-radius: 5px;
 }
 
 .text-input-label {

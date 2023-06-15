@@ -36,6 +36,27 @@ import { Provider } from 'react-redux'
 import { IInputs } from '../../generated/ManifestTypes'
 import { IColumnItem, IProject } from '../../interfaces'
 import store from '../../redux/store'
+import {
+  createSprintTask,
+  deleteSprintTask,
+  getColumnCards,
+  getFeatures,
+  getOwners,
+  getProjects,
+  getSprintId,
+  getWeekDays
+} from '../../services/services'
+
+// import {
+//   createSprintTask,
+//   deleteSprintTask,
+//   getColumnCards,
+//   getFeatures,
+//   getOwners,
+//   getProjects,
+//   getSprintId,
+//   getWeekDays
+// } from '../../services/xrmServices'
 // import {
 //   createSprintTask,
 //   deleteSprintTask,
@@ -44,16 +65,7 @@ import store from '../../redux/store'
 //   getOwners,
 //   getProjects,
 //   getWeekDays
-// } from '../../services/services'
-import {
-  createSprintTask,
-  deleteSprintTask,
-  getColumnCards,
-  getFeatures,
-  getOwners,
-  getProjects,
-  getWeekDays
-} from '../../services/xrmServices'
+// } from '../../services/newXrmServices'
 import TaskCard from '../taskCard/TaskCard'
 import './KanbanView.css'
 
@@ -96,13 +108,13 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: 'none',
   // change background colour if dragging
-  background: isDragging ? 'aliceblue' : '',
+  background: isDragging ? 'rgb(245, 245, 245)' : '',
 
   // styles we need to apply on draggables
   ...draggableStyle
 })
 const getListStyle = (isDraggingOver: boolean) => ({
-  background: isDraggingOver ? 'lightblue' : ''
+  background: isDraggingOver ? 'rgb(245, 245, 245)' : ''
 })
 
 const KanbanView: React.FC<IKanbanViewProps> = (props) => {
@@ -122,53 +134,80 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
 
     const removed = sourceClone[droppableSource.index]
     // destClone.splice(droppableDestination.index, 0, removed)
-
+    sourceClone.splice(droppableSource.index, 1)
+    destClone.splice(droppableDestination.index, 0, removed)
     if (sIndex === 0 && dIndex > 0) {
+      const sprintId = await getSprintId(
+        props.context!,
+        removed.projectId,
+        weekDays[dIndex - 1]
+      )
+
+      console.log(
+        'create sprint task parameters ',
+        'project task id ',
+        removed.projectTask.id,
+        'sprint id',
+        sprintId,
+        'start date',
+        weekDays[dIndex - 1],
+        'end date',
+        weekDays[dIndex - 1]
+      )
       const res = await createSprintTask(
         props.context!,
         removed.projectTask.id,
-        removed.projectTask.id,
-        weekDays[0],
-        weekDays[6]
+        sprintId,
+        weekDays[dIndex - 1],
+        weekDays[dIndex - 1]
       )
+
+      console.log('create sprint res', res)
+
       const stId = res
       removed.id = stId
       removed.isProjectTask = false
       removed.sprintTask = {
         id: stId,
-        name: removed.projectTask.name,
-        project: removed.projectTask.project,
-        feature: removed.projectTask.feature,
+        name: removed.sprintTask?.name || 'undefinde',
+        project: removed.sprintTask?.project || 'undefinde',
+        feature: removed.sprintTask?.feature || 'undefinde',
         estimatedDuration: removed.projectTask.estimatedDuration,
         priority: removed.projectTask.priority,
-        owner: removed.projectTask.owner
+        owner: removed.projectTask.owner,
+        sprintId: removed.sprintTask?.sprintId || 'undefinde'
       }
     } else if (sIndex > 0 && dIndex === 0) {
       removed.id = removed.projectTask.id
       removed.sprintTask = null
-      deleteSprintTask(props.context!, removed.id)
+      await deleteSprintTask(props.context!, removed.id)
     } else {
-      deleteSprintTask(props.context!, removed.id)
+      const sprintId = await getSprintId(
+        props.context!,
+        removed.projectId,
+        weekDays[dIndex - 1]
+      )
+      await deleteSprintTask(props.context!, removed.id)
       const stId = await createSprintTask(
         props.context!,
         removed.projectTask.id,
-        removed.projectTask.id,
-        weekDays[0],
-        weekDays[6]
+        sprintId,
+        weekDays[dIndex - 1],
+        weekDays[dIndex - 1]
       )
       removed.id = stId
       removed.sprintTask = {
         id: stId,
-        name: removed.projectTask.name,
-        project: removed.projectTask.project,
-        feature: removed.projectTask.feature,
-        estimatedDuration: removed.projectTask.estimatedDuration,
-        priority: removed.projectTask.priority,
-        owner: removed.projectTask.owner
+        sprintId: sprintId,
+        name: removed.sprintTask?.name || 'undefined',
+        project: removed.sprintTask?.project || 'undefined',
+        feature: removed.sprintTask?.feature || 'undefined',
+        estimatedDuration: removed.sprintTask?.estimatedDuration || 'undefined',
+        priority: removed.sprintTask?.priority || 'undefined',
+        owner: removed.sprintTask?.owner || 'undefined'
       }
     }
-    sourceClone.splice(droppableSource.index, 1)
-    destClone.splice(droppableDestination.index, 0, removed)
+
     // const result: IMoveResult | any = {}
     // result[droppableSource.droppableId] = sourceClone
     // result[droppableDestination.droppableId] = destClone
@@ -453,10 +492,9 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
       const promises: Promise<any>[] = []
       const taskListVar = [...list]
       weekDays.forEach((element, index) => {
-        const projecttasks = taskListVar[0].map((item) => item.projectTask)
         promises.push(
-          getColumnCards(props.context!, element, projecttasks).then((res) => {
-            console.log('getColumnCards res', res)
+          getColumnCards(props.context!, element).then((res) => {
+            console.log('input date', element, 'getColumnCards res', res)
 
             taskListVar[1 + index] = res
             console.log('taskListVar', taskListVar)
@@ -581,24 +619,122 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     setWeekDays(prevWeek)
   }
   return (
-    <ThemeProvider>
-      <Provider store={store}>
-        <div className="main-board">
-          <div className="queue-div">
-            <DragDropContext onDragEnd={onDragEnd}>
-              <div className="project-task-div">
+    // <ThemeProvider>
+    <Provider store={store}>
+      <div className="main-board">
+        <div className="queue-div">
+          <DragDropContext onDragEnd={onDragEnd}>
+            <div className="project-task-div">
+              <div className="row-ordered-div">
+                <DefaultButton
+                  className="filter-button"
+                  text="Filter"
+                  iconProps={filterIcon}
+                  menuProps={filterMenuProps}
+                  // menuAs={_getMenu}
+                  // allowDisabledFocus
+                />
+              </div>
+              <div className="queue-div">
+                <Droppable key={0} droppableId="0">
+                  {(
+                    provided: DroppableProvided,
+                    snapshot: DroppableStateSnapshot
+                  ) => (
+                    <div
+                      ref={provided.innerRef}
+                      className="list"
+                      style={getListStyle(snapshot.isDraggingOver)}
+                      {...provided.droppableProps}>
+                      <div className="list-header project-task-list">
+                        <span>
+                          Project Tasks
+                          <br />
+                        </span>
+                      </div>
+                      <div className="list-body">
+                        {list[0].map((item, index) => (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
+                            isDragDisabled={item.isClosed}>
+                            {(
+                              provided: DraggableProvided,
+                              snapshot: DraggableStateSnapshot
+                            ) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={getItemStyle(
+                                  snapshot.isDragging,
+                                  provided.draggableProps.style
+                                )}>
+                                <TaskCard
+                                  id={item.id}
+                                  isProjectTask={true}
+                                  projectTask={item.projectTask}
+                                  sprintTask={item.sprintTask}
+                                  dayIndex={0}
+                                  list={list}
+                                  setList={setList}
+                                  isClosed={item.isClosed}
+                                  weekDays={weekDays}
+                                  context={props.context}
+                                />
+                                {/* <div
+                                style={{
+                                  display: 'flex',
+                                  justifyContent: 'space-around'
+                                }}>
+                                {item.projectTask.name}
+                               
+                              </div> */}
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                      </div>
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </div>
+            </div>
+            <div className="week-day-div">
+              <div className="row-ordered-div">
+                <div className="change-week-button-div" />
                 <div className="row-ordered-div">
                   <DefaultButton
                     className="filter-button"
                     text="Filter"
                     iconProps={filterIcon}
-                    menuProps={filterMenuProps}
+                    menuProps={filterSprintTaskMenuProps}
+
                     // menuAs={_getMenu}
                     // allowDisabledFocus
                   />
                 </div>
-                <div className="queue-div">
-                  <Droppable key={0} droppableId="0">
+                <div className="row-ordered-div" />
+                <div className="row-ordered-div" />
+                <div className="row-ordered-div" />
+                <div className="row-ordered-div" />
+                <div className="row-ordered-div" />
+                <div className="row-ordered-div" />
+              </div>
+              <div className="queue-div">
+                <div className="change-week-button-div">
+                  <IconButton
+                    className="next-week-button"
+                    iconProps={prevWeekIcon}
+                    onClick={getPrevWeek}
+                    title="Next Week"
+                    ariaLabel="next week"
+                  />
+                </div>
+                {list.slice(1).map((el, ind) => (
+                  <Droppable key={ind + 1} droppableId={`${ind + 1}`}>
                     {(
                       provided: DroppableProvided,
                       snapshot: DroppableStateSnapshot
@@ -608,14 +744,15 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
                         className="list"
                         style={getListStyle(snapshot.isDraggingOver)}
                         {...provided.droppableProps}>
-                        <div className="list-header project-task-list">
+                        <div className="list-header sprint-task-list">
                           <span>
-                            Project Tasks
+                            {moment(weekDays[ind]).format('dddd')}
                             <br />
+                            {moment(weekDays[ind]).format('MMM Do')}
                           </span>
                         </div>
                         <div className="list-body">
-                          {list[0].map((item, index) => (
+                          {el.map((item, index) => (
                             <Draggable
                               key={item.id}
                               draggableId={item.id}
@@ -635,10 +772,10 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
                                   )}>
                                   <TaskCard
                                     id={item.id}
-                                    isProjectTask={true}
+                                    isProjectTask={false}
                                     projectTask={item.projectTask}
                                     sprintTask={item.sprintTask}
-                                    dayIndex={0}
+                                    dayIndex={ind + 1}
                                     list={list}
                                     setList={setList}
                                     isClosed={item.isClosed}
@@ -662,123 +799,21 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
                       </div>
                     )}
                   </Droppable>
+                ))}
+                <div className="change-week-button-div">
+                  <IconButton
+                    className="next-week-button"
+                    iconProps={nextWeekIcon}
+                    onClick={getNextWeek}
+                    title="Next Week"
+                    ariaLabel="next week"
+                  />
                 </div>
               </div>
-              <div className="week-day-div">
-                <div className="row-ordered-div">
-                  {/* <TextField
-                    placeholder="filtering area"
-                    className="search-field"
-                  /> */}
-                  <div className="row-ordered-div">
-                    <DefaultButton
-                      className="filter-button"
-                      text="Filter"
-                      iconProps={filterIcon}
-                      menuProps={filterSprintTaskMenuProps}
-
-                      // menuAs={_getMenu}
-                      // allowDisabledFocus
-                    />
-                  </div>
-                  <div className="row-ordered-div" />
-                  <div className="row-ordered-div" />
-                  <div className="row-ordered-div" />
-                  <div className="row-ordered-div" />
-                  <div className="row-ordered-div" />
-                  <div className="row-ordered-div" />
-                </div>
-                <div className="queue-div">
-                  <div className="change-week-button-div">
-                    <IconButton
-                      className="next-week-button"
-                      iconProps={prevWeekIcon}
-                      onClick={getPrevWeek}
-                      title="Next Week"
-                      ariaLabel="next week"
-                    />
-                  </div>
-                  {list.slice(1).map((el, ind) => (
-                    <Droppable key={ind + 1} droppableId={`${ind + 1}`}>
-                      {(
-                        provided: DroppableProvided,
-                        snapshot: DroppableStateSnapshot
-                      ) => (
-                        <div
-                          ref={provided.innerRef}
-                          className="list"
-                          style={getListStyle(snapshot.isDraggingOver)}
-                          {...provided.droppableProps}>
-                          <div className="list-header sprint-task-list">
-                            <span>
-                              {moment(weekDays[ind]).format('dddd')}
-                              <br />
-                              {moment(weekDays[ind]).format('MMM Do')}
-                            </span>
-                          </div>
-                          <div className="list-body">
-                            {el.map((item, index) => (
-                              <Draggable
-                                key={item.id}
-                                draggableId={item.id}
-                                index={index}
-                                isDragDisabled={item.isClosed}>
-                                {(
-                                  provided: DraggableProvided,
-                                  snapshot: DraggableStateSnapshot
-                                ) => (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={getItemStyle(
-                                      snapshot.isDragging,
-                                      provided.draggableProps.style
-                                    )}>
-                                    <TaskCard
-                                      id={item.id}
-                                      isProjectTask={false}
-                                      projectTask={item.projectTask}
-                                      sprintTask={item.sprintTask}
-                                      dayIndex={ind + 1}
-                                      list={list}
-                                      setList={setList}
-                                      isClosed={item.isClosed}
-                                      weekDays={weekDays}
-                                      context={props.context}
-                                    />
-                                    {/* <div
-                                style={{
-                                  display: 'flex',
-                                  justifyContent: 'space-around'
-                                }}>
-                                {item.projectTask.name}
-                               
-                              </div> */}
-                                  </div>
-                                )}
-                              </Draggable>
-                            ))}
-                          </div>
-                          {provided.placeholder}
-                        </div>
-                      )}
-                    </Droppable>
-                  ))}
-                  <div className="change-week-button-div">
-                    <IconButton
-                      className="next-week-button"
-                      iconProps={nextWeekIcon}
-                      onClick={getNextWeek}
-                      title="Next Week"
-                      ariaLabel="next week"
-                    />
-                  </div>
-                </div>
-              </div>
-            </DragDropContext>
-          </div>
-          {/* <div className="pt-column">
+            </div>
+          </DragDropContext>
+        </div>
+        {/* <div className="pt-column">
             {
             taskList.map((record,index) => {
                  return <div key={index} draggable onDragStart={(e) => dragStart(e, index)} 
@@ -795,9 +830,9 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
             </span>
          
         </div>))} */}
-        </div>
-      </Provider>
-    </ThemeProvider>
+      </div>
+    </Provider>
+    // </ThemeProvider>
   )
 }
 

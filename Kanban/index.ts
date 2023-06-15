@@ -5,8 +5,9 @@
 import * as React from 'react'
 import { IInputs, IOutputs } from './generated/ManifestTypes'
 import { IColumnItem } from './interfaces'
-import { getColumnCards, getWeekDays } from './services/xrmServices'
-// import { getColumnCards, getWeekDays } from './services/services'
+// import { getColumnCards, getWeekDays } from './services/xrmServices'
+// import { getColumnCards, getWeekDays } from './services/newXrmServices'
+import { getColumnCards, getWeekDays } from './services/services'
 import KanbanView, {
   IKanbanViewProps
 } from './components/kanbanView/KanbanView'
@@ -71,17 +72,16 @@ export class Kanban
       taskListVar[0].push({
         id: recordId,
         isProjectTask: true,
+        projectId: String(
+          dataSet.records[recordId].getValue('arades_projectid')
+        ),
         projectTask: {
           id: String(
             dataSet.records[recordId].getValue('arades_projecttaskid')
           ),
           name: String(dataSet.records[recordId].getValue('arades_name')),
-          project: String(
-            dataSet.records[recordId].getValue('_arades_projectid_name')
-          ),
-          feature: String(
-            dataSet.records[recordId].getValue('_arades_featureid_name')
-          ),
+          project: String(dataSet.records[recordId].getValue('arades_project')),
+          feature: String(dataSet.records[recordId].getValue('arades_feature')),
           estimatedDuration: String(
             dataSet.records[recordId].getValue('arades_estimatedduration')
           ),
@@ -129,7 +129,7 @@ export class Kanban
       // const colCards = getColumnCards(element, projecttasks)
       // taskListVar[1 + index] = colCards
 
-      getColumnCards(this._context, element, projecttasks).then((res) => {
+      getColumnCards(this._context, element).then((res) => {
         // console.log('getColumnCards res', res)
         newTaskList[1 + index] = res
       })

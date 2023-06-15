@@ -10,6 +10,7 @@ export interface IProjectTask {
 
 export interface ISprintTask {
   id: string
+  sprintId: string
   name: string
   project: string
   feature: string
@@ -20,6 +21,7 @@ export interface ISprintTask {
 
 export interface IColumnItem {
   id: string
+  projectId: string
   isProjectTask: boolean
   projectTask: IProjectTask
   sprintTask: ISprintTask | null

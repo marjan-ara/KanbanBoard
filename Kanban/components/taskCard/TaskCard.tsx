@@ -19,16 +19,21 @@ import { useBoolean, useId } from '@fluentui/react-hooks'
 import { IColumnItem, IProjectTask, ISprintTask } from '../../interfaces'
 import EditTask from '../editTask/EditTask'
 import './TaskCard.css'
-// import {
-//   createSprintTask,
-//   deleteProjectTask,
-//   deleteSprintTask
-// } from '../../services/services'
 import {
   createSprintTask,
   deleteProjectTask,
   deleteSprintTask
-} from '../../services/xrmServices'
+} from '../../services/services'
+// import {
+//   createSprintTask,
+//   deleteProjectTask,
+//   deleteSprintTask
+// } from '../../services/xrmServices'
+// import {
+//   createSprintTask,
+//   deleteProjectTask,
+//   deleteSprintTask
+// } from '../../services/newXrmServices'
 import { IInputs } from '../../generated/ManifestTypes'
 
 registerIcons({
@@ -92,7 +97,7 @@ const TaskCard: React.FC<IProps> = ({
     await createSprintTask(
       context!,
       sprintTaskCard!.projectTask.id,
-      sprintTaskCard!.id,
+      sprintTaskCard!.sprintTask?.sprintId || 'undefined',
       weekDays[dayIndex + 1],
       weekDays[dayIndex + 1]
     )
@@ -150,7 +155,9 @@ const TaskCard: React.FC<IProps> = ({
         <div className="task-card-row-ordered-div">
           <Text variant="small" nowrap={false} block>
             <b>Project:</b>
-            {isProjectTask ? projectTask.project : sprintTask?.project}
+            {isProjectTask
+              ? `  ${projectTask.project}`
+              : `  ${sprintTask?.project}`}
           </Text>
         </div>
         <div className="task-card-row-ordered-div">

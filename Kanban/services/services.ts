@@ -15,6 +15,7 @@ import sprintTasks from './sprint_tasks.json'
 import owners from './contacts.json'
 import projects from './projects.json'
 import features from './features.json'
+import sprints from './sprints.json'
 import { IInputs } from '../generated/ManifestTypes'
 
 // const authorityUrl = 'https://login.microsoftonline.com/common'
@@ -75,60 +76,46 @@ export const getWeekDays = (inputDate: Date): Date[] => {
 
 export const getColumnCards = async (
   context: ComponentFramework.Context<IInputs>,
-  date: Date,
-  projectTasks: IProjectTask[]
+  date: Date
 ): Promise<any> => {
   const output: IColumnItem[] = []
-  const strDate = moment(date).format('YYYY-MM-DD')
+  const formattedDate = date.toISOString().split('T')[0]
+  console.log('formattedDate', formattedDate)
 
-  const sprinttasks = sprintTasks.value.filter(
-    (item) =>
-      item['arades_plannedstartdate'] !== null &&
-      item['arades_plannedstartdate'].includes(strDate)
-  )
-  console.log(
-    'sprintTasks.value[2].arades_plannedstartdate',
-    sprintTasks.value[2]['arades_plannedstartdate'],
-    'strDate:',
-    strDate,
-    sprintTasks.value[2]['arades_plannedstartdate']?.includes(strDate)
-  )
-  console.log('sprinttasksAfterFilter', sprinttasks)
-  sprinttasks.forEach((el) => {
-    let pt = projectTasks.find((item) => item.id === el['_arades_taskid_value'])
-    console.log('pt', pt)
-
-    if (!pt) {
-      console.log('not pt')
-      pt = {
-        id: uuidv4(),
-        name: 'Undefined',
-        project: 'Undefined',
-        feature: 'Undefined',
-        estimatedDuration: 'Undefined',
-        priority: 'Undefined',
-        owner: 'Undefined'
-      }
-    }
+  sprintTasks.value.forEach((el) => {
+    console.log('el', el)
     const st = {
       id: el['arades_sprinttaskid'],
-      name: pt.name,
-      project: pt.project,
-      feature: pt.feature,
-      estimatedDuration: pt.estimatedDuration,
-      priority: pt.priority,
-      owner: pt.owner
+      name: el['arades_name'],
+      project: el['arades_ProjectId']['arades_name'],
+      feature: 'undefined',
+      estimatedDuration: el['arades_estimatedduration'] || 'undefined',
+      priority: 'undefined',
+      owner: el['owninguser'].fullname,
+      sprintId: el['_arades_sprintid_value']
+    }
+
+    const pt: IProjectTask = {
+      id: el['arades_ProjectId'].arades_projectid,
+      name: el['arades_name'],
+      project: el['arades_ProjectId']['arades_name'],
+      feature: 'undefined',
+      estimatedDuration: 'undefined',
+      priority: 'undefined',
+      owner: 'undefined'
     }
 
     output.push({
       id: st.id,
+      projectId: el['arades_ProjectId'].arades_projectid,
       isProjectTask: false,
-      projectTask: pt || null,
+      projectTask: pt,
       sprintTask: st,
       isClosed: false
     })
-    console.log('output', output)
   })
+  console.log('output', output)
+
   return output
 }
 
@@ -208,4 +195,21 @@ export const getProjects = (
     name: item['arades_name']
   }))
   return res
+}
+
+export const getSprintId = async (
+  context: ComponentFramework.Context<IInputs>,
+  projectId: string,
+  date: Date
+): Promise<string> => {
+  const sp = await sprints.value.find(
+    (x) =>
+      x._arades_projectid_value === projectId &&
+      date >= new Date(x.arades_startdate) &&
+      date <= new Date(x.arades_enddate)
+  )
+  let result = ''
+  if (sp) result = sp.arades_sprintid
+  else result = ''
+  return result
 }
