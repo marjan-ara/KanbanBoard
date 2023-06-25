@@ -3,10 +3,14 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-unused-vars */
 import * as React from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import { IInputs, IOutputs } from './generated/ManifestTypes'
 import { IColumnItem } from './interfaces'
-// import { getColumnCards, getWeekDays } from './services/xrmServices'
-// import { getColumnCards, getWeekDays } from './services/newXrmServices'
+// import {
+//   getColumnCards,
+//   getWeekDays,
+//   getWeekNumber
+// } from './services/xrmServices'
 import { getColumnCards, getWeekDays } from './services/services'
 import KanbanView, {
   IKanbanViewProps
@@ -69,47 +73,48 @@ export class Kanban
     const taskListVar: IColumnItem[][] = [[], [], [], [], [], [], [], []]
 
     dataSet.sortedRecordIds.forEach((recordId) => {
+      console.log(
+        'Object(dataSet.records[recordId])',
+        Object(dataSet.records[recordId].getValue('arades_projectid'))
+      )
+
       taskListVar[0].push({
-        id: recordId,
+        id: uuidv4(),
         isProjectTask: true,
-        projectId: String(
+        projectId: Object(
           dataSet.records[recordId].getValue('arades_projectid')
-        ),
+        )?.id?.guid,
         projectTask: {
-          id: String(
-            dataSet.records[recordId].getValue('arades_projecttaskid')
-          ),
+          id: String(recordId),
           name: String(dataSet.records[recordId].getValue('arades_name')),
-          project: String(dataSet.records[recordId].getValue('arades_project')),
-          feature: String(dataSet.records[recordId].getValue('arades_feature')),
+          project: String(
+            dataSet.records[recordId].getFormattedValue('arades_projectid')
+          ),
+          feature: String(
+            dataSet.records[recordId].getFormattedValue('arades_featureid')
+          ),
           estimatedDuration: String(
             dataSet.records[recordId].getValue('arades_estimatedduration')
           ),
           priority: String(
             dataSet.records[recordId].getValue('arades_priority')
           ),
-          owner: String(dataSet.records[recordId].getValue('_ownerid_name'))
+          owner: String(dataSet.records[recordId].getFormattedValue('ownerid')),
+          plannedStartDate: String(
+            dataSet.records[recordId].getValue('arades_plannedstartdate')
+          ),
+
+          plannedEndDate: String(
+            dataSet.records[recordId].getValue('arades_plannedenddate')
+          )
         },
         sprintTask: null,
         isClosed: false
       })
+      console.log('taskListVar[0]', taskListVar[0])
     })
 
-    // weekDays.forEach((element, index) => {
-    //   const projecttasks = taskListVar[0].map((item) => item.projectTask)
-    //   // const colCards = getColumnCards(element, projecttasks)
-    //   // taskListVar[1 + index] = colCards
-
-    //   getColumnCards(context, element, projecttasks).then((res) => {
-    //     console.log('getColumnCards res', res)
-
-    //     taskListVar[1 + index] = res
-    //     console.log('taskListVar', taskListVar)
-    //   })
-    // })
-
     this._taskList = [...taskListVar]
-    console.log('this._taskList', this._taskList)
     this._weekDays = weekDays
     this._props.taskList = [...taskListVar]
     this._props.weekdays = weekDays
@@ -118,8 +123,6 @@ export class Kanban
     return React.createElement(KanbanView, this._props)
 
     // this.dispatch(updateBoard(taskListVar))
-
-    // console.log('update view props', this._props)
   }
 
   private notifyChange(newList: IColumnItem[][], newWeekDays: Date[]) {
@@ -129,8 +132,7 @@ export class Kanban
       // const colCards = getColumnCards(element, projecttasks)
       // taskListVar[1 + index] = colCards
 
-      getColumnCards(this._context, element).then((res) => {
-        // console.log('getColumnCards res', res)
+      getColumnCards(this._context, element, [], [], []).then((res) => {
         newTaskList[1 + index] = res
       })
     })

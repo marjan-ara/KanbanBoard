@@ -6,11 +6,13 @@ export interface IProjectTask {
   estimatedDuration: string
   priority: string
   owner: string
+  plannedStartDate: string | null
+  plannedEndDate: string | null
 }
 
 export interface ISprintTask {
-  id: string
-  sprintId: string
+  id: string | null
+  sprintId: string | null
   name: string
   project: string
   feature: string

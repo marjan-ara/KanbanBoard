@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-redeclare */
 import * as React from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import {
   ChromeBackMirroredIcon,
   EditMirroredIcon,
@@ -29,11 +30,7 @@ import {
 //   deleteProjectTask,
 //   deleteSprintTask
 // } from '../../services/xrmServices'
-// import {
-//   createSprintTask,
-//   deleteProjectTask,
-//   deleteSprintTask
-// } from '../../services/newXrmServices'
+
 import { IInputs } from '../../generated/ManifestTypes'
 
 registerIcons({
@@ -80,28 +77,100 @@ const TaskCard: React.FC<IProps> = ({
   const [isEditModalOpen, { setTrue: showEditModal, setFalse: hideEditModal }] =
     useBoolean(false)
 
+  // const [disableActions, setDisableActions] = React.useState(false)
   const deleteCard = () => {
     const board = [...list]
     const index = board[dayIndex].findIndex((x) => x.id === id)
     board[dayIndex].splice(index, 1)
     setList(board)
-    if (isProjectTask) deleteProjectTask(context!, id)
-    else deleteSprintTask(context!, id)
+    if (isProjectTask) deleteProjectTask(context!, projectTask.id)
+    else deleteSprintTask(context!, sprintTask!.id!)
   }
 
-  const cloneToNextDay = async () => {
-    const board = [...list]
-    const sprintTaskCard = board[dayIndex].find((x) => x.id === id)
-    board[dayIndex + 1].push(sprintTaskCard!)
-    setList(board)
-    await createSprintTask(
-      context!,
-      sprintTaskCard!.projectTask.id,
-      sprintTaskCard!.sprintTask?.sprintId || 'undefined',
-      weekDays[dayIndex + 1],
-      weekDays[dayIndex + 1]
-    )
+  const createNewCard = async (
+    cardId: string,
+    boardColIndex: number,
+    name: string,
+    projectId: string,
+    projectTaskId: string,
+    sprintId: string,
+    startDate: Date,
+    endDate: Date
+  ) => {
+    try {
+      const sprintTaskId = await createSprintTask(
+        context!,
+        name,
+        projectId,
+        projectTaskId,
+        sprintId,
+        startDate,
+        endDate
+      )
+      console.log('cloned task id', sprintTaskId)
+      const board = [...list]
+      const itemIdx = board[boardColIndex].findIndex((x) => x.id === cardId)
+      console.log('itemIdx', itemIdx)
+      if (itemIdx > -1) {
+        board[boardColIndex][itemIdx].sprintTask!.id = sprintTaskId
+      }
+      setList(board)
+    } catch (error) {
+      console.log(error)
+    }
   }
+  const cloneToNextDay = () => {
+    const board = [...list]
+    let sprintTaskCard = board[dayIndex].find((x) => x.id === id)
+    if (sprintTaskCard) {
+      const newCard: IColumnItem = {
+        id: uuidv4(),
+        projectId: sprintTaskCard.projectId,
+        isClosed: false,
+        isProjectTask: false,
+        projectTask: {
+          id: sprintTaskCard.projectTask.id,
+          name: sprintTaskCard.projectTask.name,
+          project: sprintTaskCard.projectTask.project,
+          priority: sprintTaskCard.projectTask.priority,
+          estimatedDuration: sprintTaskCard.projectTask.estimatedDuration,
+          feature: sprintTaskCard.projectTask.feature,
+          owner: sprintTaskCard.projectTask.owner,
+          plannedStartDate: sprintTaskCard.projectTask.plannedStartDate,
+          plannedEndDate: sprintTaskCard.projectTask.plannedEndDate
+        },
+        sprintTask: {
+          id: null,
+          estimatedDuration: sprintTaskCard.sprintTask?.estimatedDuration!,
+          feature: sprintTaskCard.sprintTask?.feature!,
+          name: sprintTaskCard.sprintTask?.name!,
+          owner: sprintTaskCard.sprintTask?.owner!,
+          priority: sprintTaskCard.sprintTask?.priority!,
+          project: sprintTaskCard.sprintTask?.project!,
+          sprintId: sprintTaskCard.sprintTask?.sprintId!
+        }
+      }
+      board[dayIndex + 1].push(newCard)
+      setList(board)
+      createNewCard(
+        newCard.id,
+        dayIndex + 1,
+        newCard.projectTask.name,
+        newCard.projectId,
+        newCard.projectTask.id,
+        newCard.sprintTask!.sprintId!,
+        weekDays[dayIndex],
+        weekDays[dayIndex]
+      )
+    }
+  }
+
+  // React.useEffect(() => {
+  //   console.log('set disabled action', sprintTask?.id)
+  //   if (isProjectTask || sprintTask?.id) setDisableActions(false)
+  //   else setDisableActions(true)
+  // }, [])
+
   return (
     <div className="task-card-div">
       <div className="task-card-header">

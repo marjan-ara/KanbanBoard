@@ -21,15 +21,19 @@ import {
   SaveIcon
 } from '@fluentui/react-icons-mdl2'
 import './EditTask.css'
-import { getAllOwners } from '../../redux/features/ownerSlice'
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { IColumnItem } from '../../interfaces'
-import { updateProjectTask, updateSprintTask } from '../../services/services'
-//import { updateProjectTask, updateSprintTask } from '../../services/xrmservices'
+// import { getAllOwners } from '../../redux/features/ownerSlice'
+// import { useAppDispatch, useAppSelector } from '../../hooks'
+import { IColumnItem, IOwner } from '../../interfaces'
+import {
+  getOwners,
+  updateProjectTask,
+  updateSprintTask
+} from '../../services/services'
 // import {
+//   getOwners,
 //   updateProjectTask,
 //   updateSprintTask
-// } from '../../services/newXrmServices'
+// } from '../../services/xrmservices'
 import { IInputs } from '../../generated/ManifestTypes'
 
 interface IEditTaskProps {
@@ -69,9 +73,9 @@ const EditTask: React.FC<IEditTaskProps> = ({
   context
 }) => {
   // const countries = useSelector((state) => state.geo.country.list) || []
-  const owners = useAppSelector((state) => state.owner.list)
+  // const owners = useAppSelector((state) => state.owner.list)
   // const board = useAppSelector((state) => state.board.list)
-  const dispatch = useAppDispatch()
+  const [owners, setOwners] = useState<IOwner[]>([])
   const [options, setOptions] = useState<IComboBoxOption[]>([])
   const [selectedKey, setSelectedKey] = useState('')
   const [durationVal, setDurationVal] = useState(duration)
@@ -81,11 +85,17 @@ const EditTask: React.FC<IEditTaskProps> = ({
     { key: 1, text: 'No' }
   ]
 
+  const getOwnersAsync = async () => {
+    const res = await getOwners(context)
+    setOwners(res)
+  }
+
   useEffect(() => {
-    if (owners.length === 0) dispatch(getAllOwners(context))
+    if (owners.length === 0) getOwnersAsync()
   }, [])
 
   useEffect(() => {
+    console.log('owners', owners)
     const optionList: IComboBoxOption[] = owners.map((item) => ({
       key: item.id,
       text: item.name
@@ -106,6 +116,7 @@ const EditTask: React.FC<IEditTaskProps> = ({
     const cardIndex = updatedBoard[dayIndex].findIndex((x) => x.id === id)
     console.log('updatedBoard[dayIndex + 1]', updatedBoard[dayIndex])
     const selectedOwner = owners.find((x) => x.id === selectedKey)
+    console.log('selected owner', selectedOwner)
     if (editProjectTask) {
       if (cardIndex > -1) {
         updatedBoard[0][cardIndex].projectTask.owner = selectedOwner
@@ -123,7 +134,7 @@ const EditTask: React.FC<IEditTaskProps> = ({
         // closeTask: boolean
         updateProjectTask(
           context,
-          toBeUpdated.id,
+          toBeUpdated.projectTask.id,
           selectedOwner?.id,
           durationVal,
           isCloased
@@ -140,7 +151,7 @@ const EditTask: React.FC<IEditTaskProps> = ({
 
       updateSprintTask(
         context,
-        updatedBoard[dayIndex][cardIndex].id,
+        updatedBoard[dayIndex][cardIndex].sprintTask!.id!,
         selectedOwner?.id,
         durationVal,
         isCloased
@@ -200,13 +211,14 @@ const EditTask: React.FC<IEditTaskProps> = ({
             <MaskedTextField
               className="text-input"
               maskFormat={maskFormat}
-              mask="**.**"
+              mask="*.**"
               maskChar="0"
               value={String(durationVal)}
               onChange={(
                 event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
                 newValue?: string
               ) => {
+                console.log('Number(newValue)', Number(newValue))
                 setDurationVal(Number(newValue))
               }}
             />

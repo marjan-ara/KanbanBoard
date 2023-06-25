@@ -18,103 +18,65 @@ import features from './features.json'
 import sprints from './sprints.json'
 import { IInputs } from '../generated/ManifestTypes'
 
-// const authorityUrl = 'https://login.microsoftonline.com/common'
-
-// const msalConfig = {
-//   auth: {
-//     authority: authorityUrl,
-//     clientId: config.clientId,
-//     clientSecret: config.secret
-//     // knownAuthorities: ['login.microsoftonline.com']
-//   }
-// }
-
-// const cca = new ConfidentialClientApplication(msalConfig)
-
-// //function that acquires a token and passes it to DynamicsWebApi
-// const acquireToken = (
-//   dynamicsWebApiCallback: (arg0: string | undefined) => void
-// ) => {
-//   cca
-//     .acquireTokenByClientCredential({
-//       scopes: [`${config.serverUrl}/.default`]
-//     })
-//     .then((response) => {
-//       //call DynamicsWebApi callback only when a token has been retrieved successfully
-//       dynamicsWebApiCallback(response?.accessToken)
-//     })
-//     .catch((error) => {
-//       console.log(JSON.stringify(error))
-//     })
-// }
-
-// const xrmClient = new DynamicsWebApi({
-//   webApiUrl: `${config.serverUrl}/api/data/v9.2/`,
-
-//   onTokenRefresh: acquireToken
-// })
-
-// export const test = async () => {
-//   try {
-//     //call any function
-//     const response = await xrmClient.executeUnboundFunction('WhoAmI')
-//     console.log(`Hello Dynamics 365! My id is: ${response.UserId}`)
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
 export const getWeekDays = (inputDate: Date): Date[] => {
-  const first = inputDate.getDate() - inputDate.getDay() + 1 // First day is the day of the month - the day of the week
   const weekdays = []
+  var first = inputDate.getDate() - inputDate.getDay() + 1
   for (let i = 0; i < 7; i++) {
-    const day = new Date(inputDate.setDate(first + i))
-    weekdays.push(day)
+    var next = new Date(inputDate.getTime())
+    next.setDate(first + i)
+    console.log('first day', first, 'day ', i, next)
+    weekdays.push(next)
   }
   return weekdays
 }
 
 export const getColumnCards = async (
   context: ComponentFramework.Context<IInputs>,
-  date: Date
+  date: Date,
+  projectIds: string[],
+  ownerIds: string[],
+  featureIds: string[]
 ): Promise<any> => {
   const output: IColumnItem[] = []
   const formattedDate = date.toISOString().split('T')[0]
   console.log('formattedDate', formattedDate)
 
-  sprintTasks.value.forEach((el) => {
-    console.log('el', el)
-    const st = {
-      id: el['arades_sprinttaskid'],
-      name: el['arades_name'],
-      project: el['arades_ProjectId']['arades_name'],
-      feature: 'undefined',
-      estimatedDuration: el['arades_estimatedduration'] || 'undefined',
-      priority: 'undefined',
-      owner: el['owninguser'].fullname,
-      sprintId: el['_arades_sprintid_value']
-    }
+  setTimeout(() => {
+    sprintTasks.value.forEach((el) => {
+      const st = {
+        id: el['arades_sprinttaskid'],
+        name: el['arades_name'],
+        project: el['arades_ProjectId']['arades_name'],
+        feature: 'undefined',
+        estimatedDuration: el['arades_estimatedduration'] || 'undefined',
+        priority: 'undefined',
+        owner: el['owninguser'].fullname,
+        sprintId: el['_arades_sprintid_value']
+      }
 
-    const pt: IProjectTask = {
-      id: el['arades_ProjectId'].arades_projectid,
-      name: el['arades_name'],
-      project: el['arades_ProjectId']['arades_name'],
-      feature: 'undefined',
-      estimatedDuration: 'undefined',
-      priority: 'undefined',
-      owner: 'undefined'
-    }
+      const pt: IProjectTask = {
+        id: el['arades_ProjectId'].arades_projectid,
+        name: el['arades_name'],
+        project: el['arades_ProjectId']['arades_name'],
+        feature: 'undefined',
+        estimatedDuration: 'undefined',
+        priority: 'undefined',
+        owner: 'undefined',
+        plannedStartDate: el['arades_plannedstartdate'] || null,
+        plannedEndDate: el['arades_plannedstartdate'] || null
+      }
 
-    output.push({
-      id: st.id,
-      projectId: el['arades_ProjectId'].arades_projectid,
-      isProjectTask: false,
-      projectTask: pt,
-      sprintTask: st,
-      isClosed: false
+      output.push({
+        id: uuidv4(),
+        projectId: el['arades_ProjectId'].arades_projectid,
+        isProjectTask: false,
+        projectTask: pt,
+        sprintTask: st,
+        isClosed: false
+      })
     })
-  })
-  console.log('output', output)
+    console.log('output', output)
+  }, 5000)
 
   return output
 }
@@ -174,6 +136,8 @@ export const deleteSprintTask = (
 
 export const createSprintTask = (
   context: ComponentFramework.Context<IInputs>,
+  name: string,
+  projectId: string,
   projectTaskId: string,
   sprintId: string,
   startDate: Date,
@@ -202,6 +166,7 @@ export const getSprintId = async (
   projectId: string,
   date: Date
 ): Promise<string> => {
+  console.log('get sprint id', projectId, date)
   const sp = await sprints.value.find(
     (x) =>
       x._arades_projectid_value === projectId &&
@@ -212,4 +177,61 @@ export const getSprintId = async (
   if (sp) result = sp.arades_sprintid
   else result = ''
   return result
+}
+
+export const getProjectTasks = async (
+  context: ComponentFramework.Context<IInputs>,
+  projectIds: string[],
+  ownerIds: string[],
+  featureIds: string[]
+): Promise<IColumnItem[]> => {
+  const result = await context.webAPI.retrieveMultipleRecords(
+    'arades_projecttask',
+    '?$filter=statecode eq 0&$expand=arades_ProjectId($select=arades_name),arades_FeatureId($select=arades_name)'
+  )
+  let projTasks = result.entities
+  console.log('projTasks', projTasks)
+  if (projectIds.length > 0) {
+    projTasks = projTasks.filter((item) =>
+      projectIds.includes(item.arades_projecttaskid)
+    )
+  }
+
+  if (ownerIds.length > 0) {
+    projTasks = projTasks.filter((item) =>
+      ownerIds.includes(item._ownerid_value)
+    )
+  }
+
+  if (featureIds.length > 0) {
+    projTasks = projTasks.filter((item) =>
+      featureIds.includes(item._arades_featureid_value)
+    )
+  }
+  console.log('projTasks', projTasks)
+  const output = projTasks.map((el) => ({
+    id: uuidv4(),
+    projectId: el._arades_projectid_value,
+    isProjectTask: false,
+    projectTask: {
+      id: el.arades_projecttaskid,
+      name: el.arades_name || 'undefined',
+      project: el['arades_ProjectId']
+        ? el['arades_ProjectId'].arades_name
+        : 'undefined',
+      feature: el['arades_FeatureId']
+        ? el['arades_FeatureId'].arades_name
+        : 'undefined', // ptResult['arades_FeatureId'].arades_name,
+      estimatedDuration: el.arades_estimatedduration,
+      priority: el['arades_priority'] || 'undefined',
+      plannedStartDate: el.arades_plannedstartdate,
+      plannedEndDate: el.arades_plannedenddate,
+      owner: 'undefined' // ptResult['owninguser'].fullname
+    },
+    sprintTask: null,
+    isClosed: false
+  }))
+  console.log('filter output', output)
+  return output
+  // return active project tasks with these filters
 }
