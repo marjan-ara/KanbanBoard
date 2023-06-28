@@ -1,52 +1,6 @@
 {
-  "@odata.context": "https://aradespsmdev.crm4.dynamics.com/api/data/v9.0/$metadata#arades_sprinttasks(arades_TaskId(arades_name,_arades_featureid_value),arades_ProjectId(arades_name),arades_SprintId(arades_name),owninguser(fullname))",
+  "@odata.context": "https://aradespsmdev.crm4.dynamics.com/api/data/v9.1/$metadata#arades_sprinttasks(arades_TaskId(arades_name,arades_FeatureId(arades_name)),arades_ProjectId(arades_name),arades_SprintId(arades_name),owninguser(fullname))",
   "value": [
-    {
-      "@odata.etag": "W/\"11340241\"",
-      "modifiedon": "2023-06-13T10:23:14Z",
-      "_owninguser_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "arades_sprinttaskid": "712dcc99-3cb6-ed11-83ff-0022489ca570",
-      "_arades_sprintid_value": "fb653f2d-30a6-ed11-aad1-0022489ca570",
-      "overriddencreatedon": null,
-      "arades_plannedstartdate": "2023-06-13T08:00:00Z",
-      "importsequencenumber": null,
-      "_modifiedonbehalfby_value": null,
-      "statecode": 0,
-      "versionnumber": 11340241,
-      "utcconversiontimezonecode": null,
-      "arades_plannedenddate": "2023-06-13T08:00:00Z",
-      "_arades_taskid_value": "bb973b39-eb8b-ed11-81ad-0022489ca570",
-      "_createdonbehalfby_value": null,
-      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
-      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "createdon": "2023-02-27T01:18:15Z",
-      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
-      "statuscode": 1,
-      "arades_estimatedduration": null,
-      "arades_name": "2023 CW06 arades PM D365 test",
-      "_owningteam_value": null,
-      "_createdby_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "_ownerid_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "timezoneruleversionnumber": 4,
-      "arades_TaskId": {
-        "arades_name": "test",
-        "_arades_featureid_value": "de13bf5c-1d9e-4bf0-9cee-c0149a565670",
-        "arades_projecttaskid": "bb973b39-eb8b-ed11-81ad-0022489ca570"
-      },
-      "arades_ProjectId": {
-        "arades_name": "arades PM D365",
-        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
-      },
-      "arades_SprintId": {
-        "arades_name": "2023 CW06 arades PM D365",
-        "arades_sprintid": "fb653f2d-30a6-ed11-aad1-0022489ca570"
-      },
-      "owninguser": {
-        "fullname": "Mehran Ahmadifar",
-        "systemuserid": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-        "ownerid": "eadc2bfd-1073-ed11-81ab-0022489ca5d2"
-      }
-    },
     {
       "@odata.etag": "W/\"9967740\"",
       "modifiedon": "2023-05-19T13:25:28Z",
@@ -76,8 +30,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Review data migration",
-        "_arades_featureid_value": "d09a59d0-8b91-ed11-aad1-0022489cadfe",
-        "arades_projecttaskid": "4018ff50-8c91-ed11-aad1-0022489cadfe"
+        "arades_projecttaskid": "4018ff50-8c91-ed11-aad1-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Implementing new production environment",
+          "arades_featureid": "d09a59d0-8b91-ed11-aad1-0022489cadfe"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "DFIHK",
@@ -122,8 +79,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Data migration",
-        "_arades_featureid_value": "d09a59d0-8b91-ed11-aad1-0022489cadfe",
-        "arades_projecttaskid": "0f430378-8c91-ed11-aad1-0022489cadfe"
+        "arades_projecttaskid": "0f430378-8c91-ed11-aad1-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Implementing new production environment",
+          "arades_featureid": "d09a59d0-8b91-ed11-aad1-0022489cadfe"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "DFIHK",
@@ -168,8 +128,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Data completeness Test",
-        "_arades_featureid_value": "d09a59d0-8b91-ed11-aad1-0022489cadfe",
-        "arades_projecttaskid": "db4630c4-8c91-ed11-aad1-0022489cadfe"
+        "arades_projecttaskid": "db4630c4-8c91-ed11-aad1-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Implementing new production environment",
+          "arades_featureid": "d09a59d0-8b91-ed11-aad1-0022489cadfe"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "DFIHK",
@@ -214,8 +177,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Data Quality Test",
-        "_arades_featureid_value": "d09a59d0-8b91-ed11-aad1-0022489cadfe",
-        "arades_projecttaskid": "6b3591e4-8c91-ed11-aad1-0022489cadfe"
+        "arades_projecttaskid": "6b3591e4-8c91-ed11-aad1-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Implementing new production environment",
+          "arades_featureid": "d09a59d0-8b91-ed11-aad1-0022489cadfe"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "DFIHK",
@@ -260,8 +226,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Data Readiness Test",
-        "_arades_featureid_value": "d09a59d0-8b91-ed11-aad1-0022489cadfe",
-        "arades_projecttaskid": "c81ac917-8d91-ed11-aad1-0022489cadfe"
+        "arades_projecttaskid": "c81ac917-8d91-ed11-aad1-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Implementing new production environment",
+          "arades_featureid": "d09a59d0-8b91-ed11-aad1-0022489cadfe"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "DFIHK",
@@ -306,8 +275,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Marketing functionality test",
-        "_arades_featureid_value": "d09a59d0-8b91-ed11-aad1-0022489cadfe",
-        "arades_projecttaskid": "82038a64-8d91-ed11-aad1-0022489cadfe"
+        "arades_projecttaskid": "82038a64-8d91-ed11-aad1-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Implementing new production environment",
+          "arades_featureid": "d09a59d0-8b91-ed11-aad1-0022489cadfe"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "DFIHK",
@@ -352,8 +324,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Implement datamodel",
-        "_arades_featureid_value": "90a7f8dd-8d91-ed11-aad1-0022489cadfe",
-        "arades_projecttaskid": "eb553209-8e91-ed11-aad1-0022489cadfe"
+        "arades_projecttaskid": "eb553209-8e91-ed11-aad1-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Implement category datamodel",
+          "arades_featureid": "90a7f8dd-8d91-ed11-aad1-0022489cadfe"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "DFIHK",
@@ -398,8 +373,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Optimize datamodel",
-        "_arades_featureid_value": "90a7f8dd-8d91-ed11-aad1-0022489cadfe",
-        "arades_projecttaskid": "57899d1c-8e91-ed11-aad1-0022489cadfe"
+        "arades_projecttaskid": "57899d1c-8e91-ed11-aad1-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Implement category datamodel",
+          "arades_featureid": "90a7f8dd-8d91-ed11-aad1-0022489cadfe"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "DFIHK",
@@ -444,8 +422,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Result and Requirements meeting",
-        "_arades_featureid_value": "90a7f8dd-8d91-ed11-aad1-0022489cadfe",
-        "arades_projecttaskid": "c917502b-8e91-ed11-aad1-0022489cadfe"
+        "arades_projecttaskid": "c917502b-8e91-ed11-aad1-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Implement category datamodel",
+          "arades_featureid": "90a7f8dd-8d91-ed11-aad1-0022489cadfe"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "DFIHK",
@@ -490,8 +471,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Demo datamodel",
-        "_arades_featureid_value": "90a7f8dd-8d91-ed11-aad1-0022489cadfe",
-        "arades_projecttaskid": "b530ca50-8e91-ed11-aad1-0022489cadfe"
+        "arades_projecttaskid": "b530ca50-8e91-ed11-aad1-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Implement category datamodel",
+          "arades_featureid": "90a7f8dd-8d91-ed11-aad1-0022489cadfe"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "DFIHK",
@@ -505,6 +489,1516 @@
         "fullname": "Amela Asimovska",
         "systemuserid": "23debee4-1073-ed11-81ab-0022489ca5c5",
         "ownerid": "23debee4-1073-ed11-81ab-0022489ca5c5"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12152799\"",
+      "modifiedon": "2023-06-26T06:57:02Z",
+      "_owninguser_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "arades_sprinttaskid": "3ccf4c50-420f-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "39cb054a-420f-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-18T07:47:40Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12152799,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-18T07:47:40Z",
+      "_arades_taskid_value": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "55463900-7b8a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "1e7646b6-2761-ed11-9561-000d3adf729e",
+      "createdon": "2023-06-20T08:13:21Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Plugin for checking Role of User",
+      "_owningteam_value": null,
+      "_createdby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "_ownerid_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "timezoneruleversionnumber": 0,
+      "arades_TaskId": {
+        "arades_name": "Plugin for checking Role of User",
+        "arades_projecttaskid": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "School Management",
+          "arades_featureid": "16755f4a-7b8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL New",
+        "arades_projectid": "55463900-7b8a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "39cb054a-420f-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Arash Baniahmad",
+        "systemuserid": "48b2e247-db60-ed11-9561-000d3adf729e",
+        "ownerid": "48b2e247-db60-ed11-9561-000d3adf729e"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661153\"",
+      "modifiedon": "2023-06-22T06:21:16Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "bf5713fd-c410-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "2bc8216c-7b0e-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-24T06:20:46Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661153,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-24T06:20:46Z",
+      "_arades_taskid_value": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T06:21:16Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Develop API for retriving School data from D365",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Develop API for retriving School data from D365",
+        "arades_projecttaskid": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "2bc8216c-7b0e-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661184\"",
+      "modifiedon": "2023-06-22T06:23:01Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "e1bea237-c510-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "202854f3-660e-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-22T06:21:48Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661184,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-22T06:21:48Z",
+      "_arades_taskid_value": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "55463900-7b8a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T06:23:01Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Plugin for checking Role of User",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Plugin for checking Role of User",
+        "arades_projecttaskid": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "School Management",
+          "arades_featureid": "16755f4a-7b8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL New",
+        "arades_projectid": "55463900-7b8a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": "2023 CW25 SHL New",
+        "arades_sprintid": "202854f3-660e-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661194\"",
+      "modifiedon": "2023-06-22T06:23:16Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "cc15a545-c510-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "2bc8216c-7b0e-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-21T06:21:48Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661194,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-21T06:21:48Z",
+      "_arades_taskid_value": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T06:23:16Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Binding API to FE",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Binding API to FE",
+        "arades_projecttaskid": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "2bc8216c-7b0e-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661212\"",
+      "modifiedon": "2023-06-22T06:23:35Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "dd25cd4b-c510-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "d825cd4b-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-02T06:21:48Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661212,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-02T06:21:48Z",
+      "_arades_taskid_value": "2125a168-3c81-ed11-81ad-0022489ca5c5",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "105db51b-7476-ed11-81ab-0022489ca5d2",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T06:23:35Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Test Queue",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Test Queue",
+        "arades_projecttaskid": "2125a168-3c81-ed11-81ad-0022489ca5c5",
+        "arades_FeatureId": {
+          "arades_name": "Implementing Work Agreements",
+          "arades_featureid": "09c21cde-58d2-4f7a-8e70-8820e9c4ba36"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL",
+        "arades_projectid": "105db51b-7476-ed11-81ab-0022489ca5d2"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "d825cd4b-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661234\"",
+      "modifiedon": "2023-06-22T06:24:35Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "941d8670-c510-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "921d8670-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-02T06:24:14Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661234,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-02T06:24:14Z",
+      "_arades_taskid_value": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T06:24:35Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Develop API for retriving School data from D365",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Develop API for retriving School data from D365",
+        "arades_projecttaskid": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "921d8670-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661246\"",
+      "modifiedon": "2023-06-22T06:25:13Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "c7e9f988-c510-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "c5e9f988-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-02T06:24:45Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661246,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-02T06:24:45Z",
+      "_arades_taskid_value": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T06:25:13Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Develop API for retriving School data from D365",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Develop API for retriving School data from D365",
+        "arades_projecttaskid": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "c5e9f988-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661267\"",
+      "modifiedon": "2023-06-22T06:26:13Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "03b77ba9-c510-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "00b77ba9-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-02T06:25:46Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661267,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-02T06:25:46Z",
+      "_arades_taskid_value": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T06:26:13Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Binding API to FE",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Binding API to FE",
+        "arades_projecttaskid": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "00b77ba9-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661283\"",
+      "modifiedon": "2023-06-22T06:27:22Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "bf8455d6-c510-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "bd8455d6-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-02T06:26:36Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661283,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-02T06:26:36Z",
+      "_arades_taskid_value": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "55463900-7b8a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T06:27:22Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Plugin for checking Role of User",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Plugin for checking Role of User",
+        "arades_projecttaskid": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "School Management",
+          "arades_featureid": "16755f4a-7b8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL New",
+        "arades_projectid": "55463900-7b8a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "bd8455d6-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661298\"",
+      "modifiedon": "2023-06-22T06:28:11Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "be745ef0-c510-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "b5745ef0-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-02T06:27:52Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661298,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-02T06:27:52Z",
+      "_arades_taskid_value": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T06:28:11Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "test",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "test",
+        "arades_projecttaskid": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Possibility to use task templates",
+          "arades_featureid": "de13bf5c-1d9e-4bf0-9cee-c0149a565670"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "b5745ef0-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661320\"",
+      "modifiedon": "2023-06-22T06:33:57Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "fdf88bc2-c610-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "5bdb1d6b-0510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-19T06:33:34Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661320,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-19T06:33:34Z",
+      "_arades_taskid_value": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T06:33:57Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "test",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "test",
+        "arades_projecttaskid": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Possibility to use task templates",
+          "arades_featureid": "de13bf5c-1d9e-4bf0-9cee-c0149a565670"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "5bdb1d6b-0510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661647\"",
+      "modifiedon": "2023-06-22T07:18:25Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "fa6511f8-cc10-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "202854f3-660e-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-19T07:17:24Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661647,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-19T07:17:24Z",
+      "_arades_taskid_value": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "55463900-7b8a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T07:18:25Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Plugin for checking Role of User",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Plugin for checking Role of User",
+        "arades_projecttaskid": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "School Management",
+          "arades_featureid": "16755f4a-7b8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL New",
+        "arades_projectid": "55463900-7b8a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": "2023 CW25 SHL New",
+        "arades_sprintid": "202854f3-660e-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661661\"",
+      "modifiedon": "2023-06-22T07:22:05Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "d1208379-cd10-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "2bc8216c-7b0e-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-21T07:17:24Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661661,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-21T07:17:24Z",
+      "_arades_taskid_value": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T07:22:05Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Develop API for retriving School data from D365",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Develop API for retriving School data from D365",
+        "arades_projecttaskid": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "2bc8216c-7b0e-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11661775\"",
+      "modifiedon": "2023-06-22T09:01:25Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "53911658-db10-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "2bc8216c-7b0e-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-20T07:17:24Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11661775,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-20T07:17:24Z",
+      "_arades_taskid_value": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-22T09:01:25Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Develop API for retriving School data from D365",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Develop API for retriving School data from D365",
+        "arades_projecttaskid": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "2bc8216c-7b0e-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11665303\"",
+      "modifiedon": "2023-06-23T13:00:22Z",
+      "_owninguser_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "arades_sprinttaskid": "10e73ee6-c511-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "202854f3-660e-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-19T12:59:08Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11665303,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-19T12:59:08Z",
+      "_arades_taskid_value": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "55463900-7b8a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "createdon": "2023-06-23T13:00:22Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Plugin for checking Role of User",
+      "_owningteam_value": null,
+      "_createdby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "_ownerid_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "timezoneruleversionnumber": 0,
+      "arades_TaskId": {
+        "arades_name": "Plugin for checking Role of User",
+        "arades_projecttaskid": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "School Management",
+          "arades_featureid": "16755f4a-7b8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL New",
+        "arades_projectid": "55463900-7b8a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": "2023 CW25 SHL New",
+        "arades_sprintid": "202854f3-660e-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Arash Baniahmad",
+        "systemuserid": "48b2e247-db60-ed11-9561-000d3adf729e",
+        "ownerid": "48b2e247-db60-ed11-9561-000d3adf729e"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11665310\"",
+      "modifiedon": "2023-06-23T13:00:54Z",
+      "_owninguser_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "arades_sprinttaskid": "dc6201fb-c511-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "202854f3-660e-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-20T12:59:08Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11665310,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-20T12:59:08Z",
+      "_arades_taskid_value": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "55463900-7b8a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "createdon": "2023-06-23T13:00:54Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Plugin for checking Role of User",
+      "_owningteam_value": null,
+      "_createdby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "_ownerid_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "timezoneruleversionnumber": 0,
+      "arades_TaskId": {
+        "arades_name": "Plugin for checking Role of User",
+        "arades_projecttaskid": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "School Management",
+          "arades_featureid": "16755f4a-7b8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL New",
+        "arades_projectid": "55463900-7b8a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": "2023 CW25 SHL New",
+        "arades_sprintid": "202854f3-660e-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Arash Baniahmad",
+        "systemuserid": "48b2e247-db60-ed11-9561-000d3adf729e",
+        "ownerid": "48b2e247-db60-ed11-9561-000d3adf729e"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12152998\"",
+      "modifiedon": "2023-06-26T07:09:58Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "f3a80871-f013-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "efa80871-f013-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-09T07:06:11Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12152998,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-09T07:06:11Z",
+      "_arades_taskid_value": "52cdff29-0610-ee11-8f6d-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T07:09:58Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Test Kanban Arash 1",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Test Kanban Arash 1",
+        "arades_projecttaskid": "52cdff29-0610-ee11-8f6d-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Automatically Reporting",
+          "arades_featureid": "19d709f7-deb5-4896-b384-bbded534f27a"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "efa80871-f013-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12153019\"",
+      "modifiedon": "2023-06-26T07:10:19Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "8b3a757d-f013-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "893a757d-f013-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-23T07:06:11Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12153019,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-23T07:06:11Z",
+      "_arades_taskid_value": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T07:10:19Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Binding API to FE",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Binding API to FE",
+        "arades_projecttaskid": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "893a757d-f013-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12153030\"",
+      "modifiedon": "2023-06-26T07:10:26Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "47af2284-f013-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "43af2284-f013-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-23T07:06:11Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12153030,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-23T07:06:11Z",
+      "_arades_taskid_value": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T07:10:26Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "test",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "test",
+        "arades_projecttaskid": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Possibility to use task templates",
+          "arades_featureid": "de13bf5c-1d9e-4bf0-9cee-c0149a565670"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "43af2284-f013-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12153040\"",
+      "modifiedon": "2023-06-26T07:11:19Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "587da6a2-f013-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "567da6a2-f013-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-09T07:11:00Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12153040,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-09T07:11:00Z",
+      "_arades_taskid_value": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T07:11:19Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Develop API for retriving School data from D365",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Develop API for retriving School data from D365",
+        "arades_projecttaskid": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "567da6a2-f013-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12153046\"",
+      "modifiedon": "2023-06-26T07:11:48Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "fb3077b5-f013-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "567da6a2-f013-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-03T07:11:00Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12153046,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-03T07:11:00Z",
+      "_arades_taskid_value": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T07:11:48Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Binding API to FE",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Binding API to FE",
+        "arades_projecttaskid": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "567da6a2-f013-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12153052\"",
+      "modifiedon": "2023-06-26T07:12:05Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "2bb989bb-f013-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "efa80871-f013-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-04T07:11:00Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12153052,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-04T07:11:00Z",
+      "_arades_taskid_value": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T07:12:05Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "test",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "test",
+        "arades_projecttaskid": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Possibility to use task templates",
+          "arades_featureid": "de13bf5c-1d9e-4bf0-9cee-c0149a565670"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "efa80871-f013-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12153061\"",
+      "modifiedon": "2023-06-26T07:12:09Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "f340dac1-f013-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "f140dac1-f013-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-09T07:11:00Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12153061,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-09T07:11:00Z",
+      "_arades_taskid_value": "2125a168-3c81-ed11-81ad-0022489ca5c5",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "105db51b-7476-ed11-81ab-0022489ca5d2",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T07:12:09Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Test Queue",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Test Queue",
+        "arades_projecttaskid": "2125a168-3c81-ed11-81ad-0022489ca5c5",
+        "arades_FeatureId": {
+          "arades_name": "Implementing Work Agreements",
+          "arades_featureid": "09c21cde-58d2-4f7a-8e70-8820e9c4ba36"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL",
+        "arades_projectid": "105db51b-7476-ed11-81ab-0022489ca5d2"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "f140dac1-f013-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12153067\"",
+      "modifiedon": "2023-06-26T07:12:37Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "a8be14ce-f013-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "efa80871-f013-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-05T07:11:00Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12153067,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-05T07:11:00Z",
+      "_arades_taskid_value": "8b41ef6c-ac86-ed11-81ad-0022489ca5c5",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T07:12:37Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Test 1",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Test 1",
+        "arades_projecttaskid": "8b41ef6c-ac86-ed11-81ad-0022489ca5c5",
+        "arades_FeatureId": {
+          "arades_name": "Feature Test",
+          "arades_featureid": "9584f965-188d-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "efa80871-f013-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12153074\"",
+      "modifiedon": "2023-06-26T07:12:39Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "380e7dd4-f013-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "360e7dd4-f013-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-09T07:11:00Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12153074,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-09T07:11:00Z",
+      "_arades_taskid_value": "eae20437-c074-ed11-81ab-0022489ca5d2",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "e160f9f5-b974-ed11-81ab-0022489ca5d2",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T07:12:39Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "MileStone 1",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "MileStone 1",
+        "arades_projecttaskid": "eae20437-c074-ed11-81ab-0022489ca5d2",
+        "arades_FeatureId": null
+      },
+      "arades_ProjectId": {
+        "arades_name": "Project WEEE",
+        "arades_projectid": "e160f9f5-b974-ed11-81ab-0022489ca5d2"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "360e7dd4-f013-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12153079\"",
+      "modifiedon": "2023-06-26T07:12:41Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "630e7dd4-f013-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "360e7dd4-f013-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-07T07:11:00Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12153079,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-07T07:11:00Z",
+      "_arades_taskid_value": "051add99-c074-ed11-81ab-0022489ca5d2",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "e160f9f5-b974-ed11-81ab-0022489ca5d2",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T07:12:41Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Task 1",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Task 1",
+        "arades_projecttaskid": "051add99-c074-ed11-81ab-0022489ca5d2",
+        "arades_FeatureId": null
+      },
+      "arades_ProjectId": {
+        "arades_name": "Project WEEE",
+        "arades_projectid": "e160f9f5-b974-ed11-81ab-0022489ca5d2"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "360e7dd4-f013-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12153087\"",
+      "modifiedon": "2023-06-26T07:12:46Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "d40e7dd4-f013-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "360e7dd4-f013-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-08T07:11:00Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12153087,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-08T07:11:00Z",
+      "_arades_taskid_value": "6cce0c9e-c274-ed11-81ab-0022489ca5d2",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "e160f9f5-b974-ed11-81ab-0022489ca5d2",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T07:12:46Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Task 1.1",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Task 1.1",
+        "arades_projecttaskid": "6cce0c9e-c274-ed11-81ab-0022489ca5d2",
+        "arades_FeatureId": null
+      },
+      "arades_ProjectId": {
+        "arades_name": "Project WEEE",
+        "arades_projectid": "e160f9f5-b974-ed11-81ab-0022489ca5d2"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "360e7dd4-f013-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12153315\"",
+      "modifiedon": "2023-06-26T08:04:18Z",
+      "_owninguser_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "arades_sprinttaskid": "9eafb20a-f813-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "b5745ef0-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-28T08:01:42Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12153315,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-28T08:01:42Z",
+      "_arades_taskid_value": "8ae0da64-f713-ee11-8f6d-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "createdon": "2023-06-26T08:04:18Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "06-26 Task Arash 1",
+      "_owningteam_value": null,
+      "_createdby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "_ownerid_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "timezoneruleversionnumber": 0,
+      "arades_TaskId": {
+        "arades_name": "06-26 Task Arash 1",
+        "arades_projecttaskid": "8ae0da64-f713-ee11-8f6d-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Automatically Reporting",
+          "arades_featureid": "19d709f7-deb5-4896-b384-bbded534f27a"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "b5745ef0-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Arash Baniahmad",
+        "systemuserid": "48b2e247-db60-ed11-9561-000d3adf729e",
+        "ownerid": "48b2e247-db60-ed11-9561-000d3adf729e"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12160477\"",
+      "modifiedon": "2023-06-27T06:13:51Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "e19e25c7-b114-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "197202c1-b114-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-30T06:07:51Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12160477,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-30T06:07:51Z",
+      "_arades_taskid_value": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-27T06:13:51Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "test",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "test",
+        "arades_projecttaskid": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Possibility to use task templates",
+          "arades_featureid": "de13bf5c-1d9e-4bf0-9cee-c0149a565670"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": "2023 CW30 arades PM D365",
+        "arades_sprintid": "197202c1-b114-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12160705\"",
+      "modifiedon": "2023-06-27T09:02:08Z",
+      "_owninguser_value": "3959eee2-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "eb051ee1-b114-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "197202c1-b114-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-26T06:07:51Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "statecode": 0,
+      "versionnumber": 12160705,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-26T06:07:51Z",
+      "_arades_taskid_value": "8b41ef6c-ac86-ed11-81ad-0022489ca5c5",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-27T06:14:39Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": 1.5,
+      "arades_name": "Test 1",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "3959eee2-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Test 1",
+        "arades_projecttaskid": "8b41ef6c-ac86-ed11-81ad-0022489ca5c5",
+        "arades_FeatureId": {
+          "arades_name": "Feature Test",
+          "arades_featureid": "9584f965-188d-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": "2023 CW30 arades PM D365",
+        "arades_sprintid": "197202c1-b114-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Shahab Jalili",
+        "systemuserid": "3959eee2-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "3959eee2-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12160609\"",
+      "modifiedon": "2023-06-27T07:34:57Z",
+      "_owninguser_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "arades_sprinttaskid": "84a4ec19-bd14-ee11-8f6d-0022489ca570",
+      "_arades_sprintid_value": "921d8670-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-30T07:33:23Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12160609,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-30T07:33:23Z",
+      "_arades_taskid_value": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "createdon": "2023-06-27T07:34:57Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Develop API for retriving School data from D365",
+      "_owningteam_value": null,
+      "_createdby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "_ownerid_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "timezoneruleversionnumber": 0,
+      "arades_TaskId": {
+        "arades_name": "Develop API for retriving School data from D365",
+        "arades_projecttaskid": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "921d8670-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Arash Baniahmad",
+        "systemuserid": "48b2e247-db60-ed11-9561-000d3adf729e",
+        "ownerid": "48b2e247-db60-ed11-9561-000d3adf729e"
       }
     },
     {
@@ -536,8 +2030,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Test 2",
-        "_arades_featureid_value": "64de4c63-66a3-ed11-a81b-000d3adda963",
-        "arades_projecttaskid": "9d8a2489-d489-ed11-81ad-0022489cadfe"
+        "arades_projecttaskid": "9d8a2489-d489-ed11-81ad-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "test55",
+          "arades_featureid": "64de4c63-66a3-ed11-a81b-000d3adda963"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "arades PM D365",
@@ -582,8 +2079,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "test",
-        "_arades_featureid_value": "de13bf5c-1d9e-4bf0-9cee-c0149a565670",
-        "arades_projecttaskid": "bb973b39-eb8b-ed11-81ad-0022489ca570"
+        "arades_projecttaskid": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Possibility to use task templates",
+          "arades_featureid": "de13bf5c-1d9e-4bf0-9cee-c0149a565670"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "arades PM D365",
@@ -628,8 +2128,8 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Test 3",
-        "_arades_featureid_value": null,
-        "arades_projecttaskid": "65f336a2-d489-ed11-81ad-0022489cadfe"
+        "arades_projecttaskid": "65f336a2-d489-ed11-81ad-0022489cadfe",
+        "arades_FeatureId": null
       },
       "arades_ProjectId": {
         "arades_name": "arades PM D365",
@@ -646,8 +2146,8 @@
       }
     },
     {
-      "@odata.etag": "W/\"9967751\"",
-      "modifiedon": "2023-05-19T13:25:28Z",
+      "@odata.etag": "W/\"12155233\"",
+      "modifiedon": "2023-06-26T13:50:15Z",
       "_owninguser_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
       "arades_sprinttaskid": "aaa2c544-d991-ed11-aad1-0022489ca570",
       "_arades_sprintid_value": "fea86223-df89-ed11-81ad-0022489ca570",
@@ -656,7 +2156,7 @@
       "importsequencenumber": null,
       "_modifiedonbehalfby_value": null,
       "statecode": 0,
-      "versionnumber": 9967751,
+      "versionnumber": 12155233,
       "utcconversiontimezonecode": null,
       "arades_plannedenddate": null,
       "_arades_taskid_value": "8105ffac-d989-ed11-81ad-0022489ca570",
@@ -674,8 +2174,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Review existing Datamodel",
-        "_arades_featureid_value": "a262ff9b-d889-ed11-81ad-0022489ca570",
-        "arades_projecttaskid": "8105ffac-d989-ed11-81ad-0022489ca570"
+        "arades_projecttaskid": "8105ffac-d989-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Optimizing Datamodel",
+          "arades_featureid": "a262ff9b-d889-ed11-81ad-0022489ca570"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "Thex",
@@ -692,49 +2195,150 @@
       }
     },
     {
-      "@odata.etag": "W/\"6227868\"",
-      "modifiedon": "2023-02-27T01:10:46Z",
-      "_owninguser_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "arades_sprinttaskid": "a4049a61-0896-ed11-aad1-0022489ca570",
-      "_arades_sprintid_value": "5c06cfef-2589-ed11-81ad-0022489cadfe",
+      "@odata.etag": "W/\"11657893\"",
+      "modifiedon": "2023-06-21T16:35:39Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "71336aa7-5110-ee11-8f6d-0022489ca94a",
+      "_arades_sprintid_value": "d64fd727-a40e-ee11-8f6d-0022489cadfe",
       "overriddencreatedon": null,
-      "arades_plannedstartdate": null,
+      "arades_plannedstartdate": "2023-06-30T16:34:57Z",
       "importsequencenumber": null,
       "_modifiedonbehalfby_value": null,
-      "statecode": 1,
-      "versionnumber": 6227868,
+      "statecode": 0,
+      "versionnumber": 11657893,
       "utcconversiontimezonecode": null,
-      "arades_plannedenddate": null,
-      "_arades_taskid_value": "8b41ef6c-ac86-ed11-81ad-0022489ca5c5",
+      "arades_plannedenddate": "2023-06-30T16:34:57Z",
+      "_arades_taskid_value": "29e807ae-7d8a-ed11-81ad-0022489ca570",
       "_createdonbehalfby_value": null,
-      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
-      "_modifiedby_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "createdon": "2023-01-17T01:43:49Z",
+      "_arades_projectid_value": "55463900-7b8a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-21T16:35:39Z",
       "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
-      "statuscode": 771840002,
+      "statuscode": 1,
       "arades_estimatedduration": null,
-      "arades_name": "2024 CW04 arades PM D365 Test 1",
+      "arades_name": "Plugin for checking Role of User",
       "_owningteam_value": null,
-      "_createdby_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "_ownerid_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "timezoneruleversionnumber": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
       "arades_TaskId": {
-        "arades_name": "Test 1",
-        "_arades_featureid_value": "9584f965-188d-ed11-81ad-0022489ca570",
-        "arades_projecttaskid": "8b41ef6c-ac86-ed11-81ad-0022489ca5c5"
+        "arades_name": "Plugin for checking Role of User",
+        "arades_projecttaskid": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "School Management",
+          "arades_featureid": "16755f4a-7b8a-ed11-81ad-0022489ca570"
+        }
       },
       "arades_ProjectId": {
-        "arades_name": "arades PM D365",
-        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+        "arades_name": "SHL New",
+        "arades_projectid": "55463900-7b8a-ed11-81ad-0022489ca570"
       },
       "arades_SprintId": {
-        "arades_name": "2024 CW03 arades PM D365",
-        "arades_sprintid": "5c06cfef-2589-ed11-81ad-0022489cadfe"
+        "arades_name": null,
+        "arades_sprintid": "d64fd727-a40e-ee11-8f6d-0022489cadfe"
       },
       "owninguser": {
-        "fullname": "Mehran Ahmadifar",
-        "systemuserid": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-        "ownerid": "eadc2bfd-1073-ed11-81ab-0022489ca5d2"
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11657943\"",
+      "modifiedon": "2023-06-21T16:37:28Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "917689e8-5110-ee11-8f6d-0022489ca94a",
+      "_arades_sprintid_value": "27802166-a40e-ee11-8f6d-0022489cadfe",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-01T16:34:57Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11657943,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-01T16:34:57Z",
+      "_arades_taskid_value": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-21T16:37:28Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Develop API for retriving School data from D365",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Develop API for retriving School data from D365",
+        "arades_projecttaskid": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "27802166-a40e-ee11-8f6d-0022489cadfe"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11657954\"",
+      "modifiedon": "2023-06-21T16:39:19Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "827e3f29-5210-ee11-8f6d-0022489ca94a",
+      "_arades_sprintid_value": "d64fd727-a40e-ee11-8f6d-0022489cadfe",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-27T16:34:57Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11657954,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-27T16:34:57Z",
+      "_arades_taskid_value": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "55463900-7b8a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-21T16:39:19Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Plugin for checking Role of User",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Plugin for checking Role of User",
+        "arades_projecttaskid": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "School Management",
+          "arades_featureid": "16755f4a-7b8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL New",
+        "arades_projectid": "55463900-7b8a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "d64fd727-a40e-ee11-8f6d-0022489cadfe"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
       }
     },
     {
@@ -766,8 +2370,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Test 1",
-        "_arades_featureid_value": "9584f965-188d-ed11-81ad-0022489ca570",
-        "arades_projecttaskid": "8b41ef6c-ac86-ed11-81ad-0022489ca5c5"
+        "arades_projecttaskid": "8b41ef6c-ac86-ed11-81ad-0022489ca5c5",
+        "arades_FeatureId": {
+          "arades_name": "Feature Test",
+          "arades_featureid": "9584f965-188d-ed11-81ad-0022489ca570"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "arades PM D365",
@@ -784,95 +2391,934 @@
       }
     },
     {
-      "@odata.etag": "W/\"4805978\"",
-      "modifiedon": "2023-01-16T23:59:16Z",
-      "_owninguser_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "arades_sprinttaskid": "365ba1fe-c892-ed11-aad1-0022489cadfe",
-      "_arades_sprintid_value": "5c06cfef-2589-ed11-81ad-0022489cadfe",
+      "@odata.etag": "W/\"11605431\"",
+      "modifiedon": "2023-06-19T13:21:22Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "b116e52d-a40e-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "d64fd727-a40e-ee11-8f6d-0022489cadfe",
       "overriddencreatedon": null,
-      "arades_plannedstartdate": null,
+      "arades_plannedstartdate": "2023-07-02T13:21:09Z",
       "importsequencenumber": null,
       "_modifiedonbehalfby_value": null,
-      "statecode": 1,
-      "versionnumber": 4805978,
+      "statecode": 0,
+      "versionnumber": 11605431,
       "utcconversiontimezonecode": null,
-      "arades_plannedenddate": null,
-      "_arades_taskid_value": "65f336a2-d489-ed11-81ad-0022489cadfe",
+      "arades_plannedenddate": "2023-07-02T13:21:09Z",
+      "_arades_taskid_value": "29e807ae-7d8a-ed11-81ad-0022489ca570",
       "_createdonbehalfby_value": null,
-      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
-      "_modifiedby_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "createdon": "2023-01-12T22:32:38Z",
+      "_arades_projectid_value": "55463900-7b8a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-19T13:21:22Z",
       "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
-      "statuscode": 2,
+      "statuscode": 1,
       "arades_estimatedduration": null,
-      "arades_name": "2024 CW04 arades PM D365 Test 3",
+      "arades_name": "Plugin for checking Role of User",
       "_owningteam_value": null,
-      "_createdby_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "_ownerid_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "timezoneruleversionnumber": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
       "arades_TaskId": {
-        "arades_name": "Test 3",
-        "_arades_featureid_value": null,
-        "arades_projecttaskid": "65f336a2-d489-ed11-81ad-0022489cadfe"
+        "arades_name": "Plugin for checking Role of User",
+        "arades_projecttaskid": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "School Management",
+          "arades_featureid": "16755f4a-7b8a-ed11-81ad-0022489ca570"
+        }
       },
       "arades_ProjectId": {
-        "arades_name": "arades PM D365",
-        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+        "arades_name": "SHL New",
+        "arades_projectid": "55463900-7b8a-ed11-81ad-0022489ca570"
       },
       "arades_SprintId": {
-        "arades_name": "2024 CW03 arades PM D365",
-        "arades_sprintid": "5c06cfef-2589-ed11-81ad-0022489cadfe"
+        "arades_name": null,
+        "arades_sprintid": "d64fd727-a40e-ee11-8f6d-0022489cadfe"
       },
       "owninguser": {
-        "fullname": "Mehran Ahmadifar",
-        "systemuserid": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-        "ownerid": "eadc2bfd-1073-ed11-81ab-0022489ca5d2"
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
       }
     },
     {
-      "@odata.etag": "W/\"6227859\"",
-      "modifiedon": "2023-02-27T01:10:46Z",
-      "_owninguser_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "arades_sprinttaskid": "47d39560-0896-ed11-aad1-0022489cadfe",
-      "_arades_sprintid_value": "5c06cfef-2589-ed11-81ad-0022489cadfe",
+      "@odata.etag": "W/\"12160567\"",
+      "modifiedon": "2023-06-27T07:12:38Z",
+      "_owninguser_value": "3959eee2-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "accc9452-a40e-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "d64fd727-a40e-ee11-8f6d-0022489cadfe",
       "overriddencreatedon": null,
-      "arades_plannedstartdate": null,
+      "arades_plannedstartdate": "2023-06-28T13:21:36Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "statecode": 0,
+      "versionnumber": 12160567,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-28T13:21:36Z",
+      "_arades_taskid_value": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "55463900-7b8a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "createdon": "2023-06-19T13:22:30Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Plugin for checking Role of User",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "3959eee2-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Plugin for checking Role of User",
+        "arades_projecttaskid": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "School Management",
+          "arades_featureid": "16755f4a-7b8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL New",
+        "arades_projectid": "55463900-7b8a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "d64fd727-a40e-ee11-8f6d-0022489cadfe"
+      },
+      "owninguser": {
+        "fullname": "Shahab Jalili",
+        "systemuserid": "3959eee2-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "3959eee2-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11605453\"",
+      "modifiedon": "2023-06-19T13:22:56Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "2a802166-a40e-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "27802166-a40e-ee11-8f6d-0022489cadfe",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-02T13:21:36Z",
       "importsequencenumber": null,
       "_modifiedonbehalfby_value": null,
-      "statecode": 1,
-      "versionnumber": 6227859,
+      "statecode": 0,
+      "versionnumber": 11605453,
       "utcconversiontimezonecode": null,
-      "arades_plannedenddate": null,
+      "arades_plannedenddate": "2023-07-02T13:21:36Z",
+      "_arades_taskid_value": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-19T13:22:56Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Develop API for retriving School data from D365",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Develop API for retriving School data from D365",
+        "arades_projecttaskid": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "27802166-a40e-ee11-8f6d-0022489cadfe"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11605467\"",
+      "modifiedon": "2023-06-19T13:23:46Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "8f6d7f7f-a40e-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "8d6d7f7f-a40e-ee11-8f6d-0022489cadfe",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-30T13:21:36Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11605467,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-30T13:21:36Z",
+      "_arades_taskid_value": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-19T13:23:46Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Binding API to FE",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Binding API to FE",
+        "arades_projecttaskid": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "8d6d7f7f-a40e-ee11-8f6d-0022489cadfe"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11605481\"",
+      "modifiedon": "2023-06-19T13:24:47Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "bff15ca6-a40e-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "27802166-a40e-ee11-8f6d-0022489cadfe",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-29T13:24:20Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11605481,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-29T13:24:20Z",
+      "_arades_taskid_value": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-19T13:24:47Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Develop API for retriving School data from D365",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Develop API for retriving School data from D365",
+        "arades_projecttaskid": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "27802166-a40e-ee11-8f6d-0022489cadfe"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11605487\"",
+      "modifiedon": "2023-06-19T13:25:12Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "b64aa8b2-a40e-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "27802166-a40e-ee11-8f6d-0022489cadfe",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-30T13:24:20Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11605487,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-30T13:24:20Z",
+      "_arades_taskid_value": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-19T13:25:12Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Binding API to FE",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Binding API to FE",
+        "arades_projecttaskid": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "27802166-a40e-ee11-8f6d-0022489cadfe"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11605497\"",
+      "modifiedon": "2023-06-19T13:25:27Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "8ae5f5be-a40e-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "87e5f5be-a40e-ee11-8f6d-0022489cadfe",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-02T13:24:20Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11605497,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-02T13:24:20Z",
       "_arades_taskid_value": "bb973b39-eb8b-ed11-81ad-0022489ca570",
       "_createdonbehalfby_value": null,
       "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
-      "_modifiedby_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "createdon": "2023-01-17T01:43:49Z",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-19T13:25:27Z",
       "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
-      "statuscode": 771840002,
+      "statuscode": 1,
       "arades_estimatedduration": null,
-      "arades_name": "2024 CW04 arades PM D365 test",
+      "arades_name": "test",
       "_owningteam_value": null,
-      "_createdby_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "_ownerid_value": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-      "timezoneruleversionnumber": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
       "arades_TaskId": {
         "arades_name": "test",
-        "_arades_featureid_value": "de13bf5c-1d9e-4bf0-9cee-c0149a565670",
-        "arades_projecttaskid": "bb973b39-eb8b-ed11-81ad-0022489ca570"
+        "arades_projecttaskid": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Possibility to use task templates",
+          "arades_featureid": "de13bf5c-1d9e-4bf0-9cee-c0149a565670"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "arades PM D365",
         "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
       },
       "arades_SprintId": {
-        "arades_name": "2024 CW03 arades PM D365",
-        "arades_sprintid": "5c06cfef-2589-ed11-81ad-0022489cadfe"
+        "arades_name": null,
+        "arades_sprintid": "87e5f5be-a40e-ee11-8f6d-0022489cadfe"
       },
       "owninguser": {
-        "fullname": "Mehran Ahmadifar",
-        "systemuserid": "eadc2bfd-1073-ed11-81ab-0022489ca5d2",
-        "ownerid": "eadc2bfd-1073-ed11-81ab-0022489ca5d2"
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11605527\"",
+      "modifiedon": "2023-06-19T13:52:50Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "46144892-a80e-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "d64fd727-a40e-ee11-8f6d-0022489cadfe",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-01T13:52:39Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11605527,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-01T13:52:39Z",
+      "_arades_taskid_value": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "55463900-7b8a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-19T13:52:50Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Plugin for checking Role of User",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Plugin for checking Role of User",
+        "arades_projecttaskid": "29e807ae-7d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "School Management",
+          "arades_featureid": "16755f4a-7b8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL New",
+        "arades_projectid": "55463900-7b8a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "d64fd727-a40e-ee11-8f6d-0022489cadfe"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"11657710\"",
+      "modifiedon": "2023-06-21T16:31:07Z",
+      "_owninguser_value": "23debee4-1073-ed11-81ab-0022489ca5c5",
+      "arades_sprinttaskid": "40514f03-5110-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "3e514f03-5110-ee11-8f6d-0022489cadfe",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-02T16:30:28Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 11657710,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-02T16:30:28Z",
+      "_arades_taskid_value": "4018ff50-8c91-ed11-aad1-0022489cadfe",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "06b16259-b982-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "23debee4-1073-ed11-81ab-0022489ca5c5",
+      "createdon": "2023-06-21T16:31:07Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Review data migration",
+      "_owningteam_value": null,
+      "_createdby_value": "23debee4-1073-ed11-81ab-0022489ca5c5",
+      "_ownerid_value": "23debee4-1073-ed11-81ab-0022489ca5c5",
+      "timezoneruleversionnumber": 0,
+      "arades_TaskId": {
+        "arades_name": "Review data migration",
+        "arades_projecttaskid": "4018ff50-8c91-ed11-aad1-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Implementing new production environment",
+          "arades_featureid": "d09a59d0-8b91-ed11-aad1-0022489cadfe"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "DFIHK",
+        "arades_projectid": "06b16259-b982-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "3e514f03-5110-ee11-8f6d-0022489cadfe"
+      },
+      "owninguser": {
+        "fullname": "Amela Asimovska",
+        "systemuserid": "23debee4-1073-ed11-81ab-0022489ca5c5",
+        "ownerid": "23debee4-1073-ed11-81ab-0022489ca5c5"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12154751\"",
+      "modifiedon": "2023-06-26T13:03:29Z",
+      "_owninguser_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "arades_sprinttaskid": "d2a9edd2-2114-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "b5745ef0-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-29T13:02:53Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12154751,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-29T13:02:53Z",
+      "_arades_taskid_value": "8ae0da64-f713-ee11-8f6d-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "createdon": "2023-06-26T13:03:29Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "06-26 Task Arash 1",
+      "_owningteam_value": null,
+      "_createdby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "_ownerid_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "timezoneruleversionnumber": 0,
+      "arades_TaskId": {
+        "arades_name": "06-26 Task Arash 1",
+        "arades_projecttaskid": "8ae0da64-f713-ee11-8f6d-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Automatically Reporting",
+          "arades_featureid": "19d709f7-deb5-4896-b384-bbded534f27a"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "b5745ef0-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Arash Baniahmad",
+        "systemuserid": "48b2e247-db60-ed11-9561-000d3adf729e",
+        "ownerid": "48b2e247-db60-ed11-9561-000d3adf729e"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12154765\"",
+      "modifiedon": "2023-06-26T13:05:14Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "ae27cf15-2214-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "921d8670-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-26T12:53:26Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12154765,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-26T12:53:26Z",
+      "_arades_taskid_value": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T13:05:14Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Binding API to FE",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Binding API to FE",
+        "arades_projecttaskid": "abaf328a-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "921d8670-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12154771\"",
+      "modifiedon": "2023-06-26T13:05:18Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "6f28cf15-2214-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "b5745ef0-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-27T12:53:26Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12154771,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-27T12:53:26Z",
+      "_arades_taskid_value": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T13:05:18Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "test",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "test",
+        "arades_projecttaskid": "bb973b39-eb8b-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Possibility to use task templates",
+          "arades_featureid": "de13bf5c-1d9e-4bf0-9cee-c0149a565670"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "b5745ef0-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12154941\"",
+      "modifiedon": "2023-06-26T13:09:54Z",
+      "_owninguser_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "35b79db9-2214-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "921d8670-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-26T13:09:34Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12154941,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-26T13:09:34Z",
+      "_arades_taskid_value": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T13:09:54Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Develop API for retriving School data from D365",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Develop API for retriving School data from D365",
+        "arades_projecttaskid": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "921d8670-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Marjan Arami",
+        "systemuserid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "97dc2bfd-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12155146\"",
+      "modifiedon": "2023-06-26T13:22:14Z",
+      "_owninguser_value": "3959eee2-1073-ed11-81ab-0022489ca5d2",
+      "arades_sprinttaskid": "a39f396f-2414-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "b5745ef0-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-26T13:21:39Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "statecode": 0,
+      "versionnumber": 12155146,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-26T13:21:39Z",
+      "_arades_taskid_value": "8718af43-2414-ee11-8f6d-0022489cadfe",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T13:22:02Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": 1.0,
+      "arades_name": "Test Kanban 14",
+      "_owningteam_value": null,
+      "_createdby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "_ownerid_value": "3959eee2-1073-ed11-81ab-0022489ca5d2",
+      "timezoneruleversionnumber": 4,
+      "arades_TaskId": {
+        "arades_name": "Test Kanban 14",
+        "arades_projecttaskid": "8718af43-2414-ee11-8f6d-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Feature Test",
+          "arades_featureid": "9584f965-188d-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "b5745ef0-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Shahab Jalili",
+        "systemuserid": "3959eee2-1073-ed11-81ab-0022489ca5d2",
+        "ownerid": "3959eee2-1073-ed11-81ab-0022489ca5d2"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12155161\"",
+      "modifiedon": "2023-06-26T13:29:04Z",
+      "_owninguser_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "arades_sprinttaskid": "d6467e67-2514-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "567da6a2-f013-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-04T13:09:18Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12155161,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-04T13:09:18Z",
+      "_arades_taskid_value": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "94c303aa-998a-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "createdon": "2023-06-26T13:29:04Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Develop API for retriving School data from D365",
+      "_owningteam_value": null,
+      "_createdby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "_ownerid_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "timezoneruleversionnumber": 0,
+      "arades_TaskId": {
+        "arades_name": "Develop API for retriving School data from D365",
+        "arades_projecttaskid": "c5a30739-9d8a-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Managing School data",
+          "arades_featureid": "5effe62f-9a8a-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "SHL 2023",
+        "arades_projectid": "94c303aa-998a-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "567da6a2-f013-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Arash Baniahmad",
+        "systemuserid": "48b2e247-db60-ed11-9561-000d3adf729e",
+        "ownerid": "48b2e247-db60-ed11-9561-000d3adf729e"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12155210\"",
+      "modifiedon": "2023-06-26T13:48:46Z",
+      "_owninguser_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "arades_sprinttaskid": "4686bf2a-2814-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "4286bf2a-2814-ee11-8f6d-0022489cadfe",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-09T13:33:43Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12155210,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-09T13:33:43Z",
+      "_arades_taskid_value": "8105ffac-d989-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d212f944-d889-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "createdon": "2023-06-26T13:48:46Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Review existing Datamodel",
+      "_owningteam_value": null,
+      "_createdby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "_ownerid_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "timezoneruleversionnumber": 0,
+      "arades_TaskId": {
+        "arades_name": "Review existing Datamodel",
+        "arades_projecttaskid": "8105ffac-d989-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Optimizing Datamodel",
+          "arades_featureid": "a262ff9b-d889-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "Thex",
+        "arades_projectid": "d212f944-d889-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "4286bf2a-2814-ee11-8f6d-0022489cadfe"
+      },
+      "owninguser": {
+        "fullname": "Arash Baniahmad",
+        "systemuserid": "48b2e247-db60-ed11-9561-000d3adf729e",
+        "ownerid": "48b2e247-db60-ed11-9561-000d3adf729e"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12155236\"",
+      "modifiedon": "2023-06-26T13:50:19Z",
+      "_owninguser_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "arades_sprinttaskid": "16197a61-2814-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "4286bf2a-2814-ee11-8f6d-0022489cadfe",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-06T13:49:34Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12155236,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-06T13:49:34Z",
+      "_arades_taskid_value": "8105ffac-d989-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d212f944-d889-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "createdon": "2023-06-26T13:50:19Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Review existing Datamodel",
+      "_owningteam_value": null,
+      "_createdby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "_ownerid_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "timezoneruleversionnumber": 0,
+      "arades_TaskId": {
+        "arades_name": "Review existing Datamodel",
+        "arades_projecttaskid": "8105ffac-d989-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Optimizing Datamodel",
+          "arades_featureid": "a262ff9b-d889-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "Thex",
+        "arades_projectid": "d212f944-d889-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "4286bf2a-2814-ee11-8f6d-0022489cadfe"
+      },
+      "owninguser": {
+        "fullname": "Arash Baniahmad",
+        "systemuserid": "48b2e247-db60-ed11-9561-000d3adf729e",
+        "ownerid": "48b2e247-db60-ed11-9561-000d3adf729e"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12160254\"",
+      "modifiedon": "2023-06-27T05:48:08Z",
+      "_owninguser_value": "23debee4-1073-ed11-81ab-0022489ca5c5",
+      "arades_sprinttaskid": "b9261486-2814-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "4286bf2a-2814-ee11-8f6d-0022489cadfe",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-07-07T13:49:34Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "statecode": 0,
+      "versionnumber": 12160254,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-07-07T13:49:34Z",
+      "_arades_taskid_value": "8105ffac-d989-ed11-81ad-0022489ca570",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d212f944-d889-ed11-81ad-0022489ca570",
+      "_modifiedby_value": "97dc2bfd-1073-ed11-81ab-0022489ca5d2",
+      "createdon": "2023-06-26T13:51:20Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": 1.0,
+      "arades_name": "Review existing Datamodel",
+      "_owningteam_value": null,
+      "_createdby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "_ownerid_value": "23debee4-1073-ed11-81ab-0022489ca5c5",
+      "timezoneruleversionnumber": 0,
+      "arades_TaskId": {
+        "arades_name": "Review existing Datamodel",
+        "arades_projecttaskid": "8105ffac-d989-ed11-81ad-0022489ca570",
+        "arades_FeatureId": {
+          "arades_name": "Optimizing Datamodel",
+          "arades_featureid": "a262ff9b-d889-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "Thex",
+        "arades_projectid": "d212f944-d889-ed11-81ad-0022489ca570"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "4286bf2a-2814-ee11-8f6d-0022489cadfe"
+      },
+      "owninguser": {
+        "fullname": "Amela Asimovska",
+        "systemuserid": "23debee4-1073-ed11-81ab-0022489ca5c5",
+        "ownerid": "23debee4-1073-ed11-81ab-0022489ca5c5"
+      }
+    },
+    {
+      "@odata.etag": "W/\"12155302\"",
+      "modifiedon": "2023-06-26T14:04:54Z",
+      "_owninguser_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "arades_sprinttaskid": "10f1d368-2a14-ee11-8f6d-0022489cadfe",
+      "_arades_sprintid_value": "b5745ef0-c510-ee11-8f6d-0022489ca570",
+      "overriddencreatedon": null,
+      "arades_plannedstartdate": "2023-06-27T14:04:10Z",
+      "importsequencenumber": null,
+      "_modifiedonbehalfby_value": null,
+      "statecode": 0,
+      "versionnumber": 12155302,
+      "utcconversiontimezonecode": null,
+      "arades_plannedenddate": "2023-06-27T14:04:10Z",
+      "_arades_taskid_value": "8718af43-2414-ee11-8f6d-0022489cadfe",
+      "_createdonbehalfby_value": null,
+      "_arades_projectid_value": "d37e8543-ef85-ed11-81ad-0022489ca5c5",
+      "_modifiedby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "createdon": "2023-06-26T14:04:54Z",
+      "_owningbusinessunit_value": "be51ea41-db60-ed11-9561-000d3adf729e",
+      "statuscode": 1,
+      "arades_estimatedduration": null,
+      "arades_name": "Test Kanban 14",
+      "_owningteam_value": null,
+      "_createdby_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "_ownerid_value": "48b2e247-db60-ed11-9561-000d3adf729e",
+      "timezoneruleversionnumber": 0,
+      "arades_TaskId": {
+        "arades_name": "Test Kanban 14",
+        "arades_projecttaskid": "8718af43-2414-ee11-8f6d-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Feature Test",
+          "arades_featureid": "9584f965-188d-ed11-81ad-0022489ca570"
+        }
+      },
+      "arades_ProjectId": {
+        "arades_name": "arades PM D365",
+        "arades_projectid": "d37e8543-ef85-ed11-81ad-0022489ca5c5"
+      },
+      "arades_SprintId": {
+        "arades_name": null,
+        "arades_sprintid": "b5745ef0-c510-ee11-8f6d-0022489ca570"
+      },
+      "owninguser": {
+        "fullname": "Arash Baniahmad",
+        "systemuserid": "48b2e247-db60-ed11-9561-000d3adf729e",
+        "ownerid": "48b2e247-db60-ed11-9561-000d3adf729e"
       }
     },
     {
@@ -904,8 +3350,11 @@
       "timezoneruleversionnumber": null,
       "arades_TaskId": {
         "arades_name": "Review data migration",
-        "_arades_featureid_value": "d09a59d0-8b91-ed11-aad1-0022489cadfe",
-        "arades_projecttaskid": "4018ff50-8c91-ed11-aad1-0022489cadfe"
+        "arades_projecttaskid": "4018ff50-8c91-ed11-aad1-0022489cadfe",
+        "arades_FeatureId": {
+          "arades_name": "Implementing new production environment",
+          "arades_featureid": "d09a59d0-8b91-ed11-aad1-0022489cadfe"
+        }
       },
       "arades_ProjectId": {
         "arades_name": "DFIHK",

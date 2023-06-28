@@ -43,6 +43,7 @@ export interface IProject {
 export interface IFeature {
   id: string
   name: string
+  projectId: string
 }
 
 export interface ISprint {
@@ -50,4 +51,9 @@ export interface ISprint {
   name: string
   startDate: Date
   endDate: Date
+}
+export interface ISprintFilter {
+  projects: IProject[]
+  features: IFeature[]
+  owners: IOwner[]
 }

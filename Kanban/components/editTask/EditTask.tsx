@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   ComboBox,
   CommandBarButton,
+  DatePicker,
+  DayOfWeek,
+  defaultDatePickerStrings,
   // DefaultButton,
   IComboBox,
   IComboBoxOption,
@@ -24,16 +26,17 @@ import './EditTask.css'
 // import { getAllOwners } from '../../redux/features/ownerSlice'
 // import { useAppDispatch, useAppSelector } from '../../hooks'
 import { IColumnItem, IOwner } from '../../interfaces'
-import {
-  getOwners,
-  updateProjectTask,
-  updateSprintTask
-} from '../../services/services'
 // import {
 //   getOwners,
+//   getResourcesOfProject,
 //   updateProjectTask,
 //   updateSprintTask
-// } from '../../services/xrmservices'
+// } from '../../services/services'
+import {
+  getResourcesOfProject,
+  updateProjectTask,
+  updateSprintTask
+} from '../../services/xrmservices'
 import { IInputs } from '../../generated/ManifestTypes'
 
 interface IEditTaskProps {
@@ -43,6 +46,8 @@ interface IEditTaskProps {
   owner: string
   duration: number
   dayIndex: number
+  startDate: Date
+  endDate: Date
   list: IColumnItem[][]
   setList: (value: IColumnItem[][]) => void
   context: ComponentFramework.Context<IInputs>
@@ -70,32 +75,40 @@ const EditTask: React.FC<IEditTaskProps> = ({
   dayIndex,
   list,
   setList,
-  context
+  context,
+  startDate,
+  endDate
 }) => {
-  // const countries = useSelector((state) => state.geo.country.list) || []
-  // const owners = useAppSelector((state) => state.owner.list)
-  // const board = useAppSelector((state) => state.board.list)
   const [owners, setOwners] = useState<IOwner[]>([])
   const [options, setOptions] = useState<IComboBoxOption[]>([])
   const [selectedKey, setSelectedKey] = useState('')
   const [durationVal, setDurationVal] = useState(duration)
   const [isCloased, setIsCloased] = useState(false)
+  const [plannedStartDate, setPlannedStartDate] = useState<Date>(new Date())
+  const [plannedEndDate, setPlannedEndDate] = useState(new Date())
   const statusOptions = [
     { key: 0, text: 'Yes' },
     { key: 1, text: 'No' }
   ]
 
   const getOwnersAsync = async () => {
-    const res = await getOwners(context)
+    const card = list[dayIndex].find((x) => x.id === id)
+
+    const res = await getResourcesOfProject(context, card!.projectId)
     setOwners(res)
   }
 
+  const onFormatDate = (date?: Date): string => {
+    return !date
+      ? ''
+      : date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
+  }
+
   useEffect(() => {
-    if (owners.length === 0) getOwnersAsync()
+    getOwnersAsync()
   }, [])
 
   useEffect(() => {
-    console.log('owners', owners)
     const optionList: IComboBoxOption[] = owners.map((item) => ({
       key: item.id,
       text: item.name
@@ -104,6 +117,18 @@ const EditTask: React.FC<IEditTaskProps> = ({
     const selected = owners.find((x) => x.name === owner)
     setSelectedKey(selected ? selected.id : '')
   }, [owners])
+
+  useEffect(() => {
+    if (!startDate) setPlannedStartDate(new Date())
+    else if (plannedStartDate !== startDate) setPlannedStartDate(startDate)
+
+    if (!endDate) setPlannedEndDate(new Date())
+    else if (plannedEndDate !== endDate) setPlannedEndDate(endDate)
+  }, [startDate, endDate])
+
+  useEffect(() => {
+    setPlannedEndDate(plannedStartDate)
+  }, [plannedStartDate])
 
   // const comboBoxRef = React.useRef<IComboBox>(null)
   // const onOpenClick = React.useCallback(
@@ -114,9 +139,9 @@ const EditTask: React.FC<IEditTaskProps> = ({
   const saveChanges = () => {
     const updatedBoard = [...list]
     const cardIndex = updatedBoard[dayIndex].findIndex((x) => x.id === id)
-    console.log('updatedBoard[dayIndex + 1]', updatedBoard[dayIndex])
+
     const selectedOwner = owners.find((x) => x.id === selectedKey)
-    console.log('selected owner', selectedOwner)
+
     if (editProjectTask) {
       if (cardIndex > -1) {
         updatedBoard[0][cardIndex].projectTask.owner = selectedOwner
@@ -125,6 +150,11 @@ const EditTask: React.FC<IEditTaskProps> = ({
         updatedBoard[0][cardIndex].projectTask.estimatedDuration =
           String(durationVal)
         updatedBoard[0][cardIndex].isClosed = isCloased
+        updatedBoard[0][cardIndex].projectTask.plannedStartDate =
+          String(plannedStartDate)
+        updatedBoard[0][cardIndex].projectTask.plannedEndDate =
+          String(plannedEndDate)
+
         setList(updatedBoard)
         const toBeUpdated = updatedBoard[0][cardIndex]
         // context: ComponentFramework.Context<IInputs>,
@@ -137,7 +167,9 @@ const EditTask: React.FC<IEditTaskProps> = ({
           toBeUpdated.projectTask.id,
           selectedOwner?.id,
           durationVal,
-          isCloased
+          isCloased,
+          plannedStartDate,
+          plannedEndDate
         )
       }
     } else {
@@ -160,6 +192,55 @@ const EditTask: React.FC<IEditTaskProps> = ({
 
     hideModal()
   }
+  const onParseStartDateFromString = React.useCallback(
+    (newValue: string): Date => {
+      const previousValue = plannedStartDate || new Date()
+      const newValueParts = (newValue || '').trim().split('/')
+      const day =
+        newValueParts.length > 0
+          ? Math.max(1, Math.min(31, parseInt(newValueParts[0], 10)))
+          : previousValue.getDate()
+      const month =
+        newValueParts.length > 1
+          ? Math.max(1, Math.min(12, parseInt(newValueParts[1], 10))) - 1
+          : previousValue.getMonth()
+      let year =
+        newValueParts.length > 2
+          ? parseInt(newValueParts[2], 10)
+          : previousValue.getFullYear()
+      if (year < 100) {
+        year +=
+          previousValue.getFullYear() - (previousValue.getFullYear() % 100)
+      }
+      return new Date(year, month, day)
+    },
+    [plannedStartDate]
+  )
+
+  const onParseEndDateFromString = React.useCallback(
+    (newValue: string): Date => {
+      const previousValue = plannedEndDate || new Date()
+      const newValueParts = (newValue || '').trim().split('/')
+      const day =
+        newValueParts.length > 0
+          ? Math.max(1, Math.min(31, parseInt(newValueParts[0], 10)))
+          : previousValue.getDate()
+      const month =
+        newValueParts.length > 1
+          ? Math.max(1, Math.min(12, parseInt(newValueParts[1], 10))) - 1
+          : previousValue.getMonth()
+      let year =
+        newValueParts.length > 2
+          ? parseInt(newValueParts[2], 10)
+          : previousValue.getFullYear()
+      if (year < 100) {
+        year +=
+          previousValue.getFullYear() - (previousValue.getFullYear() % 100)
+      }
+      return new Date(year, month, day)
+    },
+    [plannedEndDate]
+  )
   return (
     <div className="edit-div">
       <div className="header">
@@ -173,13 +254,66 @@ const EditTask: React.FC<IEditTaskProps> = ({
         />
       </div>
       <div className="content">
+        {editProjectTask && (
+          <>
+            <div className="form-row">
+              <div className="form-field">
+                <Text variant="medium" block className="text-input-label">
+                  Planned Start Date:
+                </Text>
+              </div>
+              <div className="form-field" style={{ paddingRight: '3em' }}>
+                <DatePicker
+                  style={{ width: '100%' }}
+                  firstDayOfWeek={DayOfWeek.Monday}
+                  placeholder="Select a date..."
+                  ariaLabel="Select a date"
+                  onSelectDate={
+                    setPlannedStartDate as (
+                      date: Date | null | undefined
+                    ) => void
+                  }
+                  value={plannedStartDate}
+                  formatDate={onFormatDate}
+                  parseDateFromString={onParseStartDateFromString}
+                  strings={defaultDatePickerStrings}
+                  minDate={new Date()}
+                />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-field">
+                <Text variant="medium" block className="text-input-label">
+                  Planned End Date:
+                </Text>
+              </div>
+              <div className="form-field" style={{ paddingRight: '3em' }}>
+                <DatePicker
+                  style={{ width: '100%' }}
+                  firstDayOfWeek={DayOfWeek.Monday}
+                  placeholder="Select a date..."
+                  ariaLabel="Select a date"
+                  onSelectDate={
+                    setPlannedEndDate as (date: Date | null | undefined) => void
+                  }
+                  value={plannedEndDate}
+                  formatDate={onFormatDate}
+                  parseDateFromString={onParseEndDateFromString}
+                  strings={defaultDatePickerStrings}
+                  minDate={plannedStartDate}
+                />
+              </div>
+            </div>
+          </>
+        )}
         <div className="form-row">
           <div className="form-field">
             <Text variant="medium" block className="text-input-label">
               Owner:
             </Text>
           </div>
-          <div className="form-field">
+          <div className="form-field" style={{ paddingRight: '3em' }}>
             {/* <TextField ariaLabel="owner" required /> */}
             <ComboBox
               // componentRef={comboBoxRef}
@@ -207,7 +341,7 @@ const EditTask: React.FC<IEditTaskProps> = ({
               Estimated Duration:
             </Text>
           </div>
-          <div className="form-field">
+          <div className="form-field" style={{ paddingRight: '3em' }}>
             <MaskedTextField
               className="text-input"
               maskFormat={maskFormat}
@@ -218,7 +352,6 @@ const EditTask: React.FC<IEditTaskProps> = ({
                 event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
                 newValue?: string
               ) => {
-                console.log('Number(newValue)', Number(newValue))
                 setDurationVal(Number(newValue))
               }}
             />
@@ -230,7 +363,7 @@ const EditTask: React.FC<IEditTaskProps> = ({
               Is Closed:
             </Text>
           </div>
-          <div className="form-field">
+          <div className="form-field" style={{ paddingRight: '3em' }}>
             <ComboBox
               selectedKey={isCloased ? 0 : 1}
               defaultSelectedKey={0}

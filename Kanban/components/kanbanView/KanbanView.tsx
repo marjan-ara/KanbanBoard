@@ -39,18 +39,6 @@ import { Provider } from 'react-redux'
 import { IInputs } from '../../generated/ManifestTypes'
 import { IColumnItem, IProject } from '../../interfaces'
 
-import {
-  createSprintTask,
-  deleteSprintTask,
-  getColumnCards,
-  getFeatures,
-  getOwners,
-  getProjects,
-  getProjectTasks,
-  getSprintId,
-  getWeekDays
-} from '../../services/services'
-
 // import {
 //   createSprintTask,
 //   deleteSprintTask,
@@ -59,9 +47,24 @@ import {
 //   getOwners,
 //   getProjects,
 //   getProjectTasks,
+//   getSprintFilters,
 //   getSprintId,
 //   getWeekDays
-// } from '../../services/xrmServices'
+// } from '../../services/services'
+
+import {
+  createSprintTask,
+  deleteSprintTask,
+  getColumnCards,
+  getFeatures,
+  getOwners,
+  getProjects,
+  getProjectTasks,
+  getSprintFilters,
+  getSprintId,
+  getWeekDays,
+  openQuickCreateForm
+} from '../../services/xrmServices'
 
 import TaskCard from '../taskCard/TaskCard'
 import './KanbanView.css'
@@ -76,6 +79,7 @@ registerIcons({
 const filterIcon: IIconProps = { iconName: 'filterIcon' }
 const nextWeekIcon: IIconProps = { iconName: 'nextWeekIcon' }
 const prevWeekIcon: IIconProps = { iconName: 'prevWeekIcon' }
+const addIcon: IIconProps = { iconName: 'Add' }
 export interface IKanbanViewProps {
   // appContext: ComponentFramework.Context<IInputs>;
   taskList: IColumnItem[][]
@@ -127,17 +131,16 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     projectTaskId: string,
     startDate: Date,
     endDate: Date,
-    board: IColumnItem[][]
+    board: IColumnItem[][],
+    projectName: string
   ) => {
-    console.log(
-      'createNewCard parameters',
-      'cardId',
-      cardId,
-      'boardColIndex',
-      boardColIndex
-    )
     try {
-      const sprintId = await getSprintId(props.context!, projectId, startDate)
+      const sprintId = await getSprintId(
+        props.context!,
+        projectId,
+        startDate,
+        projectName
+      )
       const sprintTaskId = await createSprintTask(
         props.context!,
         name,
@@ -147,15 +150,14 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
         startDate,
         endDate
       )
-      console.log('create async task id', sprintTaskId)
-      console.log('board parameter ', board)
+
       const itemIdx = board[boardColIndex].findIndex((x) => x.id === cardId)
-      console.log('itemIdx', itemIdx)
+
       if (itemIdx > -1) {
         board[boardColIndex][itemIdx].sprintTask!.id = sprintTaskId
         board[boardColIndex][itemIdx].sprintTask!.sprintId = sprintId
       }
-      console.log('setList2')
+
       setList(board)
     } catch (error) {
       console.log(error)
@@ -175,7 +177,7 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     // destClone.splice(droppableDestination.index, 0, removed)
     if (sIndex === 0 && dIndex > 0) {
       const pt = removed.projectTask
-      console.log('pt', pt)
+
       if (
         pt.estimatedDuration === 'null' ||
         pt.plannedStartDate === 'null' ||
@@ -204,17 +206,9 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
 
         board[sIndex] = sourceClone
         board[dIndex] = destClone
-        console.log('board', board)
+
         setList(board)
         const sprintTaskDate = weekDays[dIndex - 1]
-        console.log(
-          'dIndex',
-          dIndex,
-          'weekDays',
-          weekDays,
-          'sprintTaskDate',
-          sprintTaskDate
-        )
 
         createNewCard(
           removed.id,
@@ -224,7 +218,8 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
           removed.projectTask.id,
           sprintTaskDate,
           sprintTaskDate,
-          board
+          board,
+          removed.projectTask.project
         )
       }
     } else if (sIndex > 0 && dIndex === 0) {
@@ -262,7 +257,8 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
         removed.projectTask.id,
         sprintTaskDate,
         sprintTaskDate,
-        board
+        board,
+        removed.projectTask.project
       )
     }
   }
@@ -338,9 +334,13 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     }
   }
 
-  const [projectOptions, setProjectOptions] = useState<IComboBoxOption[]>([])
-  const [featureOptions, setFeatureOptions] = useState<IComboBoxOption[]>([])
-  const [ownerOptions, setOwnerOptions] = useState<IComboBoxOption[]>([])
+  const [projectOptionsPT, setProjectOptionsPT] = useState<IComboBoxOption[]>(
+    []
+  )
+  const [featureOptionsPT, setFeatureOptionsPT] = useState<IComboBoxOption[]>(
+    []
+  )
+  const [ownerOptionsPT, setOwnerOptionsPT] = useState<IComboBoxOption[]>([])
 
   const [selectedFeatureIds, setSelectedFeatureIds] = React.useState<string[]>(
     []
@@ -381,6 +381,9 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
   }
 
   const asyncFilterProjectTasks = async () => {
+    // setOpenFilterMenu(false)
+    const btn = document.getElementById('filterProjectTasksBtn')
+    btn?.click()
     const board = [...list]
     const filteredProjTasks = await getProjectTasks(
       props.context!,
@@ -388,7 +391,6 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
       selectedOwnerIds,
       selectedFeatureIds
     )
-    console.log('filteredProjTasks', filteredProjTasks)
     board[0] = filteredProjTasks
     setList(board)
   }
@@ -401,34 +403,93 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
             label="Filter Projects"
             multiSelect
             selectedKey={selectedProjectIds}
-            options={projectOptions}
+            options={projectOptionsPT}
             onChange={onChangeProjectFilter}
-          />
-          <ComboBox
-            label="Filter Owners"
-            multiSelect
-            selectedKey={selectedOwnerIds}
-            options={ownerOptions}
-            onChange={onChangeOwnerFilter}
           />
           <ComboBox
             label="Filter Features"
             multiSelect
             selectedKey={selectedFeatureIds}
-            options={featureOptions}
+            options={featureOptionsPT}
             onChange={onChangeFeatureFilter}
           />
+          <ComboBox
+            label="Filter Owners"
+            multiSelect
+            selectedKey={selectedOwnerIds}
+            options={ownerOptionsPT}
+            onChange={onChangeOwnerFilter}
+          />
+
           <PrimaryButton
             className="search-button"
             text="Search"
             onClick={asyncFilterProjectTasks}
           />
         </div>
+
         {/* {defaultRender(menuListProps)} */}
       </div>
     )
   }
 
+  const [projectOptionsST, setProjectOptionsST] = useState<IComboBoxOption[]>(
+    []
+  )
+
+  const [featureOptionsST, setFeatureOptionsST] = useState<IComboBoxOption[]>(
+    []
+  )
+
+  const [ownerOptionsST, setOwnerOptionsST] = useState<IComboBoxOption[]>([])
+
+  const setSTFeatureOpionsBasedOnProjectIds = async () => {
+    const filterOptions = await getSprintFilters(props.context!)
+    let features = filterOptions.features
+    if (sprintFilterSelectedProjectIds.length > 0) {
+      features = features.filter((item) =>
+        sprintFilterSelectedProjectIds.includes(item.projectId)
+      )
+    }
+
+    const fo = features.map((item) => ({
+      key: item.id,
+      text: item.name
+    }))
+    setFeatureOptionsST(fo)
+  }
+
+  useEffect(() => {
+    setSTFeatureOpionsBasedOnProjectIds()
+  }, [sprintFilterSelectedProjectIds])
+
+  const getSprintFilterOptions = async () => {
+    const filterOptions = await getSprintFilters(props.context!)
+    const po = filterOptions.projects.map((p) => ({
+      key: p.id,
+      text: p.name
+    }))
+    setProjectOptionsST(po)
+
+    let featutes = filterOptions.features
+    if (sprintFilterSelectedProjectIds.length > 0) {
+      featutes = featutes.filter((x) =>
+        sprintFilterSelectedProjectIds.includes(x.projectId)
+      )
+    }
+    const fo = featutes.map((f) => ({
+      key: f.id,
+      text: f.name
+    }))
+
+    setFeatureOptionsST(fo)
+
+    const oo = filterOptions.owners.map((o) => ({
+      key: o.id,
+      text: o.name
+    }))
+    setOwnerOptionsST(oo)
+  }
   const initializeBoard = async () => {
     try {
       setLoading(true)
@@ -443,17 +504,21 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
           sprintFilterSelectedOwnerIds,
           sprintFilterSelectedFeatureIds
         )
-        console.log('input date', weekDays[i], 'getColumnCards res', res)
+
         taskListVar[1 + i] = [...res]
         i++
       }
-      console.log('all settled', taskListVar)
       setList(taskListVar)
+      await getSprintFilterOptions()
       setLoading(false)
     } catch (error) {
       setLoading(false)
-      console.log(error)
     }
+  }
+
+  const filterSprintTasks = () => {
+    document.getElementById('filterSprintTasksBtn')?.click()
+    initializeBoard()
   }
 
   const renderSprintTaskMenuList = () => {
@@ -464,27 +529,28 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
             label="Filter Projects"
             multiSelect
             selectedKey={sprintFilterSelectedProjectIds}
-            options={projectOptions}
+            options={projectOptionsST}
             onChange={onChangeSprintTasksProjectFilter}
-          />
-          <ComboBox
-            label="Filter Owners"
-            multiSelect
-            selectedKey={sprintFilterSelectedOwnerIds}
-            options={ownerOptions}
-            onChange={onChangeSprintTasksOwnerFilter}
           />
           <ComboBox
             label="Filter Features"
             multiSelect
             selectedKey={sprintFilterSelectedFeatureIds}
-            options={featureOptions}
+            options={featureOptionsST}
             onChange={onChangeSprintTaskFeatureFilter}
           />
+          <ComboBox
+            label="Filter Owners"
+            multiSelect
+            selectedKey={sprintFilterSelectedOwnerIds}
+            options={ownerOptionsST}
+            onChange={onChangeSprintTasksOwnerFilter}
+          />
+
           <PrimaryButton
             className="search-button"
             text="Search"
-            onClick={initializeBoard}
+            onClick={filterSprintTasks}
           />
         </div>
         {/* {defaultRender(menuListProps)} */}
@@ -493,7 +559,8 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
   }
   const filterMenuProps = {
     onRenderMenuList: renderMenuList,
-    shouldFocusOnMount: true,
+    shouldFocusOnMount: false,
+
     items: [
       {
         key: 'project',
@@ -529,68 +596,79 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     ]
   }
 
-  const getFilterOptions = async () => {
+  const setFeatureOpionsBasedOnProjectIds = async (projectIds: string[]) => {
+    let features = await getFeatures(props.context!)
+    features = features.filter((x) => projectIds.includes(x.projectId))
+    const fo = features.map((f) => ({
+      key: f.id,
+      text: f.name
+    }))
+    setFeatureOptionsPT(fo)
+  }
+
+  useEffect(() => {
+    if (selectedProjectIds.length > 0)
+      setFeatureOpionsBasedOnProjectIds(selectedProjectIds)
+    else {
+      const projectIds = list[0].map((item) => item.projectId)
+      setFeatureOpionsBasedOnProjectIds(projectIds)
+    }
+  }, [selectedProjectIds])
+
+  const getProjectTaskFilterOptions = async () => {
     try {
-      const projects = await getProjects(props.context!)
+      const projectIds = list[0].map((item) => item.projectId)
+      let projects = await getProjects(props.context!)
+      projects = projects.filter((x) => projectIds.includes(x.id))
       const po = projects.map((p) => ({
         key: p.id,
         text: p.name
       }))
-      setProjectOptions(po)
+      setProjectOptionsPT(po)
 
-      const owners = await getOwners(props.context!)
+      let ownerNames = list[0].map((item) => item.projectTask.owner)
+      let owners = await getOwners(props.context!)
+      owners = owners.filter((x) => ownerNames.includes(x.name))
       const oo = owners.map((o) => ({
         key: o.id,
         text: o.name
       }))
-      setOwnerOptions(oo)
+      setOwnerOptionsPT(oo)
 
-      const features = await getFeatures(props.context!)
-      const fo = features.map((f) => ({
-        key: f.id,
-        text: f.name
-      }))
-      setFeatureOptions(fo)
+      setFeatureOpionsBasedOnProjectIds(projectIds)
     } catch (error) {
       console.log(error)
     }
   }
+
   const [isFirstLoad, setIsFirstLoad] = useState(true)
   useEffect(() => {
-    console.log('initialize board')
     if (isFirstLoad) {
       setIsFirstLoad(false)
       initializeBoard()
-      getFilterOptions()
+      getProjectTaskFilterOptions()
     }
   }, [isFirstLoad])
 
   useEffect(() => {
-    console.log('change list', list, 'props.taskList', props.taskList)
-
-    console.log('list !== props.taskList', list !== props.taskList)
     if (list !== props.taskList) {
-      // console.log('change list 1:', list)
       props.onChange(list, weekDays)
     }
   }, [list])
 
   useEffect(() => {
-    console.log(' weekDays', weekDays)
-
     if (weekDays !== props.weekdays) {
-      // console.log('change list 2:', list)
       initializeBoard()
     }
   }, [weekDays])
 
   useEffect(() => {
     if (list !== props.taskList) {
-      // console.log('1')
       setList(props.taskList)
+      initializeBoard()
+      getProjectTaskFilterOptions()
     }
     if (weekDays !== props.weekdays) {
-      // console.log('2')
       setWeekDays(props.weekdays)
     }
   }, [props.taskList, props.weekdays])
@@ -618,7 +696,6 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
   const getNextWeek = () => {
     const date = weekDays[6]
     date.setDate(date.getDate() + 1)
-    console.log(' weekDays[6]+1', date)
     const nextWeek = getWeekDays(date)
     setWeekDays(nextWeek)
   }
@@ -629,6 +706,7 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
     const prevWeek = getWeekDays(date)
     setWeekDays(prevWeek)
   }
+
   return (
     // <ThemeProvider>
 
@@ -638,12 +716,11 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
           <div className="project-task-div">
             <div className="row-ordered-div">
               <DefaultButton
+                id="filterProjectTasksBtn"
                 className="filter-button"
                 text="Filter"
                 iconProps={filterIcon}
                 menuProps={filterMenuProps}
-                // menuAs={_getMenu}
-                // allowDisabledFocus
               />
             </div>
             <div className="queue-div">
@@ -662,6 +739,13 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
                         Project Tasks
                         <br />
                       </span>
+                      <IconButton
+                        iconProps={addIcon}
+                        className="add-icon"
+                        onClick={openQuickCreateForm}
+                        title="new projectTask"
+                        ariaLabel="new projectTask"
+                      />
                     </div>
                     <div className="list-body">
                       {list[0].map((item, index) => (
@@ -718,6 +802,7 @@ const KanbanView: React.FC<IKanbanViewProps> = (props) => {
               <div className="change-week-button-div" />
               <div className="row-ordered-div">
                 <DefaultButton
+                  id="filterSprintTasksBtn"
                   className="filter-button"
                   text="Filter"
                   iconProps={filterIcon}

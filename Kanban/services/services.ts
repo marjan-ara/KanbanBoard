@@ -9,13 +9,16 @@ import {
   IFeature,
   IOwner,
   IProject,
-  IProjectTask
+  IProjectTask,
+  ISprintFilter
 } from '../interfaces'
 import sprintTasks from './sprint_tasks.json'
 import owners from './contacts.json'
 import projects from './projects.json'
 import features from './features.json'
 import sprints from './sprints.json'
+import projectTasks from './project_tasks.json'
+import resources from './resources.json'
 import { IInputs } from '../generated/ManifestTypes'
 
 export const getWeekDays = (inputDate: Date): Date[] => {
@@ -24,7 +27,7 @@ export const getWeekDays = (inputDate: Date): Date[] => {
   for (let i = 0; i < 7; i++) {
     var next = new Date(inputDate.getTime())
     next.setDate(first + i)
-    console.log('first day', first, 'day ', i, next)
+
     weekdays.push(next)
   }
   return weekdays
@@ -39,7 +42,6 @@ export const getColumnCards = async (
 ): Promise<any> => {
   const output: IColumnItem[] = []
   const formattedDate = date.toISOString().split('T')[0]
-  console.log('formattedDate', formattedDate)
 
   setTimeout(() => {
     sprintTasks.value.forEach((el) => {
@@ -48,7 +50,7 @@ export const getColumnCards = async (
         name: el['arades_name'],
         project: el['arades_ProjectId']['arades_name'],
         feature: 'undefined',
-        estimatedDuration: el['arades_estimatedduration'] || 'undefined',
+        estimatedDuration: String(el['arades_estimatedduration']) || '',
         priority: 'undefined',
         owner: el['owninguser'].fullname,
         sprintId: el['_arades_sprintid_value']
@@ -75,7 +77,6 @@ export const getColumnCards = async (
         isClosed: false
       })
     })
-    console.log('output', output)
   }, 5000)
 
   return output
@@ -96,7 +97,8 @@ export const getFeatures = (
 ): IFeature[] => {
   const output = features.value.map((item) => ({
     id: item['arades_featureid'],
-    name: item['arades_name']
+    name: item['arades_name'],
+    projectId: item['_arades_projectid_value']
   }))
   return output
 }
@@ -106,7 +108,9 @@ export const updateProjectTask = (
   sprintTaskId: string,
   ownerId: string | undefined,
   estimatedDuration: number | null,
-  closeTask: boolean
+  closeTask: boolean,
+  plannedStartDate: Date,
+  plannedEndDate: Date
 ) => {
   return null
 }
@@ -164,9 +168,9 @@ export const getProjects = (
 export const getSprintId = async (
   context: ComponentFramework.Context<IInputs>,
   projectId: string,
-  date: Date
+  date: Date,
+  projectName: string
 ): Promise<string> => {
-  console.log('get sprint id', projectId, date)
   const sp = await sprints.value.find(
     (x) =>
       x._arades_projectid_value === projectId &&
@@ -185,12 +189,13 @@ export const getProjectTasks = async (
   ownerIds: string[],
   featureIds: string[]
 ): Promise<IColumnItem[]> => {
-  const result = await context.webAPI.retrieveMultipleRecords(
-    'arades_projecttask',
-    '?$filter=statecode eq 0&$expand=arades_ProjectId($select=arades_name),arades_FeatureId($select=arades_name)'
-  )
-  let projTasks = result.entities
-  console.log('projTasks', projTasks)
+  // const result = await context.webAPI.retrieveMultipleRecords(
+  //   'arades_projecttask',
+  //   '?$filter=statecode eq 0&$expand=arades_ProjectId($select=arades_name),arades_FeatureId($select=arades_name)'
+  // )
+  // let projTasks = result.entities
+  let projTasks = projectTasks.value
+
   if (projectIds.length > 0) {
     projTasks = projTasks.filter((item) =>
       projectIds.includes(item.arades_projecttaskid)
@@ -204,14 +209,14 @@ export const getProjectTasks = async (
   }
 
   if (featureIds.length > 0) {
+    projTasks = projTasks.filter((item) => item.arades_FeatureId != null)
     projTasks = projTasks.filter((item) =>
-      featureIds.includes(item._arades_featureid_value)
+      featureIds.includes(item._arades_featureid_value!)
     )
   }
-  console.log('projTasks', projTasks)
   const output = projTasks.map((el) => ({
     id: uuidv4(),
-    projectId: el._arades_projectid_value,
+    projectId: el._arades_projectid_value || 'undefined',
     isProjectTask: false,
     projectTask: {
       id: el.arades_projecttaskid,
@@ -222,8 +227,8 @@ export const getProjectTasks = async (
       feature: el['arades_FeatureId']
         ? el['arades_FeatureId'].arades_name
         : 'undefined', // ptResult['arades_FeatureId'].arades_name,
-      estimatedDuration: el.arades_estimatedduration,
-      priority: el['arades_priority'] || 'undefined',
+      estimatedDuration: 'undefined',
+      priority: String(el['arades_priority']),
       plannedStartDate: el.arades_plannedstartdate,
       plannedEndDate: el.arades_plannedenddate,
       owner: 'undefined' // ptResult['owninguser'].fullname
@@ -231,7 +236,100 @@ export const getProjectTasks = async (
     sprintTask: null,
     isClosed: false
   }))
-  console.log('filter output', output)
+
   return output
   // return active project tasks with these filters
+}
+
+export const openProjectTask = (projectTaskId: string) => {
+  var entityFormOptions: any = {}
+  entityFormOptions['entityName'] = 'arades_projecttask'
+  entityFormOptions['entityId'] = projectTaskId
+
+  // Open the form.
+  Xrm.Navigation.openForm(entityFormOptions).then(
+    function (success) {
+      console.log(success)
+    },
+    function (error) {
+      console.log(error)
+    }
+  )
+}
+
+export const openSprintTask = (sprintTaskId: string) => {
+  var entityFormOptions: any = {}
+  entityFormOptions['entityName'] = 'arades_sprinttask'
+  entityFormOptions['entityId'] = sprintTaskId
+
+  // Open the form.
+  Xrm.Navigation.openForm(entityFormOptions).then(
+    function (success) {
+      console.log(success)
+    },
+    function (error) {
+      console.log(error)
+    }
+  )
+}
+
+export const getSprintFilters = async (
+  context: ComponentFramework.Context<IInputs>
+): Promise<ISprintFilter> => {
+  let sprinttasks = sprintTasks.value
+  const projectFilters: IProject[] = []
+  const featureFilters: IFeature[] = []
+  const ownerFilters: IOwner[] = []
+
+  sprinttasks.forEach((el) => {
+    const pId = el['arades_ProjectId']
+      ? el['arades_ProjectId'].arades_projectid
+      : ''
+    const pName = el['arades_ProjectId']
+      ? el['arades_ProjectId'].arades_name
+      : ''
+
+    if (pId !== '' && !projectFilters.find((x) => x.id === pId))
+      projectFilters.push({ id: pId, name: pName })
+
+    const fId = ''
+
+    const fName = ''
+    const fProjectId = ''
+
+    if (fId !== '' && !featureFilters.find((x) => x.id === fId))
+      featureFilters.push({
+        id: fId,
+        name: fName,
+        projectId: fProjectId
+      })
+
+    const oId = el['owninguser'] ? el['owninguser'].systemuserid : ''
+    const oName = el['owninguser'] ? el['owninguser'].fullname : ''
+    if (oName !== '' && !ownerFilters.find((x) => x.id === oId))
+      ownerFilters.push({
+        id: oId,
+        name: oName
+      })
+  })
+
+  const output: ISprintFilter = {
+    projects: projectFilters,
+    features: featureFilters,
+    owners: ownerFilters
+  }
+  return output
+}
+
+export const getResourcesOfProject = async (
+  context: ComponentFramework.Context<IInputs>,
+  projectId: string
+): Promise<IOwner[]> => {
+  const result = resources
+  let ownersValue = result.value
+  const output = ownersValue.map((item) => ({
+    id: item._arades_userid_value,
+    name: item.arades_name
+  }))
+  return output
 }

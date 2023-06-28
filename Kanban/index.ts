@@ -6,12 +6,12 @@ import * as React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { IInputs, IOutputs } from './generated/ManifestTypes'
 import { IColumnItem } from './interfaces'
-// import {
-//   getColumnCards,
-//   getWeekDays,
-//   getWeekNumber
-// } from './services/xrmServices'
-import { getColumnCards, getWeekDays } from './services/services'
+import {
+  getColumnCards,
+  getWeekDays,
+  getWeekNumber
+} from './services/xrmServices'
+// import { getColumnCards, getWeekDays } from './services/services'
 import KanbanView, {
   IKanbanViewProps
 } from './components/kanbanView/KanbanView'
@@ -73,11 +73,6 @@ export class Kanban
     const taskListVar: IColumnItem[][] = [[], [], [], [], [], [], [], []]
 
     dataSet.sortedRecordIds.forEach((recordId) => {
-      console.log(
-        'Object(dataSet.records[recordId])',
-        Object(dataSet.records[recordId].getValue('arades_projectid'))
-      )
-
       taskListVar[0].push({
         id: uuidv4(),
         isProjectTask: true,
@@ -86,20 +81,25 @@ export class Kanban
         )?.id?.guid,
         projectTask: {
           id: String(recordId),
-          name: String(dataSet.records[recordId].getValue('arades_name')),
+          name: String(dataSet.records[recordId].getValue('arades_name') || ''),
           project: String(
-            dataSet.records[recordId].getFormattedValue('arades_projectid')
+            dataSet.records[recordId].getFormattedValue(
+              'arades_projectid' || ''
+            )
           ),
           feature: String(
-            dataSet.records[recordId].getFormattedValue('arades_featureid')
+            dataSet.records[recordId].getFormattedValue('arades_featureid') ||
+              ''
           ),
           estimatedDuration: String(
-            dataSet.records[recordId].getValue('arades_estimatedduration')
+            dataSet.records[recordId].getValue('arades_estimatedduration') || ''
           ),
           priority: String(
-            dataSet.records[recordId].getValue('arades_priority')
+            dataSet.records[recordId].getValue('arades_priority') || ''
           ),
-          owner: String(dataSet.records[recordId].getFormattedValue('ownerid')),
+          owner: String(
+            dataSet.records[recordId].getFormattedValue('ownerid') || ''
+          ),
           plannedStartDate: String(
             dataSet.records[recordId].getValue('arades_plannedstartdate')
           ),
@@ -111,7 +111,6 @@ export class Kanban
         sprintTask: null,
         isClosed: false
       })
-      console.log('taskListVar[0]', taskListVar[0])
     })
 
     this._taskList = [...taskListVar]

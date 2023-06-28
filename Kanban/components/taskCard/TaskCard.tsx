@@ -20,16 +20,20 @@ import { useBoolean, useId } from '@fluentui/react-hooks'
 import { IColumnItem, IProjectTask, ISprintTask } from '../../interfaces'
 import EditTask from '../editTask/EditTask'
 import './TaskCard.css'
-import {
-  createSprintTask,
-  deleteProjectTask,
-  deleteSprintTask
-} from '../../services/services'
 // import {
 //   createSprintTask,
 //   deleteProjectTask,
-//   deleteSprintTask
-// } from '../../services/xrmServices'
+//   deleteSprintTask,
+//   openProjectTask,
+//   openSprintTask
+// } from '../../services/services'
+import {
+  createSprintTask,
+  deleteProjectTask,
+  deleteSprintTask,
+  openProjectTask,
+  openSprintTask
+} from '../../services/xrmServices'
 
 import { IInputs } from '../../generated/ManifestTypes'
 
@@ -72,6 +76,21 @@ const TaskCard: React.FC<IProps> = ({
   weekDays,
   context
 }) => {
+  let projTaskStartDate = new Date()
+  let projTaskEndDate = new Date()
+  if (
+    projectTask.plannedStartDate &&
+    projectTask.plannedStartDate !== 'undefined' &&
+    projectTask.plannedStartDate !== 'null'
+  )
+    projTaskStartDate = new Date(projectTask.plannedStartDate)
+
+  if (
+    projectTask.plannedEndDate &&
+    projectTask.plannedEndDate !== 'undefined' &&
+    projectTask.plannedEndDate !== 'null'
+  )
+    projTaskEndDate = new Date(projectTask.plannedEndDate)
   const tooltipId = useId('tooltip')
   const titleId = useId('title')
   const [isEditModalOpen, { setTrue: showEditModal, setFalse: hideEditModal }] =
@@ -107,13 +126,14 @@ const TaskCard: React.FC<IProps> = ({
         startDate,
         endDate
       )
-      console.log('cloned task id', sprintTaskId)
+
       const board = [...list]
       const itemIdx = board[boardColIndex].findIndex((x) => x.id === cardId)
-      console.log('itemIdx', itemIdx)
+
       if (itemIdx > -1) {
         board[boardColIndex][itemIdx].sprintTask!.id = sprintTaskId
       }
+
       setList(board)
     } catch (error) {
       console.log(error)
@@ -165,11 +185,13 @@ const TaskCard: React.FC<IProps> = ({
     }
   }
 
-  // React.useEffect(() => {
-  //   console.log('set disabled action', sprintTask?.id)
-  //   if (isProjectTask || sprintTask?.id) setDisableActions(false)
-  //   else setDisableActions(true)
-  // }, [])
+  const openProjectTaskForm = () => {
+    openProjectTask(projectTask.id)
+  }
+
+  const openSprintTaskForm = () => {
+    if (sprintTask && sprintTask.id) openSprintTask(sprintTask.id)
+  }
 
   return (
     <div className="task-card-div">
@@ -237,7 +259,71 @@ const TaskCard: React.FC<IProps> = ({
         </div>
       </div>
       <div className="task-card-footer">
-        <div className="task-card-footer-left">
+        <div className="task-card-row-ordered-div">
+          <Text variant="small" nowrap={false} block>
+            <b>Owner: </b>
+            {isProjectTask ? projectTask.owner : sprintTask?.owner}
+          </Text>
+        </div>
+        <div className="task-card-row-ordered-div">
+          <Text
+            variant="small"
+            nowrap={false}
+            block
+            style={{ textAlign: 'left' }}>
+            <b>Estimated duration: </b>
+            {isProjectTask
+              ? projectTask.estimatedDuration
+              : sprintTask?.estimatedDuration}
+          </Text>
+        </div>
+        <div className="task-card-row-ordered-div">
+          <Text variant="small" nowrap={false} block>
+            <b>priority: </b>
+            {projectTask.priority || ''}
+          </Text>
+        </div>
+        {!isProjectTask && (
+          <div className="task-card-row-ordered-div">
+            <Text
+              variant="small"
+              nowrap={false}
+              block
+              onClick={() => {
+                openSprintTaskForm()
+              }}
+              style={{ marginTop: '1em' }}
+              className="action-button">
+              Open Sprint Task
+            </Text>
+            {/* <ActionButton
+              onClick={() => {
+                openSprintTaskForm()
+              }}>
+              Open Sprint Task Form
+            </ActionButton> */}
+          </div>
+        )}
+        <div className="task-card-row-ordered-div">
+          {/* <ActionButton
+            onClick={() => {
+              openProjectTaskForm()
+            }}>
+            Open Project Task Form
+          </ActionButton> */}
+          <Text
+            variant="small"
+            nowrap={false}
+            block
+            onClick={() => {
+              openProjectTaskForm()
+            }}
+            className="action-button">
+            Open Project Task
+          </Text>
+        </div>
+
+        {/* <div className="task-card-footer-left">
           {isProjectTask ? projectTask.owner : sprintTask?.owner}
           <br />
           {isProjectTask
@@ -254,7 +340,7 @@ const TaskCard: React.FC<IProps> = ({
           <br />
           priority
           <br />
-        </div>
+        </div> */}
       </div>
 
       <Modal
@@ -267,12 +353,18 @@ const TaskCard: React.FC<IProps> = ({
           id={id}
           editProjectTask={isProjectTask}
           hideModal={hideEditModal}
-          owner={projectTask.owner}
-          duration={Number(projectTask.estimatedDuration)}
+          owner={isProjectTask ? projectTask.owner : sprintTask!.owner}
+          duration={
+            isProjectTask
+              ? Number(projectTask.estimatedDuration)
+              : Number(sprintTask?.estimatedDuration)
+          }
           dayIndex={dayIndex}
           list={list}
           setList={setList}
           context={context!}
+          startDate={projTaskStartDate}
+          endDate={projTaskEndDate}
         />
       </Modal>
     </div>
