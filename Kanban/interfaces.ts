@@ -8,6 +8,7 @@ export interface IProjectTask {
   owner: string
   plannedStartDate: string | null
   plannedEndDate: string | null
+  status: string
 }
 
 export interface ISprintTask {
@@ -19,6 +20,7 @@ export interface ISprintTask {
   estimatedDuration: string
   priority: string
   owner: string
+  status: string
 }
 
 export interface IColumnItem {
