@@ -95,7 +95,9 @@ export class Kanban
             dataSet.records[recordId].getValue('arades_estimatedduration') || ''
           ),
           priority: String(
-            dataSet.records[recordId].getValue('arades_priority') || ''
+            dataSet.records[recordId].getValue(
+              'arades_priority@OData.Community.Display.V1.FormattedValue'
+            ) || ''
           ),
           owner: String(
             dataSet.records[recordId].getFormattedValue('ownerid') || ''
@@ -103,9 +105,13 @@ export class Kanban
           plannedStartDate: String(
             dataSet.records[recordId].getValue('arades_plannedstartdate')
           ),
-
           plannedEndDate: String(
             dataSet.records[recordId].getValue('arades_plannedenddate')
+          ),
+          status: String(
+            dataSet.records[recordId].getValue(
+              'statuscode@OData.Community.Display.V1.FormattedValue'
+            ) || ''
           )
         },
         sprintTask: null,
